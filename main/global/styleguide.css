@@ -1,0 +1,11 @@
+:root {
+  --variable-collection-foreground: rgba(61, 61, 61, 1);
+  --variable-collection-white: rgba(255, 255, 255, 1);
+  --variable-collection-highlight: rgba(214, 169, 100, 1);
+  --variable-collection-foreground-light: rgba(55, 55, 55, 1);
+  --variable-collection-green: rgba(56, 148, 54, 1);
+  --variable-collection-green-light: rgb(67, 172, 66);
+  --variable-collection-base: rgba(37, 37, 37, 1);
+  --variable-collection-grayish: rgba(202, 202, 202, 1);
+  --variable-collection-red: rgba(244, 36, 36, 1);
+}

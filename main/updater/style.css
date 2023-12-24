@@ -1,0 +1,67 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.updater {
+  background-color: #252525;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.updater .div {
+  background-color: var(--variable-collection-base);
+  width: 500px;
+  height: 500px;
+  position: relative;
+}
+
+.updater .overlap-group {
+  position: absolute;
+  width: 366px;
+  height: 395px;
+  top: 0;
+  left: 67px;
+}
+
+.updater .logogif {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  top: 0;
+  left: 8px;
+  object-fit: cover;
+}
+
+.updater .text {
+  position: absolute;
+  text-align: center;
+  top: 349px;
+  width: 100%;
+  font-family: "Istok Web-Bold", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 25px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.updater .progress {
+  position: absolute;
+  width: 450px;
+  height: 50px;
+  top: 411px;
+  left: 25px;
+  background-color: var(--variable-collection-foreground);
+  border-radius: 15px;
+}
+
+#progressBar {
+  width: 0;
+  height: 100%;
+  background-color: var(--variable-collection-highlight);
+  border-radius: 15px;
+}

@@ -1,0 +1,45 @@
+{
+  "name": "openvoxellauncher",
+  "displayName": "OpenVoxel Launcher",
+  "version": "1.0.0",
+  "description": "A Minecraft Launcher for OpenVoxel Studios!",
+  "main": "index.js",
+  "scripts": {
+    "test": "clear && electron .",
+    "build-mac": "npx electron-builder --mac --publish never",
+    "build-win": "npx electron-builder --win --publish never",
+    "build-linux": "npx electron-builder --linux --publish never"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OpenVoxelStudios/OpenVoxelLauncher"
+  },
+  "author": {
+    "name": "KodeurKubik",
+    "url": "https://github.com/KodeurKubik"
+  },
+  "bugs": {
+    "url": "https://github.com/OpenVoxelStudios/OpenVoxelLauncher/issues"
+  },
+  "homepage": "https://github.com/OpenVoxelStudios/OpenVoxelLauncher#readme",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.10",
+    "checksum": "^1.0.0",
+    "discord-rpc": "^4.0.1",
+    "ejs-electron": "^2.1.1",
+    "electron-updater": "^6.1.7",
+    "follow-redirects": "^1.15.3",
+    "nbt": "^0.8.1",
+    "node-fetch": "^2.7.0",
+    "npm": "^10.2.4",
+    "ospath": "^1.2.2",
+    "request": "^2.88.2",
+    "tslib": "^2.6.2",
+    "uuid": "^9.0.1"
+  }
+}

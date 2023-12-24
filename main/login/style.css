@@ -1,0 +1,149 @@
+.login {
+  background-color: #252525;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.login .div {
+  background-color: var(--variable-collection-base);
+  overflow: hidden;
+  width: 1280px;
+  height: 720px;
+  position: relative;
+}
+
+.login .body {
+  position: absolute;
+  width: 569px;
+  height: 361px;
+  top: 216px;
+  left: 355px;
+}
+
+.login .login-BTN {
+  position: absolute;
+  width: 390px;
+  height: 92px;
+  top: 269px;
+  left: 94px;
+}
+
+.login .overlap-group {
+  position: relative;
+  width: 388px;
+  height: 92px;
+  background-color: var(--variable-collection-highlight);
+  border-radius: 17px;
+}
+
+.login .text {
+  width: 387px;
+  height: 92px;
+  font-family: "Istok Web-Bold", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 70px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.login .overlap-wrapper {
+  width: 573px;
+  height: 194px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.login .overlap {
+  position: relative;
+  width: 569px;
+  height: 194px;
+}
+
+.login .description {
+  position: absolute;
+  width: 569px;
+  top: 65px;
+  left: 0;
+  font-family: "Istok Web-Regular", Helvetica;
+  font-weight: 400;
+  color: var(--variable-collection-grayish);
+  font-size: 30px;
+  text-align: center;
+  letter-spacing: -1.5px;
+  line-height: normal;
+}
+
+.login .title {
+  position: absolute;
+  top: 0;
+  left: 75px;
+  font-family: "Istok Web-Bold", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 50px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.login .header {
+  position: fixed;
+  width: 1282px;
+  height: 91px;
+  top: -3px;
+  left: 0;
+  background-color: transparent;
+}
+
+.login .overlap-2 {
+  position: relative;
+  width: 1280px;
+  height: 91px;
+  background-color: var(--variable-collection-foreground);
+}
+
+.login .text-wrapper {
+  position: absolute;
+  width: 1122px;
+  top: 3px;
+  left: 87px;
+  font-family: "Istok Web-Bold", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 67px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.login .img {
+  position: absolute;
+  width: 74px;
+  height: 74px;
+  top: 7px;
+  left: 7px;
+}
+
+.login .buttons-close {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 22px;
+  left: 1209px;
+  border-radius: 8px;
+}
+
+.login .union {
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  top: 14px;
+  left: 14px;
+}

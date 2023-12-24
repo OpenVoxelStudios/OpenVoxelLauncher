@@ -1,0 +1,341 @@
+.infos {
+  background-color: #252525;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.infos .div {
+  background-color: var(--variable-collection-base);
+  width: 1280px;
+  height: 720px;
+  position: relative;
+}
+
+.infos .info-list {
+  position: absolute;
+  width: 1158px;
+  height: 608px;
+  top: 87px;
+  left: 97px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.infos .mod-list {
+  position: absolute;
+  width: 1108px;
+  height: 700px;
+  top: 447px;
+  left: 24px;
+}
+
+.infos .zoomify {
+  position: absolute;
+  width: 1109px;
+  height: 60px;
+  top: 640px;
+  left: 0;
+}
+
+.infos .true_darkness {
+  position: absolute;
+  width: 1109px;
+  height: 60px;
+  top: 720px;
+  left: 0;
+}
+
+.infos .overlap-group {
+  position: relative;
+  width: 1107px;
+  height: 60px;
+  background-color: var(--variable-collection-foreground-light);
+  border-radius: 10px;
+}
+
+.infos .div-2 {
+  left: 26px;
+  position: absolute;
+  width: 1056px;
+  top: 12px;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.infos .yet-another-config {
+  position: absolute;
+  width: 1109px;
+  height: 60px;
+  top: 560px;
+  left: 0;
+}
+
+.infos .sodium {
+  position: absolute;
+  width: 1109px;
+  height: 60px;
+  top: 480px;
+  left: 0;
+}
+
+.infos .skin-layers {
+  position: absolute;
+  width: 1109px;
+  height: 60px;
+  top: 400px;
+  left: 0;
+}
+
+.infos .lithium {
+  position: absolute;
+  width: 1109px;
+  height: 60px;
+  top: 320px;
+  left: 0;
+}
+
+.infos .iris-shaders {
+  position: absolute;
+  width: 1109px;
+  height: 60px;
+  top: 240px;
+  left: 0;
+}
+
+.infos .overlap-group-wrapper {
+  position: absolute;
+  width: 1109px;
+  height: 60px;
+  top: 160px;
+  left: 0;
+}
+
+.infos .overlap-wrapper {
+  position: absolute;
+  width: 1109px;
+  height: 60px;
+  top: 80px;
+  left: 0;
+}
+
+.infos .overlap-wrapper-2 {
+  position: absolute;
+  width: 1109px;
+  height: 60px;
+  top: 0;
+  left: 1px;
+}
+
+.infos .div-3 {
+  left: 25px;
+  position: absolute;
+  width: 1056px;
+  top: 12px;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.infos .info-list-2 {
+  position: absolute;
+  width: 1108px;
+  height: 220px;
+  top: 65px;
+  left: 25px;
+}
+
+.infos .text-wrapper {
+  color: #d6a864;
+}
+
+.infos .span {
+  color: #ffffff;
+}
+
+.infos .overlap-wrapper-3 {
+  position: absolute;
+  width: 1160px;
+  height: 46px;
+  top: -1px;
+  left: 0;
+}
+
+.infos .overlap {
+  position: relative;
+  width: 1158px;
+  height: 46px;
+  background-color: var(--variable-collection-base);
+}
+
+.infos .text {
+  position: absolute;
+  width: 1158px;
+  top: 5px;
+  left: 0;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 30px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.infos .mods {
+  position: absolute;
+  width: 1160px;
+  height: 82px;
+  top: 345px;
+  left: -1px;
+}
+
+.infos .div-wrapper {
+  position: relative;
+  width: 1158px;
+  height: 82px;
+  background-color: var(--variable-collection-base);
+}
+
+.infos .text-wrapper-2 {
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 30px;
+  letter-spacing: 0;
+}
+
+.infos .text-wrapper-3 {
+  font-size: 25px;
+}
+
+.infos .rectangle {
+  position: absolute;
+  width: 37px;
+  height: 6px;
+  top: -1px;
+  left: -1px;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: var(--variable-collection-white);
+}
+
+.infos .icons-inbox-fill {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 455px;
+  left: 12px;
+}
+
+.infos .text-wrapper-4 {
+  position: absolute;
+  width: 50px;
+  top: -1px;
+  left: 0;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: #c3c3c3;
+  font-size: 7px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.infos .union {
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  top: 14px;
+  left: 14px;
+}
+
+.infos .buttons-discord {
+  left: 1038px;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 0;
+}
+
+.infos .loggedin-player {
+  position: absolute;
+  width: 250px;
+  height: 50px;
+  top: 0;
+  left: 768px;
+  background-color: var(--variable-collection-highlight);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.infos .overlap-group-2 {
+  position: absolute;
+  width: 150px;
+  height: 29px;
+  top: 12px;
+  left: 80px;
+}
+
+.infos .text-wrapper-5 {
+  position: absolute;
+  width: 150px;
+  top: 0;
+  left: 0;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 400;
+  font-style: italic;
+  color: #000000;
+  font-size: 10px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.infos .text-wrapper-6 {
+  position: absolute;
+  width: 150px;
+  top: 12px;
+  left: 0;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: #000000;
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.infos .overlap-2 {
+  position: absolute;
+  width: 106px;
+  height: 50px;
+  top: 0;
+  left: 0;
+}
+
+.infos .text-wrapper-7 {
+  position: absolute;
+  width: 71px;
+  top: 16px;
+  left: 35px;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 12px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}

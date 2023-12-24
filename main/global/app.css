@@ -1,0 +1,314 @@
+#GETSKIN3D {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0;
+    left: 25px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+#GETSKIN3D:not(.dont-move) {
+    top: 50px;
+}
+
+#GETSKIN3D.move-up {
+    transform: translateY(-50px);
+}
+
+.full-header {
+    position: fixed;
+    width: 1242px;
+    height: 87px;
+    top: 0;
+    left: 13px;
+}
+
+.header {
+    position: absolute;
+    width: 1158px;
+    height: 50px;
+    top: 25px;
+    left: 84px;
+    background-color: transparent;
+    mix-blend-mode: normal;
+}
+
+.header-game-list {
+    position: absolute;
+    width: 190px;
+    height: 40px;
+    top: 5px;
+    left: 133px;
+}
+
+.header-game-list * {
+    position: absolute;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    background-position: 50% 50%;
+    border-radius: 5px;
+}
+
+.gameicons-oakhousemurder {
+    left: 0;
+    background-image: url(./img/games/oakhousemurder-icon.png);
+}
+
+.gameicons-blockhunt {
+    left: 75px;
+    background-image: url(./img/games/blockhunt-icon.png);
+}
+
+.gameicons-lethalcompany {
+    left: 150px;
+    background-image: url(./img/games/lethalcompany-icon.png);
+}
+
+.gameicons-yahiamice {
+    left: 225px;
+    background-image: url(./img/games/yahiamice-icon.png);
+}
+
+.buttons-close {
+    position: absolute;
+    left: 1108px;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    top: 0;
+}
+
+.overlap-group-3 {
+    position: absolute;
+    width: 150px;
+    height: 29px;
+    top: 12px;
+    left: 80px;
+}
+
+.loginas {
+    position: absolute;
+    width: 150px;
+    top: 0;
+    left: 0;
+    font-family: "Istok Web-Italic", Helvetica;
+    font-weight: 400;
+    font-style: italic;
+    color: #000000;
+    font-size: 10px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.loginusername {
+    position: absolute;
+    width: 150px;
+    top: 12px;
+    left: 0;
+    font-family: "Istok Web-Bold", Helvetica;
+    font-weight: 700;
+    color: #000000;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.games-header {
+    position: absolute;
+    width: 748px;
+    height: 50px;
+    top: 0;
+    left: 0;
+    background-color: var(--variable-collection-foreground);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.headeroverlap {
+    position: absolute;
+    width: 106px;
+    height: 50px;
+    top: 0;
+    left: 0;
+}
+
+.header-icons {
+    width: 50px;
+    left: 0;
+    background-color: var(--variable-collection-foreground);
+    border-radius: 8px;
+    overflow: hidden;
+    position: absolute;
+    height: 50px;
+    top: 0;
+    background-image: url('../global/img/icons/gameheader.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.header-text-wrapper {
+    position: absolute;
+    width: 71px;
+    top: 16px;
+    left: 35px;
+    font-family: "Istok Web-Bold", Helvetica;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.header-separator {
+    width: 2px;
+    left: 106px;
+    position: absolute;
+    height: 50px;
+    top: 0;
+}
+
+.header-separator .rectangle-separator {
+    position: relative;
+    height: 40px;
+    top: 5px;
+    background-color: var(--variable-collection-foreground-light);
+    border-radius: 10px;
+}
+
+.sidebar {
+    position: fixed;
+    width: 62px;
+    height: 598px;
+    top: 97px;
+    left: 13px;
+}
+
+.sidebar-controller {
+    width: 50px;
+    height: 50px;
+    left: 12px;
+    position: absolute;
+    top: 0;
+}
+
+.sidebar-games {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 65px;
+    left: 12px;
+}
+
+.sidebar-settings {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 520px;
+    left: 12px;
+}
+
+.sidebarselector {
+    transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+.sidebar-selected {
+    position: relative;
+    width: 12px;
+    height: 50px;
+    left: -6px;
+    background-color: var(--variable-collection-foreground-light);
+    border-radius: 8px;
+}
+
+.sidebar-selected-undefined {
+    position: absolute;
+    width: 6px;
+    height: 50px;
+    top: 0;
+    left: -35px;
+    overflow: hidden;
+}
+
+.sidebar-selected-home {
+    position: absolute;
+    width: 6px;
+    height: 50px;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.sidebar-selected-games {
+    position: absolute;
+    width: 6px;
+    height: 50px;
+    top: 65px;
+    left: 0;
+    overflow: hidden;
+}
+
+.sidebar-selected-infos {
+    position: absolute;
+    width: 6px;
+    height: 50px;
+    top: 455px;
+    left: 0;
+    overflow: hidden;
+}
+
+.sidebar-selected-settings {
+    position: absolute;
+    width: 6px;
+    height: 50px;
+    top: 520px;
+    left: 0;
+    overflow: hidden;
+}
+
+.sidebar-globe {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 130px;
+    left: 12px;
+}
+
+.sidebar-infos {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 455px;
+    left: 12px;
+}
+
+.sidebar-VERSION {
+    position: absolute;
+    width: 50px;
+    height: 8px;
+    top: 580px;
+    left: 12px;
+}
+
+.sidebar-VERSION-text {
+    position: absolute;
+    width: 50px;
+    top: -1px;
+    left: 0;
+    font-family: "Istok Web", Helvetica;
+    font-weight: 700;
+    color: #c3c3c3;
+    font-size: 7px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+}

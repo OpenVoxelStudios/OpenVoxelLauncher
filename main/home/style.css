@@ -1,0 +1,468 @@
+.home {
+  background-color: #252525;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  position: fixed;
+}
+
+.home .div {
+  background-color: var(--variable-collection-base);
+  width: 1280px;
+  height: 720px;
+  position: relative;
+}
+
+.home .play {
+  position: absolute;
+  width: 1158px;
+  height: 300px;
+  top: 97px;
+  left: 97px;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 5px solid;
+  border-color: var(--variable-collection-highlight);
+  background-image: url(../global/img/games/oakhousemurder-bg.png);
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.home .buttons-play {
+  position: relative;
+  width: 300px;
+  height: 75px;
+  top: 113px;
+  left: 429px;
+  background-color: var(--variable-collection-green);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s linear;
+}
+
+.home .buttons-play:hover:not(.playdisabled) {
+  background-color: var(--variable-collection-green-light);
+}
+
+.home .group {
+  position: absolute;
+  width: 77px;
+  height: 14px;
+  top: 23px;
+  left: 112px;
+}
+
+.home .overlap-group {
+  position: relative;
+  height: 37px;
+  top: 18px;
+}
+
+.home .text-wrapper {
+  position: absolute;
+  width: 300px;
+  top: 0;
+  left: 0;
+  font-family: "Istok Web-Bold", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+
+.home .text-wrapper-2 {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 16px;
+  font-family: "Istok Web-Italic", Helvetica;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--variable-collection-white);
+  font-size: 10px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.home .icons-controller {
+  width: 12px;
+  height: 12px;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.home .team-list {
+  position: absolute;
+  width: 400px;
+  height: 293px;
+  top: 412px;
+  left: 855px;
+}
+
+.home .our-team {
+  position: absolute;
+  width: 400px;
+  top: -1px;
+  left: 0;
+  font-family: "Istok Web-Bold", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 30px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.home .vertical {
+  position: absolute;
+  width: 156px;
+  height: 220px;
+  top: 54px;
+  left: 19px;
+}
+
+.home .kodeur-kubik {
+  position: absolute;
+  width: 160px;
+  height: 40px;
+  top: 0;
+  left: 0;
+}
+
+.home .head {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.home .overlap-group-2 {
+  position: absolute;
+  width: 103px;
+  height: 23px;
+  top: 4px;
+  left: 53px;
+}
+
+.home .name {
+  width: 91px;
+  left: 6px;
+  position: absolute;
+  top: 0;
+  font-family: "Istok Web-Bold", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 11px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.home .roles {
+  position: absolute;
+  width: 103px;
+  top: 15px;
+  left: 0;
+  font-family: "Istok Web-Italic", Helvetica;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--variable-collection-white);
+  font-size: 6px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.home .kodeur-kubik-2 {
+  top: 60px;
+  position: absolute;
+  width: 160px;
+  height: 40px;
+  left: 0;
+}
+
+.home .kodeur-kubik-3 {
+  top: 120px;
+  position: absolute;
+  width: 160px;
+  height: 40px;
+  left: 0;
+}
+
+.home .kodeur-kubik-4 {
+  top: 180px;
+  position: absolute;
+  width: 160px;
+  height: 40px;
+  left: 0;
+}
+
+.home .name-2 {
+  width: 102px;
+  left: 1px;
+  position: absolute;
+  top: 0;
+  font-family: "Istok Web-Bold", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 11px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.home .vertical-2 {
+  position: absolute;
+  width: 156px;
+  height: 160px;
+  top: 54px;
+  left: 225px;
+}
+
+.home .news-list {
+  position: absolute;
+  width: 738px;
+  height: 291px;
+  top: 414px;
+  left: 97px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.home .row {
+  position: absolute;
+  width: 725px;
+  height: 150px;
+  top: 761px;
+  left: 7px;
+}
+
+.home .rectangle {
+  position: absolute;
+  width: 350px;
+  height: 150px;
+  top: -54px;
+  left: 543px;
+  object-fit: cover;
+}
+
+.home .img {
+  position: absolute;
+  width: 350px;
+  height: 150px;
+  top: -54px;
+  left: 918px;
+  object-fit: cover;
+}
+
+.home .row-2 {
+  position: absolute;
+  width: 725px;
+  height: 150px;
+  top: 586px;
+  left: 7px;
+}
+
+.home .row-3 {
+  position: absolute;
+  width: 725px;
+  height: 150px;
+  top: 411px;
+  left: 7px;
+}
+
+.home .row-4 {
+  position: absolute;
+  width: 725px;
+  height: 150px;
+  top: 236px;
+  left: 7px;
+}
+
+.home .row-5 {
+  position: absolute;
+  width: 725px;
+  height: 150px;
+  top: 61px;
+  left: 7px;
+}
+
+.GETNEWS {
+  border-radius: 10px;
+  cursor: pointer;
+  width: 350px;
+  height: 187px;
+  object-fit: cover;
+}
+
+.home .rectangle-4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.home .rectangle-5 {
+  position: absolute;
+  top: 0;
+  left: 375px;
+}
+
+.home .rectangle-4-2 {
+  position: absolute;
+  top: 220px;
+  left: 0;
+}
+
+.home .rectangle-5-2 {
+  position: absolute;
+  top: 220px;
+  left: 375px;
+}
+
+.home .news {
+  position: absolute;
+  width: 740px;
+  height: 53px;
+  top: -17px;
+  left: 0;
+}
+
+.home .news-wrapper {
+  position: relative;
+  width: 738px;
+  height: 53px;
+  background-color: var(--variable-collection-base);
+}
+
+.home .news-2 {
+  position: absolute;
+  width: 725px;
+  top: 17px;
+  left: 7px;
+  font-family: "Istok Web-Bold", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.home .union {
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  top: 14px;
+  left: 14px;
+}
+
+.home .buttons-discord {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 0;
+  left: 1038px;
+}
+
+.home .loggedin-player {
+  position: absolute;
+  width: 250px;
+  height: 50px;
+  top: 0;
+  left: 768px;
+  background-color: var(--variable-collection-highlight);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.home .text-wrapper-5 {
+  position: absolute;
+  width: 71px;
+  top: 16px;
+  left: 35px;
+  font-family: "Istok Web-Bold", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 12px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.home .group-3 {
+  position: relative;
+  width: 35px;
+  height: 20px;
+  top: 15px;
+  left: 7px;
+}
+
+.home .rectangle-17 {
+  position: absolute;
+  width: 37px;
+  height: 6px;
+  top: -1px;
+  left: -1px;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: var(--variable-collection-white);
+}
+
+.home .rectangle-18 {
+  position: absolute;
+  width: 37px;
+  height: 6px;
+  top: 7px;
+  left: -1px;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: var(--variable-collection-white);
+}
+
+.home .rectangle-19 {
+  position: absolute;
+  width: 37px;
+  height: 6px;
+  top: 15px;
+  left: -1px;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: var(--variable-collection-white);
+}
+
+.home .text-wrapper-6 {
+  position: absolute;
+  width: 50px;
+  top: -1px;
+  left: 0;
+  font-family: "Istok Web-Bold", Helvetica;
+  font-weight: 700;
+  color: #c3c3c3;
+  font-size: 7px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.STEVELOCKSHOVERED {
+  animation-name: rotate;
+  animation-duration: 7500ms;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}

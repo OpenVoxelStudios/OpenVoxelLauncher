@@ -1,0 +1,36 @@
+<div class="sidebar">
+    <div class="sidebarselector">
+        <div class="sidebar-selected"></div>
+    </div>
+    <script>
+        let lastPageViewed = localStorage.getItem('lastpage') || 'undefined';
+        document.querySelector('.sidebarselector').classList.add(`sidebar-selected-${lastPageViewed}`);
+
+        window.addEventListener('load', function () {
+            document.querySelector('.sidebarselector').classList.remove(`sidebar-selected-${lastPageViewed}`);
+            document.querySelector('.sidebarselector').classList.add(`sidebar-selected-<%= page %>`);
+            localStorage.setItem('lastpage', '<%= page %>');
+        })
+    </script>
+
+    <img class="sidebar-controller<%= (page != 'home' ? ' NAVIGATETO' : '') %>" data-to="home"
+        src="../global/img/icons/controller-<%= (page != 'home' ? 'stroke' : 'fill') %>.png" />
+
+
+    <img class="sidebar-games<%= (page != 'games' ? ' NAVIGATETO' : '') %>" data-to="games"
+        src="../global/img/icons/games-<%= (page != 'games' ? 'stroke' : 'fill') %>.png" />
+
+    <img class="sidebar-settings<%= (page != 'settings' ? ' NAVIGATETO' : '') %>" data-to="settings"
+        src="../global/img/icons/settings-<%= (page != 'settings' ? 'stroke' : 'fill') %>.png" />
+
+    <img class="sidebar-globe OPENURLDEFAULTBROWSER clickable pointer" src="../global/img/icons/globe-stroke.png"
+        data-url="https://www.zygocraft.com/openvoxel" />
+
+    <img class="sidebar-infos<%= (page != 'infos' ? ' NAVIGATETO' : '') %>" data-to="infos" src="../global/img/icons/inbox-<%= (page != 'infos' ? 'stroke' : 'fill') %>.png" />
+
+    <div class="sidebar-VERSION">
+        <div class="sidebar-VERSION-text">
+            <%= version %>
+        </div>
+    </div>
+</div>

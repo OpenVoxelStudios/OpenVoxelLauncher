@@ -1,0 +1,8 @@
+{
+    "name": "Lethal Company",
+    "id": "lethalcompany",
+    "url": "https://github.com/OpenVoxelStudios/Maps/releases/download/OpenVoxel/lethalcompany.zip",
+    "appendMods": [
+        "lethalcompany"
+    ]
+}

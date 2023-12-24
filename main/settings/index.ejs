@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="../global/globals.css" />
+  <link rel="stylesheet" href="../global/styleguide.css" />
+  <link rel="stylesheet" href="../global/app.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <title>Settings - OpenVoxel Launcher</title>
+  <script src="../localstorage.js"></script>
+</head>
+
+<body>
+  <div class="settings">
+    <div class="div">
+      <div class="settings-list">
+        <div class="settings-list-2">
+          <div class="close-when-launch">
+            <div class="overlap-group">
+              <p class="text">Close the Launcher when Minecraft is launched?</p>
+
+              <label class="togglelabel toggle">
+                <input class="toggler TOGGLESETTING" type="checkbox" name="Does the Launcher close when you launch Minecraft?" data-setting="closeOnLaunch" <%= ((options['closeOnLaunch'] !== undefined) ? options['closeOnLaunch'] : defaultSettings['closeOnLaunch']) ? 'checked' : '' %>>
+                <span></span>
+              </label>
+            </div>
+          </div>
+          <div class="DRPC">
+            <div class="overlap">
+              <div class="text-wrapper">Discord RPC?</div>
+
+              <label class="togglelabel toggle">
+                <input class="toggler TOGGLESETTING" type="checkbox" name="Does the Launcher creates a Discord Rich Present Status on your profile?" data-setting="drpc" <%= ((options['drpc'] !== undefined) ? options['drpc'] : defaultSettings['drpc']) ? 'checked' : '' %>>
+                <span></span>
+            </label>
+            </div>
+          </div>
+          <div class="full-screen">
+            <div class="overlap">
+              <div class="text-wrapper">Launch game in Fullscreen?</div>
+
+              <label class="togglelabel toggle">
+                <input class="toggler TOGGLESETTING" type="checkbox" name="Does the game launch in fullscreen? Overrides the Width and Height." data-setting="fullscreen" <%= ((options['fullscreen'] !== undefined) ? options['fullscreen'] : defaultSettings['fullscreen']) ? 'checked' : '' %>>
+                <span></span>
+            </label>
+            </div>
+          </div>
+          <div class="win-height">
+            <div class="overlap-group-wrapper">
+              <div class="div-wrapper">
+                <input type="number" class="text-wrapper-2 INPUTSETTING" placeholder="Height of the window in Pixels" value="<%= (options['height'] !== undefined) ? options['height'] : openvoxel.defaultSettings['height'] %>" data-setting="height" min="100" max="2060"/>
+              </div>
+            </div>
+            <div class="overlap-wrapper">
+              <div class="overlap-2">
+                <p class="text-2">Height of the Minecraft window when starting</p>
+              </div>
+            </div>
+          </div>
+          <div class="win-width">
+            <div class="overlap-group-wrapper">
+              <div class="div-wrapper">
+                <input type="number" class="text-wrapper-2 INPUTSETTING" placeholder="Width of the window in Pixels" value="<%= (options['width'] !== undefined) ? options['width'] : openvoxel.defaultSettings['width'] %>" data-setting="width" min="100" max="4096"/>
+              </div>
+            </div>
+            <div class="overlap-wrapper">
+              <div class="overlap-2">
+                <p class="text-2">Width of the Minecraft window when starting</p>
+              </div>
+            </div>
+          </div>
+          <div class="min-ram">
+            <div class="overlap-group-wrapper-2">
+              <div class="div-wrapper">
+                <input type="number" class="text-wrapper-2 INPUTSETTING" placeholder="Amount of RAM in M" value="<%= (options['minRam'] !== undefined) ? options['minRam'] : openvoxel.defaultSettings['minRam'] %>" data-setting="minRam" min="512" max="20000"/>
+              </div>
+            </div>
+            <div class="overlap-wrapper-2">
+              <div class="overlap-2">
+                <p class="text-2">Minimum RAM for Minecraft - In <u>Megabytes</u></p>
+              </div>
+            </div>
+          </div>
+          <div class="max-ram">
+            <div class="overlap-group-wrapper-2">
+              <div class="div-wrapper">
+                <input type="number" class="text-wrapper-2 INPUTSETTING" placeholder="Amount of RAM in M" value="<%= (options['maxRam'] !== undefined) ? options['maxRam'] : openvoxel.defaultSettings['maxRam'] %>" data-setting="maxRam" min="512" max="20000"/>
+              </div>
+            </div>
+            <div class="overlap-wrapper-2">
+              <div class="overlap-2">
+                <p class="text-2">Maximum RAM for Minecraft - In <u>Megabytes</u></p>
+              </div>
+            </div>
+          </div>
+          <div class="account">
+            <div class="overlap-group-wrapper pointer" id="LOGOUT">
+              <div class="overlap-group-2">
+                <div class="text-3">Log Out</div>
+              </div>
+            </div>
+            <div class="overlap-wrapper">
+              <div class="overlap-2">
+                <div class="text-2">Logged in as <a><%= playerName %></a></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="openlogs">
+            <div class="overlap" style="cursor: pointer;" id="OPENLOGS">
+              <div class="full-text-wrapper">Open Logs</div>
+            </div>
+          </div>
+          <div class="openfolder">
+            <div class="overlap" style="cursor: pointer;" id="OPENGAMEFOLDER">
+              <div class="full-text-wrapper">Open Game Folder</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="overlap-wrapper-3">
+          <div class="overlap-3">
+            <div class="text-4">SETTINGS</div>
+          </div>
+        </div>
+      </div>
+      
+      <%- include('../components/sidebar', { page: 'settings' }) %>
+      
+      <%- include('../components/header') %>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="../allpages.js"></script>
+</body>
+
+</html>

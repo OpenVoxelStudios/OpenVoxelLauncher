@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="../global/globals.css" />
+  <link rel="stylesheet" href="../global/styleguide.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="updater">
+    <div class="div">
+      <div class="overlap-group">
+        <img class="logogif" src="../global/img/logo.gif" />
+        <div class="text" id="status">Loading the app...</div>
+      </div>
+      <div class="progress">
+        <div id="progressBar"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function setProgress(percent) {
+      document.getElementById('progressBar').style.width = percent + "%";
+    };
+
+    const { ipcRenderer } = window.require('electron');
+
+    ipcRenderer.on('statusUpdate', (_event, text) => {
+      document.getElementById('status').innerText = text;
+    });
+
+    let previous = 0;
+    ipcRenderer.on('progressUpdate', (_event, newPercentage) => {
+      // No idea why but sometimes the progress just go backwards??
+      if (newPercentage > previous) {
+        setProgress(newPercentage);
+        previous = newPercentage;
+      };
+    })
+  </script>
+</body>
+
+</html>

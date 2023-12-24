@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="../global/globals.css" />
+  <link rel="stylesheet" href="../global/styleguide.css" />
+  <link rel="stylesheet" href="../global/app.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <title>Home - OpenVoxel Launcher</title>
+  <script src="../localstorage.js"></script>
+</head>
+
+<body>
+  <div class="home">
+    <div class="div">
+      <div class="play" id="PLAYBG">
+        <div class="buttons-play" id="PLAYBTN" data-enabled="true">
+          <div class="overlap-group">
+            <div class="text-wrapper"><a id="PLAYTEXT">Launch Minecraft</a></div>
+            <div class="group">
+              <div class="text-wrapper-2"><a id="PLAYSUBTEXT">Click to play!</a></div>
+              <img class="icons-controller" src="../global/img/icons/controller-small.png" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team-list">
+        <div class="our-team">OUR TEAM</div>
+        <div class="vertical">
+          <a class="OPENURLDEFAULTBROWSER" data-url="https://discordapp.com/users/685739284287848458">
+            <div class="kodeur-kubik">
+              <img class="head" src="../global/img/heads/Kodeur_Kubik.png" />
+              <div class="overlap-group-2">
+                <div class="name">Kodeur_Kubik</div>
+                <div class="roles">Programmer, Animator, Modeller</div>
+              </div>
+            </div>
+          </a>
+          <a class="OPENURLDEFAULTBROWSER" data-url="https://discordapp.com/users/552465226583506945">
+            <div class="kodeur-kubik-2">
+              <img class="head" src="../global/img/heads/Sammy2D.png" />
+              <div class="overlap-group-2">
+                <div class="name">Sammy2D</div>
+                <div class="roles">Programmer, Animator, Modeller</div>
+              </div>
+            </div>
+          </a>
+          <a class="OPENURLDEFAULTBROWSER" data-url="https://discordapp.com/users/728545314507849748">
+            <div class="kodeur-kubik-3">
+              <img class="head" src="../global/img/heads/CMANIF.png" />
+              <div class="overlap-group-2">
+                <div class="name">CMANIF</div>
+                <div class="roles">Builder</div>
+              </div>
+            </div>
+          </a>
+          <a class="OPENURLDEFAULTBROWSER" data-url="https://discordapp.com/users/724906882380202006">
+            <div class="kodeur-kubik-4">
+              <img class="head" src="../global/img/heads/ChoosingBerry29.png" />
+              <div class="overlap-group-2">
+                <div class="name-2">ChoosingBerry29</div>
+                <div class="roles">Programmer, Builder, Modeller</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="vertical-2">
+          <a class="OPENURLDEFAULTBROWSER" data-url="https://discordapp.com/users/709164804144758814">
+            <div class="kodeur-kubik" id="STEVELOCKSHOVER">
+              <img class="head" src="../global/img/heads/Stevelocks100.png" id="STEVELOCKSROTATE" />
+              <div class="overlap-group-2">
+                <div class="name">Stevelocks100</div>
+                <div class="roles">Programmer, Animator, Modeller</div>
+              </div>
+            </div>
+          </a>
+          <a id="ArtkiliouPT" class="OPENURLDEFAULTBROWSER" data-url="https://discordapp.com/users/655453962874388482">
+            <div class="kodeur-kubik-2">
+              <img class="head" src="../global/img/heads/Monster_Art.png" />
+              <div class="overlap-group-2">
+                <div class="name">Monster_Art</div>
+                <div class="roles">Animator, Modeller</div>
+              </div>
+            </div>
+          </a>
+          <a class="OPENURLDEFAULTBROWSER" data-url="https://discordapp.com/users/249993006705278986">
+            <div class="kodeur-kubik-3" id="AWESOME">
+              <img class="head" src="../global/img/heads/s0fl.png" />
+              <div class="overlap-group-2">
+                <div class="name">s0fl</div>
+                <div class="roles">Programmer</div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="news-list">
+        <div class="row-5">
+          <img class="rectangle-4 GETNEWS" src="../global/img/news-template.png" data-newsindex="0" />
+          <img class="rectangle-5 GETNEWS" src="../global/img/news-template.png" data-newsindex="1" />
+          <img class="rectangle-4-2 GETNEWS" src="../global/img/news-template.png" data-newsindex="2" />
+          <img class="rectangle-5-2 GETNEWS" src="../global/img/news-template.png" data-newsindex="3" />
+        </div>
+        <div class="news">
+          <div class="news-wrapper">
+            <div class="news-2">NEWS!</div>
+          </div>
+        </div>
+      </div>
+      
+      <%- include('../components/header') %>
+
+      <%- include('../components/sidebar', { page: 'home' }) %>
+    </div>
+  </div>
+
+  <audio id="playaudio" src="../global/img/play.mp3" style="visibility: hidden;"></audio>
+  <audio id="stevelocksaudio" src="https://www.zygocraft.com/openvoxel/stevelocks.mp3" style="visibility: hidden;" loop></audio>
+
+  <script src="script.js"></script>
+  <script src="../allpages.js"></script>
+</body>
+
+</html>

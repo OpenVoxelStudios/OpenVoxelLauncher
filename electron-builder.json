@@ -1,0 +1,63 @@
+{
+    "appId": "studio.openvoxel.ovlauncher",
+    "productName": "OpenVoxel Launcher",
+    "copyright": "Copyright © 2023 OpenVoxel Studios",
+    "mac": {
+        "category": "public.app-category.games",
+        "icon": "./icons/icon.icns",
+        "target": [
+            {
+                "target": "dmg",
+                "arch": [
+                    "arm64"
+                ]
+            },
+            {
+                "target": "zip",
+                "arch": [
+                    "arm64"
+                ]
+            }
+        ],
+        "extendInfo": "openvoxel"
+    },
+    "win": {
+        "publisherName": "OpenVoxel Studios",
+        "target": [
+            {
+                "target": "nsis",
+                "arch": [
+                    "x64"
+                ]
+            }
+        ]
+    },
+    "dmg": {
+        "background": "./icons/background.png",
+        "icon": "./icons/cmdblock.icns",
+        "title": "OpenVoxel Launcher Installer"
+    },
+    "nsis": {
+        "oneClick": false,
+        "perMachine": false,
+        "allowToChangeInstallationDirectory": true,
+        "installerIcon": "./icons/icon.ico",
+        "license": "./agreement.html",
+        "createDesktopShortcut": true,
+        "createStartMenuShortcut": true
+    },
+    "extraResources": [
+        "./assets/mcversion.json",
+        "./assets/servericon.txt",
+        "./games/*.json",
+        "./assets/**/*",
+        "./assets/mods/**/*"
+    ],
+    "protocols": {
+        "name": "openvoxel",
+        "schemes": [
+            "openvoxel",
+            "openvoxellauncher"
+        ]
+    }
+}

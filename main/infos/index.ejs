@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="../global/globals.css" />
+  <link rel="stylesheet" href="../global/styleguide.css" />
+  <link rel="stylesheet" href="../global/app.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <title>Infos - OpenVoxel Launcher</title>
+  <script src="../localstorage.js"></script>
+</head>
+
+<body>
+  <div class="infos">
+    <div class="div">
+      <div class="info-list">
+        <div class="mod-list">
+          <a class="pointer openLicense" data-license="GNU_LESSER_GENERAL_PUBLIC_LICENSE">
+            <div class="true_darkness">
+              <div class="overlap-group">
+                <div class="div-2">True Darkness</div>
+              </div>
+            </div>
+          </a>
+          <a class="pointer openLicense" data-license="GNU_LESSER_GENERAL_PUBLIC_LICENSE">
+            <div class="zoomify">
+              <div class="overlap-group">
+                <div class="div-2">Zoomify</div>
+              </div>
+            </div>
+          </a>
+          <a class="pointer openLicense" data-license="GNU_LESSER_GENERAL_PUBLIC_LICENSE">
+            <div class="yet-another-config">
+              <div class="overlap-group">
+                <div class="div-2">YetAnotherConfigLib</div>
+              </div>
+            </div>
+          </a>
+          <a class="pointer openLicense" data-license="GNU_LESSER_GENERAL_PUBLIC_LICENSE">
+            <div class="sodium">
+              <div class="overlap-group">
+                <div class="div-2">Sodium</div>
+              </div>
+            </div>
+          </a>
+          <a class="pointer openLicense" data-license="TR7ZW_PROTECTIVE_LICENSE">
+            <div class="skin-layers">
+              <div class="overlap-group">
+                <div class="div-2">Skin Layers 3D</div>
+              </div>
+            </div>
+          </a>
+          <a class="pointer openLicense" data-license="GNU_LESSER_GENERAL_PUBLIC_LICENSE">
+            <div class="lithium">
+              <div class="overlap-group">
+                <div class="div-2">Lithium</div>
+              </div>
+            </div>
+          </a>
+          <a class="pointer openLicense" data-license="GNU_LESSER_GENERAL_PUBLIC_LICENSE">
+            <div class="iris-shaders">
+              <div class="overlap-group">
+                <div class="div-2">Iris Shaders</div>
+              </div>
+            </div>
+          </a>
+          <a class="pointer openLicense" data-license="APACHE">
+            <div class="overlap-group-wrapper">
+              <div class="overlap-group">
+                <div class="div-2">Indium</div>
+              </div>
+            </div>
+          </a>
+          <a class="pointer openLicense" data-license="APACHE">
+            <div class="overlap-group-wrapper">
+              <div class="overlap">
+                <div class="overlap-group">
+                  <div class="div-2">Fabric Language Kotlin</div>
+                </div>
+              </div>
+            </div>
+          </a>
+          <a class="pointer openLicense" data-license="APACHE">
+            <div class="overlap-wrapper">
+              <div class="overlap-group">
+                <div class="div-2">Fabric API</div>
+              </div>
+            </div>
+          </a>
+          <a class="pointer openLicense" data-license="GNU_LESSER_GENERAL_PUBLIC_LICENSE">
+            <div class="overlap-wrapper-2">
+              <div class="overlap-group">
+                <div class="div-3">Disable Custom Worlds Advice</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="info-list-2">
+          <div class="overlap-group-wrapper">
+            <div class="overlap-group">
+              <p class="div-2">
+                <span class="text-wrapper">All coded by Kubik: </span>
+                <span class="span">&copy; 2023 OpenVoxel Studios</span>
+              </p>
+            </div>
+          </div>
+          <div class="overlap-wrapper">
+            <div class="overlap-group">
+              <p class="div-2">
+                <span class="text-wrapper">Electron version:</span> <span class="span"> v27.1.0</span>
+              </p>
+            </div>
+          </div>
+          <div class="overlap-wrapper-2">
+            <div class="overlap-group">
+              <p class="div-3">
+                <span class="text-wrapper">App Version:</span><span class="span"> <%= version %></span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="overlap-wrapper-3">
+          <div class="overlap">
+            <div class="text">INFOS ABOUT THE LAUNCHER</div>
+          </div>
+        </div>
+        <div class="mods">
+          <div class="div-wrapper">
+            <p class="text">
+              <span class="text-wrapper-2">Infos about mods used<br /></span>
+              <span class="text-wrapper-3">(click on them to see their license)</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <%- include('../components/sidebar', { page: 'infos' }) %>
+      
+      <%- include('../components/header') %>
+    </div>
+  </div>
+
+  <script src="../allpages.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

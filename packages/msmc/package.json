@@ -1,0 +1,72 @@
+{
+  "name": "msmc",
+  "version": "4.1.0",
+  "description": "A bare bones login library for Minecraft based projects to authenticate individuals with a Microsoft account.",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types":"./types/index.d.ts",
+      "import": "./code/index.js",
+      "require": "./code/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Hanro50/MSMC.git"
+  },
+  "types": "./types/index.d.ts",
+  "author": "Hanro50 (https://github.com/Hanro50)",
+  "bugs": {
+    "url": "https://github.com/Hanro50/MSMC/issues"
+  },
+  "homepage": "https://www.hanro50.net.za/msmc/",
+  "scripts": {
+    "build": "node build.js",
+    "test:raw": "cd ./tests/raw\nnpm i\nnpm run start",
+    "test:nwjs": "cd ./tests/nwjs\nnpm i\nnpm run start",
+    "test:electron": "cd ./tests/electron\nnpm i\nnpm run start",
+    "test:console": "cd ./tests/console\nnpm i\nnpm run start"
+  },
+  "workspaces": [
+    "tests/console",
+    "tests/electron",
+    "tests/nwjs",
+    "tests/raw"
+  ],
+  "keywords": [
+    "msmc",
+    "microsoft",
+    "oauth2",
+    "minecraft",
+    "login",
+    "mc",
+    "es6",
+    "commonjs"
+  ],
+  "engines": {
+    "node": ">=14.17.3"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.35",
+    "@types/node-fetch": "^2.x",
+    "@types/webpack": "^5.x",
+    "typescript": "^4.x"
+  },
+  "dependencies": {
+    "node-fetch": "2.x",
+    "tslib": "^2.4.0"
+  },
+  "funding": [
+    {
+      "type": "paypal",
+      "url": "https://paypal.me/hanro50"
+    }
+  ],
+  "files": [
+    "code",
+    "types",
+    "README.md",
+    "package.json",
+    "LICENSE"
+  ]
+}
