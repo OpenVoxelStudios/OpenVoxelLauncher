@@ -125,10 +125,42 @@ function importSettings(gameInfo) {
     };
 
 
-    if (!existsSync(path.join(root, 'sodium-options.json')) && existsSync(path.join(mcroot, 'sodium-options.json'))) {
+    if (!existsSync(path.join(root, 'config', 'sodium-options.json')) && existsSync(path.join(mcroot, 'config', 'sodium-options.json'))) {
         logger.log('both', 'sodium-options.json doesnt exist yet: copying the Minecraft config');
         cpSync(path.join(mcroot, 'sodium-options.json'), path.join(root, 'sodium-options.json'));
     }
+
+    let read = {
+        "quality": {
+            "weather_quality": "DEFAULT",
+            "leaves_quality": "DEFAULT",
+            "enable_vignette": true
+        },
+        "advanced": {
+            "enable_memory_tracing": false,
+            "use_advanced_staging_buffers": true,
+            "cpu_render_ahead_limit": 3
+        },
+        "performance": {
+            "chunk_builder_threads": 0,
+            "always_defer_chunk_updates_v2": true,
+            "animate_only_visible_textures": true,
+            "use_entity_culling": true,
+            "use_fog_occlusion": true,
+            "use_block_face_culling": true,
+            "use_no_error_g_l_context": true
+        },
+        "notifications": {
+            "hide_donation_button": true
+        }
+    };
+
+    if (existsSync(path.join(root, 'config', 'sodium-options.json'))) read = JSON.parse(readFileSync(path.join(root, 'config', 'sodium-options.json'), { encoding: 'utf-8' }));
+    read.notifications = {};
+    read.notifications.hide_donation_button = true;
+
+    writeFileSync(path.join(root, 'config', 'sodium-options.json'), JSON.stringify(read, null, 4), { encoding: 'utf-8' });
+
 
     if (!existsSync(path.join(root, 'servers.dat')) && existsSync(path.join(mcroot, 'servers.dat'))) {
         logger.log('both', 'servers.dat doesnt exist yet: copying the Minecraft config');
