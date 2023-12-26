@@ -199,7 +199,7 @@ document.onkeydown = (event) => {
             lastBerryText = -1;
 
             var video = document.createElement("img");
-            video.src = 'https://www.zygocraft.com/openvoxel/berry.gif';
+            video.src = 'https://openvoxel.studio/assets/berry.gif';
             video.width = '100%';
             video.height = '100%';
             video.id = 'fullytopvideo';

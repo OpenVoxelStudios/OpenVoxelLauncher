@@ -18,7 +18,7 @@ class RPC {
                 },
                 {
                     label: 'Website',
-                    url: 'https://www.zygocraft.com/openvoxel'
+                    url: 'https://openvoxel.studio/'
                 }
             ],
             startTimestamp: this.start,

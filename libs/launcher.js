@@ -35,7 +35,7 @@ function setAppMenu(win) {
                 {
                     label: 'About OpenVoxel',
                     click() {
-                        shell.openExternal('https://www.zygocraft.com/openvoxel')
+                        shell.openExternal('https://openvoxeldio/')
                     },
                 },
                 { type: 'separator' },
