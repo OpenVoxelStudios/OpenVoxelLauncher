@@ -35,7 +35,7 @@ function setAppMenu(win) {
                 {
                     label: 'About OpenVoxel',
                     click() {
-                        shell.openExternal('https://openvoxeldio/')
+                        shell.openExternal('https://openvoxel.studio/')
                     },
                 },
                 { type: 'separator' },

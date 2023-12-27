@@ -1,4 +1,3 @@
-const HEADAPI = "https://visage.surgeplay.com/bust/320";
 var openvoxel = window.openvoxel;
 
 
@@ -199,7 +198,7 @@ document.onkeydown = (event) => {
             lastBerryText = -1;
 
             var video = document.createElement("img");
-            video.src = 'https://www.zygocraft.com/openvoxel/berry.gif';
+            video.src = '../global/img/berry.gif';
             video.width = '100%';
             video.height = '100%';
             video.id = 'fullytopvideo';

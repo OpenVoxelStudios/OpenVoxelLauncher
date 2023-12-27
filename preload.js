@@ -7,6 +7,9 @@ contextBridge.exposeInMainWorld('openvoxel', {
 
     onCMANIFStuff: (callback) => ipcRenderer.on('set-CMANIF-mode', (_event, value) => callback(value)),
     getCMANIFStuff: () => ipcRenderer.invoke('get-CMANIF-mode'),
+
+    // Some caching stuff
+    cacheNews: async (url, index, toOpen) => await ipcRenderer.invoke('cacheNews', url, index, toOpen),
     
     // Invoke stuff
     setSetting: (setting, newvalue) => ipcRenderer.invoke('setSetting', setting, newvalue),

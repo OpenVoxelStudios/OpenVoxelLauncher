@@ -62,19 +62,33 @@ openvoxel.isGameLaunched().then(result => {
 });
 
 
+function updateNewsWith(newsList) {
+    document.querySelectorAll('.GETNEWS').forEach(async n => {
+        let news = newsList?.[n.dataset.newsindex];
+        if (news) {
+            n.onclick = () => openvoxel.openExternal(news.url);
+            n.src = await openvoxel.cacheNews(news.image, n.dataset.newsindex, news.url);
+        };
+    });
+}
+
+let cachedNews = localStorage.getItem('news');
+if (cachedNews) {
+    cachedNews = JSON.parse(cachedNews);
+    updateNewsWith(cachedNews);
+}
+
 // Get latest news
 fetch(`https://www.zygocraft.com/openvoxel/news.json`)
     .then(res => res.json())
     .then(newsList => {
+        newsList = newsList.slice(0, 4);
         console.log('Got news!');
 
-        document.querySelectorAll('.GETNEWS').forEach(n => {
-            let news = newsList?.[n.dataset.newsindex];
-            if (news) {
-                n.src = news.image;
-                n.onclick = () => openvoxel.openExternal(news.url);
-            };
-        });
+        if (newsList != JSON.parse(localStorage.getItem('news'))) {
+            updateNewsWith(newsList);
+            localStorage.setItem('news', JSON.stringify(newsList));
+        };
     });
 
 

@@ -13,6 +13,7 @@ const { fromXboxManagerToSaveLogin, authManager, deleteLogin } = require('./libs
 const { protocol, setAppMenu, quit, openLicense } = require('./libs/launcher.js');
 const ejse = require('ejs-electron');
 const { spawn } = require('node:child_process');
+const fetch = require('node-fetch');
 
 var OVOPTIONS = OVOPTIONS_origin;
 
@@ -34,7 +35,7 @@ async function OpenVoxelLauncher(PROFILE) {
 
     if (PROFILE?.username) {
         ejse.data('playerName', PROFILE?.username);
-        ejse.data('playerSkin', `https://visage.surgeplay.com/bust/320/${PROFILE?.username}`);
+        ejse.data('playerSkin', `https://visage.surgeplay.com/bust/320/${PROFILE?.token?.uuid || PROFILE?.username}`);
     }
     ejse.data('version', 'v' + require('./package.json').version || 'v0.0.0');
     ejse.data('options', OVOPTIONS);
@@ -63,6 +64,10 @@ async function OpenVoxelLauncher(PROFILE) {
         disableAutoHideCursor: true,
         hasShadow: true,
     });
+
+    // Caching assets yay
+    let assetCachingPath = path.join(rootroot, 'cache', 'assets');
+    mkdirSync(assetCachingPath, { recursive: true });
 
     app.on('open-url', (event, url) => { protocol(win, url, PROFILE) });
     app.on('second-instance', (event, commandLine, workingDirectory) => { protocol(win, commandLine.pop(), PROFILE) });
@@ -103,6 +108,32 @@ async function OpenVoxelLauncher(PROFILE) {
         win.webContents.send('set-CMANIF-mode', CMANIFMode);
     })
     ipcMain.handle('get-CMANIF-mode', () => CMANIFMode);
+
+    ipcMain.handle('cacheNews', (_, url, index, toOpen) => {
+        return new Promise(async (resolve) => {
+            let thatPath = path.join(assetCachingPath, `news${index}.json`);
+            let read = existsSync(thatPath) ? JSON.parse(readFileSync(thatPath, { encoding: 'utf-8' })) : undefined;
+
+            // Maybe check other files? (TODO)
+
+            if (!read || read?.version != 1 || read?.url != url || read?.lastUpdate + 60 * 60 * 1000 < Date.now()) {
+                let response = await fetch(url);
+                let base64Data = `data:${response.headers.get('content-type')};base64,${(await response.buffer()).toString('base64')}`;
+                resolve(base64Data);
+
+                writeFileSync(thatPath, JSON.stringify({
+                    url,
+                    toOpen,
+                    lastUpdate: Date.now(),
+                    version: 1,
+                }), { encoding: 'utf-8' });
+
+                writeFileSync(thatPath + '.image', base64Data, { encoding: 'utf-8' });
+            }
+
+            else resolve(readFileSync(thatPath + '.image', { encoding: 'utf-8' }));
+        })
+    })
 
     app.on('window-all-closed', () => quit(win));
     app.on('before-quit', () => quit(win));
@@ -161,6 +192,7 @@ async function OpenVoxelLauncher(PROFILE) {
 
         OVOPTIONS = editOptions(setting, newvalue);
         if (setting == 'drpc' && newvalue == false) RPC.stop();
+
         return true;
     });
 
