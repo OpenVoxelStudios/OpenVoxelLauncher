@@ -12,7 +12,10 @@
     "electron": "clear && electron .",
     "build-mac": "npm run prepare-notdev && npx electron-builder --mac --publish never",
     "build-win": "npm run prepare-notdev && npx electron-builder --win --publish never",
-    "build-linux": "npm run prepare-notdev && npx electron-builder --linux --publish never"
+    "build-linux": "npm run prepare-notdev && npx electron-builder --linux --publish never",
+    "testbuild-mac": "npm run prepare-notdev && npx electron-builder --mac --publish never",
+    "testbuild-win": "npm run prepare-notdev && npx electron-builder --win --publish never",
+    "testbuild-linux": "npm run prepare-notdev && npx electron-builder --linux --publish never"
   },
   "devMode": false,
   "repository": {

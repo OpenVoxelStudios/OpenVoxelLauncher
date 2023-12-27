@@ -42,7 +42,6 @@
         "perMachine": false,
         "allowToChangeInstallationDirectory": true,
         "installerIcon": "./icons/icon.ico",
-        "license": "./agreement.html",
         "createDesktopShortcut": true,
         "createStartMenuShortcut": true
     },

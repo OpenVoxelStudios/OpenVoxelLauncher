@@ -1,4 +1,3 @@
-const { devMode } = require('./package.json');
 const { app, BrowserWindow, ipcMain, Notification } = require('electron');
 const { Client } = require("./packages/minecraft-launcher-core/index");
 const launcher = new Client();
@@ -15,6 +14,7 @@ const { protocol, setAppMenu, quit, openLicense } = require('./libs/launcher.js'
 const ejse = require('ejs-electron');
 const { spawn } = require('node:child_process');
 const fetch = require('node-fetch');
+const { devMode } = require(path.join(appPath, './package.json'));
 
 if (devMode) logger.info('both', 'Launcher running in Dev Mode');
 
