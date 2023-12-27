@@ -1,3 +1,4 @@
+const { devMode } = require('./package.json');
 const { app, BrowserWindow, ipcMain, Notification } = require('electron');
 const { Client } = require("./packages/minecraft-launcher-core/index");
 const launcher = new Client();
@@ -14,6 +15,8 @@ const { protocol, setAppMenu, quit, openLicense } = require('./libs/launcher.js'
 const ejse = require('ejs-electron');
 const { spawn } = require('node:child_process');
 const fetch = require('node-fetch');
+
+if (devMode) logger.info('both', 'Launcher running in Dev Mode');
 
 var OVOPTIONS = OVOPTIONS_origin;
 
@@ -32,6 +35,10 @@ function editOptions(setting, newvalue) {
 
 async function OpenVoxelLauncher(PROFILE) {
     var gameLaunched = { is: false };
+
+    // Caching assets yay
+    let assetCachingPath = path.join(rootroot, 'cache', 'assets');
+    mkdirSync(assetCachingPath, { recursive: true });
 
     if (PROFILE?.username) {
         ejse.data('playerName', PROFILE?.username);
@@ -54,20 +61,16 @@ async function OpenVoxelLauncher(PROFILE) {
         titleBarOverlay: true,
         titleBarStyle: 'customButtonsOnHover',
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
+            preload: path.join(appPath, 'preload.js'),
             nodeIntegration: true,
             contextIsolation: true,
-            // devTools: false,
+            devTools: devMode || false,
         },
         icon: './assets/icon.png',
         backgroundColor: '#252525',
         disableAutoHideCursor: true,
         hasShadow: true,
     });
-
-    // Caching assets yay
-    let assetCachingPath = path.join(rootroot, 'cache', 'assets');
-    mkdirSync(assetCachingPath, { recursive: true });
 
     app.on('open-url', (event, url) => { protocol(win, url, PROFILE) });
     app.on('second-instance', (event, commandLine, workingDirectory) => { protocol(win, commandLine.pop(), PROFILE) });
@@ -78,7 +81,7 @@ async function OpenVoxelLauncher(PROFILE) {
     if (PROFILE === false) win.loadFile('./main/login/index.ejs')
     else win.loadFile('./main/home/index.ejs');
 
-    // win.webContents.openDevTools({ mode: 'detach' });
+    if (devMode) win.webContents.openDevTools({ mode: 'detach' });
 
     if (OVOPTIONS?.drpc) {
         logger.log('both', '[DRPC] Logging in to Discord RPC');

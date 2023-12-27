@@ -1,6 +1,6 @@
 const path = require('path');
 const { existsSync, createWriteStream } = require('node:fs');
-const { rootroot } = require('./paths');
+const { rootroot, appPath } = require('./paths');
 const { mkdirSync } = require('fs');
 
 const STARTTIME = new Date(Date.now());
@@ -90,5 +90,7 @@ const logger = {
         },
     }
 };
+
+logger.info('both', `Taking ${appPath} as the App Path`);
 
 module.exports = logger;

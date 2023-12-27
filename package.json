@@ -5,11 +5,16 @@
   "description": "A Minecraft Launcher for OpenVoxel Studios!",
   "main": "index.js",
   "scripts": {
-    "test": "clear && electron .",
-    "build-mac": "npx electron-builder --mac --publish never",
-    "build-win": "npx electron-builder --win --publish never",
-    "build-linux": "npx electron-builder --linux --publish never"
+    "prepare-notdev": "node -e \"var old = require('./package.json'); old.devMode = false; require('node:fs').writeFileSync('./package.json', JSON.stringify(old, undefined, 2), { encoding: 'utf-8' });\"",
+    "prepare-dev": "node -e \"var old = require('./package.json'); old.devMode = true; require('node:fs').writeFileSync('./package.json', JSON.stringify(old, undefined, 2), { encoding: 'utf-8' });\"",
+    "dev": "npm run prepare-dev && npm run electron",
+    "start": "npm run prepare-notdev && npm run electron",
+    "electron": "clear && electron .",
+    "build-mac": "npm run prepare-notdev && npx electron-builder --mac --publish never",
+    "build-win": "npm run prepare-notdev && npx electron-builder --win --publish never",
+    "build-linux": "npm run prepare-notdev && npx electron-builder --linux --publish never"
   },
+  "devMode": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/OpenVoxelStudios/OpenVoxelLauncher"

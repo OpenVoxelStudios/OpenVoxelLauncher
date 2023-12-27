@@ -48,8 +48,8 @@ module.exports = () => {
                 win.webContents.send('statusUpdate', `Checking for updates...`);
                 let update = await autoUpdater.checkForUpdates();
 
-                logger.info('both', 'Got latest update:')
-                logger.info('both', update)
+                logger.info('both', 'Got latest update')
+                if (update) logger.info('both', update)
 
                 if (update && v1Bigger(update.updateInfo.version, require('./package.json').version)) {
                     win.webContents.send('progressUpdate', 0);
