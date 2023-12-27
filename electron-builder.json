@@ -50,7 +50,8 @@
         "./assets/servericon.txt",
         "./games/*.json",
         "./assets/**/*",
-        "./assets/mods/**/*"
+        "./assets/mods/**/*",
+        "./intern.json"
     ],
     "protocols": {
         "name": "openvoxel",

@@ -78,7 +78,8 @@ module.exports = () => {
             autoUpdater.on('error', (err) => {
                 win.setProgressBar(1, { mode: 'error' });
                 win.webContents.send('statusUpdate', `Something went wrong...`);
-                dialog.showErrorBox('An error occured...', `This shouldn't happend. Check your internet connection, restart the app and try again.\n\nFULL ERROR: ${err}`);
+                dialog.showErrorBox('An error occured...', `The app will still try to launch. If this error still occur, please report the potential bug.\n\nFULL ERROR: ${err}`);
+                win.setProgressBar(-1, { mode: 'none' });
                 autoUpdater.emit('update-not-available');
             });
 

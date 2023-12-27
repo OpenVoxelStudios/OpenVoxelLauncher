@@ -14,7 +14,7 @@ const { protocol, setAppMenu, quit, openLicense } = require('./libs/launcher.js'
 const ejse = require('ejs-electron');
 const { spawn } = require('node:child_process');
 const fetch = require('node-fetch');
-const { devMode } = require(path.join(appPath, './package.json'));
+const { devMode } = existsSync(path.join(appPath, 'intern.json')) ? require(path.join(appPath, 'intern.json')) : false;
 
 if (devMode) logger.info('both', 'Launcher running in Dev Mode');
 
@@ -61,7 +61,7 @@ async function OpenVoxelLauncher(PROFILE) {
         titleBarOverlay: true,
         titleBarStyle: 'customButtonsOnHover',
         webPreferences: {
-            preload: path.join(appPath, 'preload.js'),
+            preload: path.join(__dirname, 'preload.js'),
             nodeIntegration: true,
             contextIsolation: true,
             devTools: devMode || false,
