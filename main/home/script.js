@@ -63,7 +63,7 @@ openvoxel.isGameLaunched().then(result => {
 
 
 // Get latest news
-fetch(`https://openvoxel.studio/api/news.json`)
+fetch(`https://www.zygocraft.com/openvoxel/news.json`)
     .then(res => res.json())
     .then(newsList => {
         console.log('Got news!');
@@ -86,7 +86,7 @@ document.getElementById('ArtkiliouPT').addEventListener('click', () => {
         document.getElementById('ArtkiliouPT').dataset.url = undefined;
 
         var video = document.createElement("video");
-        video.src = 'https://openvoxel.studio/assets/artkiliou.mp4';
+        video.src = 'https://www.zygocraft.com/openvoxel/artkiliou.mp4';
         video.preload = "auto";
         video.controls = false;
         video.autoplay = true;
