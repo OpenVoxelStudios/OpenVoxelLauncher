@@ -41,7 +41,6 @@
     "follow-redirects": "^1.15.3",
     "nbt": "^0.8.1",
     "node-fetch": "^2.7.0",
-    "npm": "^10.2.4",
     "ospath": "^1.2.2",
     "request": "^2.88.2",
     "tslib": "^2.6.2",
