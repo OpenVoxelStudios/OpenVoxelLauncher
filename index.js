@@ -45,7 +45,7 @@ async function OpenVoxelLauncher(PROFILE) {
         ejse.data('playerName', PROFILE?.username);
         ejse.data('playerSkin', `https://visage.surgeplay.com/bust/320/${PROFILE?.token?.uuid || PROFILE?.username}`);
     }
-    ejse.data('version', 'v' + require('./package.json').version || 'v0.0.0');
+    ejse.data('version', 'v' + app.getVersion() || 'v0.0.0');
     ejse.data('options', OVOPTIONS);
     ejse.data('defaultSettings', defaultConfig);
 

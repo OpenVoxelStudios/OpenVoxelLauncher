@@ -27,7 +27,7 @@ function protocol(win, url, PROFILE) {
     }
 };
 
-function setAppMenu(win) {
+function setAppMenu(win, full = true) {
     Menu.setApplicationMenu(Menu.buildFromTemplate([
         {
             label: 'OpenVoxel Launcher',
@@ -58,8 +58,7 @@ function setAppMenu(win) {
                 },
             ],
             commandId: 0,
-        },
-        {
+        }].concat(full ? [{
             label: 'Pages',
             submenu: [
                 {
@@ -106,8 +105,8 @@ function setAppMenu(win) {
                 },
             ],
             commandId: 2,
-        },
-    ]));
+        }] : [])
+    ));
 };
 
 var quitting = false;

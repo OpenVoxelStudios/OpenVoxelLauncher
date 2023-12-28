@@ -15,6 +15,8 @@ autoUpdater.setFeedURL({
 });
 
 module.exports = () => {
+    logger.info('both', 'Starting with version v' + app.getVersion());
+    
     return new Promise((resolve) => {
         logger.log('both', 'Launching updater...');
         autoUpdater.logger = logger.both;
@@ -51,7 +53,7 @@ module.exports = () => {
                 logger.info('both', 'Got latest update')
                 if (update) logger.info('both', update)
 
-                if (update && v1Bigger(update.updateInfo.version, require('./package.json').version)) {
+                if (update && v1Bigger(update.updateInfo.version, app.getVersion())) {
                     win.webContents.send('progressUpdate', 0);
                     win.webContents.send('statusUpdate', `Downloading update...`);
                     await autoUpdater.downloadUpdate();

@@ -10,11 +10,12 @@
     "dev": "npm run prepare-dev && npm run electron",
     "start": "npm run prepare-notdev && npm run electron",
     "electron": "clear && electron .",
-    "build-mac": "npm run prepare-notdev && GH_TOKEN=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 npx electron-builder --mac --publish always && npm run clean",
-    "build-win": "npm run prepare-notdev && GH_TOKEN=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 npx electron-builder --win --publish always && npm run clean",
+    "build-mac": "npm run prepare-notdev && GH_TOKEN=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 npx electron-builder --mac --publish never && npm run clean",
+    "build-win": "npm run prepare-notdev && GH_TOKEN=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 npx electron-builder --win --publish never && npm run clean",
     "testbuild-mac": "npm run prepare-dev && npx electron-builder --mac --publish never",
     "testbuild-win": "npm run prepare-dev && npx electron-builder --win --publish never",
-    "clean": "unset GH_TOKEN"
+    "clean": "unset GH_TOKEN",
+    "build-all": "npm run build-mac && npm run build-win"
   },
   "repository": {
     "type": "git",
