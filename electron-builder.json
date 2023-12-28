@@ -22,10 +22,17 @@
         "extendInfo": "openvoxel"
     },
     "win": {
+        "icon": "./icons/icon.ico",
         "publisherName": "OpenVoxel Studios",
         "target": [
             {
                 "target": "nsis",
+                "arch": [
+                    "x64"
+                ]
+            },
+            {
+                "target": "portable",
                 "arch": [
                     "x64"
                 ]

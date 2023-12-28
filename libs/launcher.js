@@ -1,6 +1,6 @@
 const logger = require("./logger");
 const path = require('path');
-const { Menu, Tray, nativeImage, app, shell, BrowserWindow } = require('electron');
+const { Menu, app, shell, BrowserWindow } = require('electron');
 const { appPath, OVOPTIONS } = require("./paths");
 const RPC = require("./rpc");
 const { existsSync } = require("fs");

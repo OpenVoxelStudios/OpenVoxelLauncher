@@ -14,6 +14,7 @@ const { protocol, setAppMenu, quit, openLicense } = require('./libs/launcher.js'
 const ejse = require('ejs-electron');
 const { spawn } = require('node:child_process');
 const fetch = require('node-fetch');
+const os = require('os');
 const { devMode } = existsSync(path.join(appPath, 'intern.json')) ? require(path.join(appPath, 'intern.json')) : false;
 
 if (devMode) logger.info('both', 'Launcher running in Dev Mode');
@@ -53,7 +54,7 @@ async function OpenVoxelLauncher(PROFILE) {
         width: 1280,
         height: 720,
         fullscreenable: false,
-        frame: false,
+        frame: os.platform() !== 'darwin',
         maximizable: false,
         resizable: false,
         title: 'OpenVoxel Launcher',
