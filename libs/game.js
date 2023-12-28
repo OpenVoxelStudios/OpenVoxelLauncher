@@ -104,6 +104,11 @@ function importSettings(gameInfo) {
         cpSync(path.join(mcroot, 'resourcepacks'), path.join(root, 'resourcepacks'), { recursive: true, force: true });
     }
 
+    if (!existsSync(path.join(root, 'shaderpacks')) && existsSync(path.join(mcroot, 'shaderpacks'))) {
+        logger.log('both', 'Importing ressource packs from Minecraft');
+        cpSync(path.join(mcroot, 'shaderpacks'), path.join(root, 'shaderpacks'), { recursive: true, force: true });
+    }
+
 
     if (!existsSync(path.join(root, 'options.txt')) && existsSync(path.join(mcroot, 'options.txt'))) {
         logger.log('both', 'options.txt doesnt exist yet: copying the Minecraft config');
