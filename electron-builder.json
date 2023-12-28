@@ -1,6 +1,6 @@
 {
     "appId": "studio.openvoxel.ovlauncher",
-    "productName": "OpenVoxel Launcher",
+    "productName": "OpenVoxelLauncher",
     "copyright": "Copyright © 2023 OpenVoxel Studios",
     "mac": {
         "category": "public.app-category.games",
