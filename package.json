@@ -11,11 +11,11 @@
     "start": "npm run prepare-notdev && npm run electron",
     "electron": "clear && electron .",
     "build-mac": "npm run prepare-notdev && npx electron-builder --mac --publish never && npm run clean-mac",
-    "build-win": "npm run prepare-notdev && npx electron-builder --win --publish never && npm run clean-win",
+    "build-win": "npm run prepare-notdev && npx electron-builder --win --publish never && npm run clean-win && cd ./dist && for file in OpenVoxelLauncher*; do mv \"$file\" \"${file// /-}\"; done && cd ../",
     "testbuild-mac": "npm run prepare-dev && npx electron-builder --mac --publish never",
     "testbuild-win": "npm run prepare-dev && npx electron-builder --win --publish never",
     "build-all": "npm run build-mac && npm run build-win",
-    "clean-global": "echo 'Cleaning up...' && rm -f ./dist/builder-debug.yml && rm -f ./dist/builder-effective-config.yaml && for file in OpenVoxelLauncher*; do mv \"$file\" \"${file// /-}\"; done",
+    "clean-global": "echo 'Cleaning up...' && rm -f ./dist/builder-debug.yml && rm -f ./dist/builder-effective-config.yaml",
     "clean-win": "npm run clean-global && rm -rf ./dist/win-unpacked",
     "clean-mac": "npm run clean-global && rm -rf ./dist/mac-arm64"
   },
