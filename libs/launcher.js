@@ -40,23 +40,6 @@ function setAppMenu(win) {
                 },
                 { type: 'separator' },
                 {
-                    label: 'Home',
-                    click() { win.show(); win.loadFile('main/home/index.ejs') }
-                },
-                {
-                    label: 'Games',
-                    click() { win.show(); win.loadFile('main/games/index.ejs') }
-                },
-                {
-                    label: 'Infos',
-                    click() { win.show(); win.loadFile('main/infos/index.ejs') }
-                },
-                {
-                    label: 'Settings',
-                    click() { win.show(); win.loadFile('main/settings/index.ejs') }
-                },
-                { type: 'separator' },
-                {
                     label: 'Hide',
                     accelerator: 'CmdOrCtrl+H',
                     click() { app.hide() },
@@ -75,7 +58,55 @@ function setAppMenu(win) {
                 },
             ],
             commandId: 0,
-        }
+        },
+        {
+            label: 'Pages',
+            submenu: [
+                {
+                    label: 'Home',
+                    click() { win.show(); win.loadFile('main/home/index.ejs') }
+                },
+                {
+                    label: 'Games',
+                    click() { win.show(); win.loadFile('main/games/index.ejs') }
+                },
+                {
+                    label: 'Infos',
+                    click() { win.show(); win.loadFile('main/infos/index.ejs') }
+                },
+                {
+                    label: 'Settings',
+                    click() { win.show(); win.loadFile('main/settings/index.ejs') }
+                },
+            ],
+            commandId: 1,
+        },
+        {
+            label: 'Games',
+            submenu: [
+                {
+                    label: 'Vanilla',
+                    click() { win.show(); win.loadFile('main/home/index.ejs') }
+                },
+                {
+                    label: 'Oak House Murder',
+                    click() { win.show(); win.loadFile('main/home/index.ejs', { query: { game: 'oakhousemurder' }})}
+                },
+                /*{
+                    label: 'Block Hunt',
+                    click() { win.show(); win.loadFile('main/home/index.ejs', { query: { game: 'blockhunt' }}) }
+                },*/
+                {
+                    label: 'Lethal Budget',
+                    click() { win.show(); win.loadFile('main/home/index.ejs', { query: { game: 'lethalbudget' }}) }
+                },
+                {
+                    label: 'Yahiamice',
+                    click() { win.show(); win.loadFile('main/home/index.ejs', { query: { game: 'yahiamice' }}) }
+                },
+            ],
+            commandId: 2,
+        },
     ]));
 };
 

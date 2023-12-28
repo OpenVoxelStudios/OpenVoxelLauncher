@@ -57,18 +57,18 @@
     background-image: url(./img/games/oakhousemurder-icon.png);
 }
 
-.gameicons-blockhunt {
+/*.gameicons-blockhunt {
     left: 75px;
     background-image: url(./img/games/blockhunt-icon.png);
-}
+}*/
 
 .gameicons-lethalbudget {
-    left: 150px;
+    left: 75px;
     background-image: url(./img/games/lethalbudget-icon.png);
 }
 
 .gameicons-yahiamice {
-    left: 225px;
+    left: 150px;
     background-image: url(./img/games/yahiamice-icon.png);
 }
 

@@ -52,7 +52,7 @@ async function OpenVoxelLauncher(PROFILE) {
     logger.log('both', 'Creating Window...');
     const win = new BrowserWindow({
         width: 1280,
-        height: 720,
+        height: os.platform() == 'darwin' ? 720 : 748,
         fullscreenable: false,
         frame: os.platform() !== 'darwin',
         maximizable: false,
