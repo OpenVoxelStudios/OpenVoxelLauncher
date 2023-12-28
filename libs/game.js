@@ -99,6 +99,11 @@ function importSettings(gameInfo) {
     writeFileSync(path.join(root, 'config', 'customwindowtitle-client.toml'), `title = 'OpenVoxel Launcher {mcversion}'\n`, { encoding: 'utf-8' });
 
 
+    if (!existsSync(path.join(root, 'resourcepacks')) && existsSync(path.join(mcroot, 'resourcepacks'))) {
+        logger.log('both', 'Importing ressource packs from Minecraft');
+        cpSync(path.join(mcroot, 'resourcepacks'), path.join(root, 'resourcepacks'), { recursive: true, force: true });
+    }
+
 
     if (!existsSync(path.join(root, 'options.txt')) && existsSync(path.join(mcroot, 'options.txt'))) {
         logger.log('both', 'options.txt doesnt exist yet: copying the Minecraft config');
@@ -106,7 +111,7 @@ function importSettings(gameInfo) {
     }
 
     // Add ressource pack to options
-    let getOpts = readFileSync(path.join(root, 'options.txt'), { encoding: 'utf-8' });
+    let getOpts = readFileSync(existsSync(path.join(root, 'options.txt')) ? path.join(root, 'options.txt') : path.join(appPath, 'assets', 'options.txt'), { encoding: 'utf-8' });
 
     let old = getOpts.split('resourcePacks:')?.[1]?.split('\n')?.[0];
 

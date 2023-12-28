@@ -49,6 +49,7 @@
         "perMachine": false,
         "allowToChangeInstallationDirectory": true,
         "installerIcon": "./icons/icon.ico",
+        "uninstallerIcon": "./icons/icon.ico",
         "createDesktopShortcut": true,
         "createStartMenuShortcut": true
     },
