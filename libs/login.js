@@ -20,6 +20,7 @@ function deleteLogin(PROFILE) {
 
 function saveLogin(PROFILE) {
     logger.log('both', 'Saving login...');
+    logger.info('both', 'New login is user ' + PROFILE?.username + ' with UUID ' + PROFILE?.uuid);
     writeFileSync(path.join(rootroot, '.login'), JSON.stringify(PROFILE), { encoding: 'utf-8' });
 
     if (PROFILE?.username) {
@@ -50,7 +51,7 @@ async function fromXboxManagerToSaveLogin(xboxManager) {
         };
     };
 
-    var PROFILE = { username: token.profile.name, token: toWriteToken, refresh: toWriteRefresh, crypted };
+    var PROFILE = { username: token.profile.name, uuid: token.mclc(true)?.uuid, token: toWriteToken, refresh: toWriteRefresh, crypted };
     saveLogin(PROFILE);
     return PROFILE;
 };

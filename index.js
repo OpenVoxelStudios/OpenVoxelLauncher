@@ -6,15 +6,15 @@ const { mkdirSync, readFileSync, writeFileSync, existsSync } = require('node:fs'
 const RPC = require('./libs/rpc.js');
 const { defaultConfig } = require('./config.js');
 const { parseNBT, writeNBT } = require('./libs/nbt.js');
-const { prepareFullGame, importSettings } = require('./libs/game.js');
+const { prepareFullGame, importSettings, downloadGame } = require('./libs/game.js');
 const logger = require('./libs/logger.js');
 const { root, appPath, OVOPTIONS_origin, rootroot } = require('./libs/paths.js');
 const { fromXboxManagerToSaveLogin, authManager, deleteLogin } = require('./libs/login.js');
 const { protocol, setAppMenu, quit, openLicense } = require('./libs/launcher.js');
 const ejse = require('ejs-electron');
 const { spawn } = require('node:child_process');
-const fetch = require('node-fetch');
 const os = require('os');
+const { downloadImage } = require('./libs/util.js');
 const { devMode } = existsSync(path.join(appPath, 'intern.json')) ? require(path.join(appPath, 'intern.json')) : false;
 
 if (devMode) logger.info('both', 'Launcher running in Dev Mode');
@@ -36,18 +36,6 @@ function editOptions(setting, newvalue) {
 
 async function OpenVoxelLauncher(PROFILE) {
     var gameLaunched = { is: false };
-
-    // Caching assets yay
-    let assetCachingPath = path.join(rootroot, 'cache', 'assets');
-    mkdirSync(assetCachingPath, { recursive: true });
-
-    if (PROFILE?.username) {
-        ejse.data('playerName', PROFILE?.username);
-        ejse.data('playerSkin', `https://visage.surgeplay.com/bust/320/${PROFILE?.token?.uuid || PROFILE?.username}`);
-    }
-    ejse.data('version', 'v' + app.getVersion() || 'v0.0.0');
-    ejse.data('options', OVOPTIONS);
-    ejse.data('defaultSettings', defaultConfig);
 
     logger.log('both', 'Creating Window...');
     const win = new BrowserWindow({
@@ -72,6 +60,19 @@ async function OpenVoxelLauncher(PROFILE) {
         disableAutoHideCursor: true,
         hasShadow: true,
     });
+
+    // Caching assets yay
+    let assetCachingPath = path.join(rootroot, 'cache', 'assets');
+    mkdirSync(assetCachingPath, { recursive: true });
+
+    if (PROFILE?.username) {
+        ejse.data('playerName', PROFILE?.username);
+        let base64skin = await downloadImage(`https://visage.surgeplay.com/bust/320/${PROFILE?.uuid || PROFILE?.username}.png`, path.join(rootroot, 'cache', 'heads', `${PROFILE?.username}.base64`));
+        ejse.data('playerSkin', base64skin);
+    }
+    ejse.data('version', 'v' + app.getVersion() || 'v0.0.0');
+    ejse.data('options', OVOPTIONS);
+    ejse.data('defaultSettings', defaultConfig);
 
     app.on('open-url', (event, url) => { protocol(win, url, PROFILE) });
     app.on('second-instance', (event, commandLine, workingDirectory) => { protocol(win, commandLine.pop(), PROFILE) });
@@ -121,9 +122,7 @@ async function OpenVoxelLauncher(PROFILE) {
             // Maybe check other files? (TODO)
 
             if (!read || read?.version != 1 || read?.url != url || read?.lastUpdate + 60 * 60 * 1000 < Date.now()) {
-                let response = await fetch(url);
-                let base64Data = `data:${response.headers.get('content-type')};base64,${(await response.buffer()).toString('base64')}`;
-                resolve(base64Data);
+                let base64Data = await downloadImage(url, thatPath + '.image');
 
                 writeFileSync(thatPath, JSON.stringify({
                     url,
@@ -132,7 +131,7 @@ async function OpenVoxelLauncher(PROFILE) {
                     version: 1,
                 }), { encoding: 'utf-8' });
 
-                writeFileSync(thatPath + '.image', base64Data, { encoding: 'utf-8' });
+                resolve(base64Data);
             }
 
             else resolve(readFileSync(thatPath + '.image', { encoding: 'utf-8' }));
@@ -163,7 +162,8 @@ async function OpenVoxelLauncher(PROFILE) {
             authManager.launch("electron", { resizable: true, width: 500, height: 750 }).then(async xboxManager => {
                 PROFILE = await fromXboxManagerToSaveLogin(xboxManager);
                 ejse.data('playerName', PROFILE?.username);
-                ejse.data('playerSkin', `https://visage.surgeplay.com/bust/320/${PROFILE?.username}`);
+                let base64skin = await downloadImage(`https://visage.surgeplay.com/bust/320/${PROFILE?.uuid || PROFILE?.username}.png`, path.join(rootroot, 'cache', 'heads', `${PROFILE?.username}.base64`));
+                ejse.data('playerSkin', base64skin);
                 resolve(true);
             })
                 .catch((err) => {
