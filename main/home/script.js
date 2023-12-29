@@ -67,6 +67,7 @@ function updateNewsWith(newsList) {
         let news = newsList?.[n.dataset.newsindex];
         if (news) {
             n.onclick = () => openvoxel.openExternal(news.url);
+            n.style.cursor = "pointer";
             n.src = await openvoxel.cacheNews(news.image, n.dataset.newsindex, news.url);
         };
     });
