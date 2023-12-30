@@ -123,6 +123,7 @@ document.getElementById('ArtkiliouPT').addEventListener('click', () => {
 
 const STEVELOCKSHOVER = document.getElementById('STEVELOCKSHOVER');
 var STEVELOCKSTIME;
+var STEVELOCKSIN = false;
 function stevelocks(doWhat) {
     if (doWhat == 'enable') {
         console.log('Stevelocks!')
@@ -136,7 +137,11 @@ function stevelocks(doWhat) {
     }
 };
 STEVELOCKSHOVER.onmouseenter = () => {
+    STEVELOCKSIN = true;
     STEVELOCKSTIME = Date.now();
-    setTimeout(() => { if (Date.now() - STEVELOCKSTIME >= 5000) stevelocks('enable') }, 5000)
+    setTimeout(() => { if (Date.now() - STEVELOCKSTIME >= 5000 && STEVELOCKSIN) stevelocks('enable') }, 5000)
 };
-STEVELOCKSHOVER.onmouseleave = () => stevelocks();
+STEVELOCKSHOVER.onmouseleave = () => {
+    STEVELOCKSIN = false;
+    stevelocks();
+}
