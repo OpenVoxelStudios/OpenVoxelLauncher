@@ -1,5 +1,7 @@
 # OpenVoxel Launcher is out! 🔥
 
+## Check out latest release here: https://github.com/OpenVoxelStudios/OpenVoxelLauncher/releases/latest
+
 Download it now and play all of our games, with **Click & Play**!
 
 Contains optimisation mods, settings tab, game tab & more!
