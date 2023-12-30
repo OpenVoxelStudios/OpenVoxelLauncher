@@ -24,7 +24,7 @@
   overflow: hidden;
   border: 5px solid;
   border-color: var(--variable-collection-highlight);
-  background-image: url(../global/img/games/oakhousemurder-bg.png);
+  background-image: url(../global/img/games/default-bg.png);
   background-size: cover;
   background-position: 50% 50%;
 }
