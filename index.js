@@ -6,7 +6,7 @@ const { mkdirSync, readFileSync, writeFileSync, existsSync } = require('node:fs'
 const RPC = require('./libs/rpc.js');
 const { defaultConfig } = require('./config.js');
 const { parseNBT, writeNBT } = require('./libs/nbt.js');
-const { prepareFullGame, importSettings, downloadGame } = require('./libs/game.js');
+const { prepareFullGame, importSettings } = require('./libs/game.js');
 const logger = require('./libs/logger.js');
 const { root, appPath, OVOPTIONS_origin, rootroot } = require('./libs/paths.js');
 const { fromXboxManagerToSaveLogin, authManager, deleteLogin } = require('./libs/login.js');
@@ -78,7 +78,7 @@ async function OpenVoxelLauncher(PROFILE) {
     app.on('second-instance', (event, commandLine, workingDirectory) => { protocol(win, commandLine.pop(), PROFILE) });
 
     logger.log('both', 'Creating app menu...');
-    setAppMenu(win);
+    setAppMenu(win, PROFILE !== false);
 
     if (PROFILE === false) win.loadFile('./main/login/index.ejs')
     else win.loadFile('./main/home/index.ejs');
@@ -160,6 +160,7 @@ async function OpenVoxelLauncher(PROFILE) {
         logger.log('both', 'Received Login signal. Opening auth window');
         return new Promise((resolve) => {
             authManager.launch("electron", { resizable: true, width: 500, height: 750 }).then(async xboxManager => {
+                setAppMenu(win, true);
                 PROFILE = await fromXboxManagerToSaveLogin(xboxManager);
                 ejse.data('playerName', PROFILE?.username);
                 let base64skin = await downloadImage(`https://visage.surgeplay.com/bust/320/${PROFILE?.uuid || PROFILE?.username}.png`, path.join(rootroot, 'cache', 'heads', `${PROFILE?.username}.base64`));
@@ -175,6 +176,7 @@ async function OpenVoxelLauncher(PROFILE) {
     });
 
     ipcMain.handle('logout', () => {
+        setAppMenu(win, false);
         logger.log('both', 'Received Logout signal');
         deleteLogin(PROFILE);
         app.emit('goto-view', 'login');
@@ -219,7 +221,7 @@ async function OpenVoxelLauncher(PROFILE) {
             importSettings(gameInfo);
 
             // Adding our server at the top
-            let ourServer = { ip: { type: 'string', value: 'mc.openvoxel.studio' }, name: { type: 'string', value: '⭐ §6OpenVoxel Studios§r' }, acceptTextures: { type: 'byte', value: 1 }, icon: { type: 'string', value: readFileSync(path.join(appPath, 'assets/servericon.txt'), { encoding: 'utf-8' }) } };
+            let ourServer = { ip: { type: 'string', value: 'Thanks for using the launcher!' }, name: { type: 'string', value: '⭐ §6OpenVoxel Studios§r' }, acceptTextures: { type: 'byte', value: 1 }, icon: { type: 'string', value: readFileSync(path.join(appPath, 'assets/servericon.txt'), { encoding: 'utf-8' }) } };
             let dat = await parseNBT(path.join(root, 'servers.dat'));
             let values = dat.value.servers.value.value;
 
@@ -264,7 +266,7 @@ async function OpenVoxelLauncher(PROFILE) {
                 },
                 quickPlay: (game && game != 'vanilla') ? {
                     type: 'singleplayer',
-                    identifier: game
+                    identifier: game == 'lethalbudget' ? 'lethalcompany' : game // TODO: Fix this lol
                 } : undefined,
                 memory: {
                     min: ((OVOPTIONS?.minRam !== undefined) ? OVOPTIONS?.minRam : defaultConfig.minRam) + "M",
@@ -275,6 +277,7 @@ async function OpenVoxelLauncher(PROFILE) {
                     height: (OVOPTIONS?.height !== undefined) ? OVOPTIONS?.height : defaultConfig.height,
                     fullscreen: (OVOPTIONS?.fullscreen !== undefined) ? OVOPTIONS?.fullscreen : defaultConfig.fullscreen,
                 },
+                javaPath: (OVOPTIONS?.java !== undefined) ? OVOPTIONS?.java : defaultConfig.java
             });
 
             launcher.handler.client.on('progress', (data) => {

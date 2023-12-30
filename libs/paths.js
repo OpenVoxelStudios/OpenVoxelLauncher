@@ -14,8 +14,10 @@ const appPath = app.getAppPath().replace('app.asar', '');
 let OVOPTIONSPATH = path.join(rootroot, 'options.txt');
 if (!existsSync(OVOPTIONSPATH)) {
     mkdirSync(path.join(rootroot), { recursive: true });
-    writeFileSync(OVOPTIONSPATH, JSON.stringify(defaultConfig, undefined, 2), { encoding: 'utf-8' });
-};
+    writeFileSync(OVOPTIONSPATH, JSON.stringify(defaultConfig, undefined, 4), { encoding: 'utf-8' });
+} else {
+    writeFileSync(OVOPTIONSPATH, JSON.stringify(Object.assign(defaultConfig, JSON.parse(readFileSync(OVOPTIONSPATH, { encoding: 'utf-8' }))), undefined, 2), { encoding: 'utf-8' });
+}
 let OVOPTIONS_origin = JSON.parse(readFileSync(OVOPTIONSPATH, { encoding: 'utf-8' }));
 
 module.exports = { mcroot, rootroot, root, appPath, OVOPTIONS_origin, OVOPTIONSPATH };

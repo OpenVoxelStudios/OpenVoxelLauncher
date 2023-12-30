@@ -3,20 +3,24 @@ const { autoUpdater } = require('electron-updater');
 const logger = require('./logger');
 const { v1Bigger } = require('./util');
 const { getLogin } = require('./login');
+const { setAppMenu } = require('./launcher');
+const { OVOPTIONS_origin, appPath, OVOPTIONSPATH } = require('./paths');
+const path = require('path');
+const { defaultConfig } = require('../config');
+const { writeFileSync } = require('fs');
 
 autoUpdater.setFeedURL({
     provider: 'github',
     repo: 'OpenVoxelLauncher',
     owner: 'OpenVoxelStudios',
     vPrefixedTagName: true,
-    private: true,
-    releaseType: 'release',
-    token: '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',
+    private: false,
+    releaseType: 'release'
 });
 
 module.exports = () => {
     logger.info('both', 'Starting with version v' + app.getVersion());
-    
+
     return new Promise((resolve) => {
         logger.log('both', 'Launching updater...');
         autoUpdater.logger = logger.both;
@@ -45,6 +49,32 @@ module.exports = () => {
 
             win.loadFile(`main/updater/index.ejs`);
 
+            setAppMenu(win, false);
+
+            if (OVOPTIONS_origin?.tos !== true) {
+                let answ = dialog.showMessageBoxSync(win, {
+                    title: 'Terms of Service',
+                    message: 'Welcome To OpenVoxel Launcher! Please agree to our Terms of Service in order to continue.\n\nYou can find our ToS here: https://launcher.openvoxel.studio/stuff/terms-of-service',
+                    type: 'question',
+                    buttons: ['Don\'t Agree (close the launcher)', 'Agree'],
+                    cancelId: 0,
+                    defaultId: 0,
+                    icon: path.join(appPath, 'icons', 'icon.png')
+                });
+                
+                if (answ == 0) {
+                    logger.error('both', 'ToS not agreed, closing the Launcher');
+                    app.quit();
+                    process.exit(0);
+                    return;
+                }
+                else {
+                    logger.info('both', 'ToS agreed! Opening the Launcher');
+                    OVOPTIONS_origin.tos = true;
+                    writeFileSync(OVOPTIONSPATH, JSON.stringify(Object.assign(defaultConfig, OVOPTIONS_origin), undefined, 2), { encoding: 'utf-8' });
+                }
+            }
+
 
             win.once('ready-to-show', async () => {
                 win.webContents.send('statusUpdate', `Checking for updates...`);
@@ -68,7 +98,7 @@ module.exports = () => {
                 win.webContents.send('statusUpdate', `Logging in...`);
 
                 var PROFILE = await getLogin();
-                
+
                 // Some timeout for avoiding being flashbanged by a window opening and instant closing
                 setTimeout(() => {
                     win.close();

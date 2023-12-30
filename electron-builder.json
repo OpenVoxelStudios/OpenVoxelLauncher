@@ -1,6 +1,6 @@
 {
     "appId": "studio.openvoxel.ovlauncher",
-    "productName": "OpenVoxelLauncher",
+    "productName": "OpenVoxel Launcher",
     "copyright": "Copyright © 2023 OpenVoxel Studios",
     "mac": {
         "category": "public.app-category.games",
@@ -9,13 +9,15 @@
             {
                 "target": "dmg",
                 "arch": [
-                    "arm64"
+                    "arm64",
+                    "universal"
                 ]
             },
             {
                 "target": "zip",
                 "arch": [
-                    "arm64"
+                    "arm64",
+                    "universal"
                 ]
             }
         ],

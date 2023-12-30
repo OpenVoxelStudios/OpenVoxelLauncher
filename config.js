@@ -12,6 +12,7 @@ module.exports = {
         fullscreen: false,
         drpc: true,
         closeOnLaunch: false,
-        java: undefined,
+        java: 'java',
+        tos: false,
     }
 }
