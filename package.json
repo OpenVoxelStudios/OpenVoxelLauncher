@@ -10,14 +10,16 @@
     "dev": "npm run prepare-dev && npm run electron",
     "start": "npm run prepare-notdev && npm run electron",
     "electron": "clear && electron .",
-    "build-mac": "npm run prepare-notdev && npx electron-builder --mac --publish never && npm run clean-mac",
-    "build-win": "npm run prepare-notdev && npx electron-builder --win --publish never && npm run clean-win && cd ./dist && for file in OpenVoxelLauncher*; do mv \"$file\" \"${file// /-}\"; done && cd ../",
+    "build-mac": "npm run prepare-notdev && npx electron-builder --mac --publish never && npm run clean-mac && npm run rename",
+    "build-win": "npm run prepare-notdev && npx electron-builder --win --publish never && npm run clean-win && npm run rename",
+    "build-all": "npm run build-mac && npm run build-win",
     "testbuild-mac": "npm run prepare-dev && npx electron-builder --mac --publish never",
     "testbuild-win": "npm run prepare-dev && npx electron-builder --win --publish never",
-    "build-all": "npm run build-mac && npm run build-win",
+    "testbuild-all": "npm run testbuild-mac && npm run testbuild-win",
     "clean-global": "echo 'Cleaning up...' && rm -f ./dist/builder-debug.yml && rm -f ./dist/builder-effective-config.yaml",
     "clean-win": "npm run clean-global && rm -rf ./dist/win-unpacked",
-    "clean-mac": "npm run clean-global && rm -rf ./dist/mac-arm64"
+    "clean-mac": "npm run clean-global && rm -rf ./dist/mac-arm64 && rm -rf ./dist/mac-universal",
+    "rename": "cd ./dist && for file in OpenVoxel*; do mv \"$file\" \"${file// /-}\"; done && cd ../"
   },
   "repository": {
     "type": "git",
