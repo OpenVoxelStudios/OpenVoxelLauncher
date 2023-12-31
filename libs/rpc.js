@@ -5,10 +5,9 @@ class RPC {
     constructor(disabled = false) {
         this.rpc = new DRPC.Client({ transport: 'ipc' });
         this.start = Date.now();
-        this.headAPI = 'https://visage.surgeplay.com/face';
         this.status = {
             largeImageKey: 'openvoxel-logo',
-            state: 'A Minecraft Studio', // In the Launcher
+            state: 'In the Launcher',
             smallImageKey: undefined,
             smallImageText: undefined,
             buttons: [
@@ -39,21 +38,21 @@ class RPC {
         })
     };
 
-    setPlayer(player) {
+    setPlayer(player, uuid) {
         if (this.disabled || !this.hasLoggedIn) return 'disabled';
         if (player == false) {
             this.status.smallImageText = null;
             this.status.smallImageKey = null;
         }
         else {
-            this.status.smallImageText = `Hi! I'm ${player}`; // Logged in as ${player}
-            this.status.smallImageKey = `${this.headAPI}/${player}`;
+            this.status.smallImageText = `Logged in as ${player}`;
+            this.status.smallImageKey = `https://minotar.net/avatar/${uuid}`;
         }
     };
 
-    async updatePlayer(player) {
+    async updatePlayer(player, uuid) {
         if (this.disabled || !this.hasLoggedIn) return 'disabled';
-        this.setPlayer(player);
+        this.setPlayer(player, uuid);
         await this.setStatus();
     };
 

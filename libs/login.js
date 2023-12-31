@@ -24,7 +24,7 @@ function saveLogin(PROFILE) {
     writeFileSync(path.join(rootroot, '.login'), JSON.stringify(PROFILE), { encoding: 'utf-8' });
 
     if (PROFILE?.username) {
-        RPC.updatePlayer(PROFILE.username).then(v => {
+        RPC.updatePlayer(PROFILE.username, PROFILE.uuid).then(v => {
             if (v != 'disabled') logger.log('both', '[DRPC] Updating player name to ' + PROFILE.username);
         })
     }

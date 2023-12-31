@@ -90,7 +90,7 @@ async function OpenVoxelLauncher(PROFILE) {
         RPC.login().then(async () => {
             logger.log('both', '[DRPC] Discord RPC Started');
             if (PROFILE?.username) {
-                await RPC.updatePlayer(PROFILE.username);
+                await RPC.updatePlayer(PROFILE.username, PROFILE.uuid);
                 logger.log('both', '[DRPC] Player name was set to ' + PROFILE.username);
             };
         })

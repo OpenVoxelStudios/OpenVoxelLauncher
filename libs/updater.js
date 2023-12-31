@@ -15,7 +15,7 @@ autoUpdater.setFeedURL({
     owner: 'OpenVoxelStudios',
     vPrefixedTagName: true,
     private: false,
-    releaseType: 'release'
+    releaseType: 'release',
 });
 
 module.exports = () => {
