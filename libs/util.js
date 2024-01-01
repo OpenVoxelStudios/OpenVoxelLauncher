@@ -1,5 +1,5 @@
 const { app } = require('electron');
-const { writeFileSync } = require('fs');
+const { writeFileSync, mkdirSync } = require('fs');
 const fetch = require('node-fetch');
 
 function v1Bigger(v1, v2) {
@@ -25,6 +25,8 @@ function v1Bigger(v1, v2) {
  * @returns base64 data of that image
  */
 function downloadImage(url, destination) {
+    mkdirSync(path.join(rootroot, 'cache', 'heads'), { recursive: true });
+
     return new Promise(async (resolve) => {
         let response = await fetch(url, {
             headers: {
