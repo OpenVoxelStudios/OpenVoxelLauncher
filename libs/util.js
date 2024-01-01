@@ -1,6 +1,7 @@
 const { app } = require('electron');
 const { writeFileSync, mkdirSync } = require('fs');
 const fetch = require('node-fetch');
+const path = require('path');
 
 function v1Bigger(v1, v2) {
     let v1parts = v1.split('.').map(Number),
