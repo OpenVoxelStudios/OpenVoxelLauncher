@@ -10,7 +10,7 @@ const { prepareFullGame, importSettings } = require('./libs/game.js');
 const logger = require('./libs/logger.js');
 const { root, appPath, OVOPTIONS_origin, rootroot } = require('./libs/paths.js');
 const { fromXboxManagerToSaveLogin, authManager, deleteLogin } = require('./libs/login.js');
-const { protocol, setAppMenu, quit, openLicense } = require('./libs/launcher.js');
+const { setAppMenu, quit, openLicense, protocol } = require('./libs/launcher.js');
 const ejse = require('ejs-electron');
 const { execSync } = require('node:child_process');
 const os = require('node:os');
@@ -74,9 +74,6 @@ async function OpenVoxelLauncher(PROFILE) {
     ejse.data('version', 'v' + app.getVersion() || 'v0.0.0');
     ejse.data('options', OVOPTIONS);
     ejse.data('defaultSettings', defaultConfig);
-
-    app.on('open-url', (event, url) => { protocol(win, url, PROFILE) });
-    app.on('second-instance', (event, commandLine, workingDirectory) => { protocol(win, commandLine.pop(), PROFILE) });
 
     logger.log('both', 'Creating app menu...');
     setAppMenu(win, PROFILE !== false);
@@ -328,6 +325,15 @@ async function OpenVoxelLauncher(PROFILE) {
             if (OVOPTIONS['closeOnLaunch']) app.hide();
         });
     });
+
+    app.emit('protocol-apploaded', win, PROFILE);
+
+    app.removeAllListeners('open-url');
+    app.removeAllListeners('second-instance');
+    
+    app.on('open-url', (event, url) => { protocol(win, url, PROFILE) });
+    app.on('second-instance', (event, commandLine, workingDirectory) => { protocol(win, commandLine.pop(), PROFILE) });
+    logger.info('both', 'Restarted protocols handlers');
 };
 
 require('./libs/updater.js')().then((PROFILE) => OpenVoxelLauncher(PROFILE));

@@ -5,7 +5,9 @@ const { appPath, OVOPTIONS } = require("./paths");
 const RPC = require("./rpc");
 const { existsSync } = require("fs");
 
-
+/**
+ * @param {BrowserWindow} win 
+ */
 function protocol(win, url, PROFILE) {
     let params = url.split('://')?.[1]?.split('/').filter(o => o.replace(/ /g, '') != '');
 
@@ -27,6 +29,10 @@ function protocol(win, url, PROFILE) {
     }
 };
 
+/**
+ * @param {BrowserWindow} win 
+ * @param {Boolean} full
+ */
 function setAppMenu(win, full = true) {
     Menu.setApplicationMenu(Menu.buildFromTemplate([
         {
@@ -110,6 +116,9 @@ function setAppMenu(win, full = true) {
 };
 
 var quitting = false;
+/**
+ * @param {BrowserWindow} win 
+ */
 async function quit(win) {
     if (quitting) return;
     quitting = true;

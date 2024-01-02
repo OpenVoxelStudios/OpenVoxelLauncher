@@ -3,7 +3,7 @@ const { autoUpdater } = require('electron-updater');
 const logger = require('./logger');
 const { v1Bigger } = require('./util');
 const { getLogin } = require('./login');
-const { setAppMenu } = require('./launcher');
+const { setAppMenu, protocol } = require('./launcher');
 const { OVOPTIONS_origin, appPath, OVOPTIONSPATH } = require('./paths');
 const path = require('path');
 const { defaultConfig } = require('../config');
@@ -20,6 +20,21 @@ autoUpdater.setFeedURL({
 
 module.exports = () => {
     logger.info('both', 'Starting with version v' + app.getVersion());
+
+    function handleProtocol(url) {
+        app.removeAllListeners('protocol-apploaded');
+        app.addListener('protocol-apploaded', (win, PROFILE) => {
+            logger.log('both', win)
+            logger.log('both', url)
+            logger.log('both', PROFILE)
+            app.removeAllListeners('protocol-apploaded');
+            protocol(win, url, PROFILE);
+        });
+    };
+
+    app.on('open-url', (event, url) => { handleProtocol(url) });
+    app.on('second-instance', (event, commandLine, workingDirectory) => { handleProtocol(commandLine.pop()) });
+    logger.info('both', 'Started protocols handlers');
 
     return new Promise((resolve) => {
         logger.log('both', 'Launching updater...');
@@ -61,7 +76,7 @@ module.exports = () => {
                     defaultId: 0,
                     icon: path.join(appPath, 'icons', 'icon.png')
                 });
-                
+
                 if (answ == 0) {
                     logger.error('both', 'ToS not agreed, closing the Launcher');
                     app.quit();
