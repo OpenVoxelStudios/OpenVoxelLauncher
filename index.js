@@ -13,7 +13,7 @@ const { fromXboxManagerToSaveLogin, authManager, deleteLogin } = require('./libs
 const { protocol, setAppMenu, quit, openLicense } = require('./libs/launcher.js');
 const ejse = require('ejs-electron');
 const { execSync } = require('node:child_process');
-const os = require('os');
+const os = require('node:os');
 const { downloadImage } = require('./libs/util.js');
 const { devMode } = existsSync(path.join(appPath, 'intern.json')) ? require(path.join(appPath, 'intern.json')) : false;
 
@@ -35,6 +35,7 @@ function editOptions(setting, newvalue) {
 }
 
 async function OpenVoxelLauncher(PROFILE) {
+    app.focus({ steal: true });
     var gameLaunched = { is: false };
 
     logger.log('both', 'Creating Window...');
@@ -265,6 +266,8 @@ async function OpenVoxelLauncher(PROFILE) {
             });
 
 
+            let javaPath = (OVOPTIONS?.java !== undefined) ? OVOPTIONS?.java : defaultConfig.java;
+            
             launcher.prepare({
                 clientPackage: null,
                 authorization: PROFILE.token,
@@ -287,8 +290,17 @@ async function OpenVoxelLauncher(PROFILE) {
                     height: (OVOPTIONS?.height !== undefined) ? OVOPTIONS?.height : defaultConfig.height,
                     fullscreen: (OVOPTIONS?.fullscreen !== undefined) ? OVOPTIONS?.fullscreen : defaultConfig.fullscreen,
                 },
-                javaPath: (OVOPTIONS?.java !== undefined) ? OVOPTIONS?.java : defaultConfig.java
+                javaPath: javaPath,
             });
+
+            if ((javaPath == 'java' || !javaPath) && os.platform() == 'win32') {
+                let testJavaw = await launcher.handler.checkJava('javaw')
+                if (testJavaw.run) {
+                    logger.info('both', 'Found javaw, using this instead of java');
+                    launcher.options.javaPath = 'javaw';
+                    editOptions('java', 'javaw');
+                };
+            };
 
             launcher.handler.client.on('progress', (data) => {
                 if (data?.type == 'assets') {
@@ -307,7 +319,6 @@ async function OpenVoxelLauncher(PROFILE) {
             app.emit('send-to-window', 'gamelaunchdetails', 'Game Launched!');
 
             app.emit('run-if-notfocused', () => {
-
                 if (Date.now() - started > 60 * 1000) new Notification({
                     title: 'Game Downloaded',
                     body: 'The game was downloaded successfully. Minecraft is opening...',
