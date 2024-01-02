@@ -2,7 +2,7 @@ const path = require('path');
 const ospath = require('ospath');
 const os = require('node:os');
 const { app } = require('electron');
-const { writeFileSync, readFileSync, existsSync, mkdirSync } = require('fs');
+const { writeFileSync, readFileSync, existsSync, mkdirSync } = require('node:fs');
 const { defaultConfig } = require('../config');
 
 
@@ -10,6 +10,8 @@ let mcroot = path.join(ospath.data(), (os.platform() == 'darwin') ? 'minecraft' 
 let rootroot = path.join(ospath.data(), 'OpenVoxel');
 let root = path.join(rootroot, 'launcher');
 const appPath = app.getAppPath().replace('app.asar', '');
+
+mkdirSync(root, { recursive: true });
 
 let OVOPTIONSPATH = path.join(rootroot, 'options.txt');
 if (!existsSync(OVOPTIONSPATH)) {

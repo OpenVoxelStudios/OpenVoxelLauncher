@@ -12,7 +12,7 @@ const { root, appPath, OVOPTIONS_origin, rootroot } = require('./libs/paths.js')
 const { fromXboxManagerToSaveLogin, authManager, deleteLogin } = require('./libs/login.js');
 const { protocol, setAppMenu, quit, openLicense } = require('./libs/launcher.js');
 const ejse = require('ejs-electron');
-const { spawn } = require('node:child_process');
+const { execSync } = require('node:child_process');
 const os = require('os');
 const { downloadImage } = require('./libs/util.js');
 const { devMode } = existsSync(path.join(appPath, 'intern.json')) ? require(path.join(appPath, 'intern.json')) : false;
@@ -40,7 +40,7 @@ async function OpenVoxelLauncher(PROFILE) {
     logger.log('both', 'Creating Window...');
     const win = new BrowserWindow({
         width: 1280,
-        height: os.platform() == 'darwin' ? 720 : 748,
+        height: os.platform() == 'darwin' ? 720 : 760,
         fullscreenable: false,
         frame: os.platform() !== 'darwin',
         maximizable: false,
@@ -151,8 +151,18 @@ async function OpenVoxelLauncher(PROFILE) {
         win.loadFile(`./main/${view}/index.ejs`)
     });
 
-    ipcMain.handle('openLogs', () => { spawn('open', [logger.file]) });
-    ipcMain.handle('openGameFolder', () => { spawn('open', [root]) });
+    function spawnOpen(ThePath) {
+        ThePath = ThePath.replace(/ /g, '\\ ');
+        try {
+            execSync(`${os.platform() == 'win32' ? 'start' : 'open'} ${path.normalize(ThePath)}`);
+        } catch(err) {
+            logger.error('both', `Could not open path "${ThePath}". Opening with file explorer/Finder instead`);
+            execSync(`${os.platform() == 'win32' ? 'start' : 'open'} ${path.parse(path.normalize(ThePath)).dir}`);
+        }
+    };
+
+    ipcMain.handle('openLogs', () => { spawnOpen(logger.file) });
+    ipcMain.handle('openGameFolder', () => { spawnOpen(root) });
 
     ipcMain.handle('closeApp', () => app.emit('force-leave'));
 

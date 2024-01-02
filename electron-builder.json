@@ -26,6 +26,7 @@
     "win": {
         "icon": "./icons/icon.ico",
         "publisherName": "OpenVoxel Studios",
+        "sign": "./sign.js",
         "target": [
             {
                 "target": "nsis",

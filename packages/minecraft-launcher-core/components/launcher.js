@@ -1,7 +1,7 @@
 const child = require('child_process')
 const path = require('path')
 const Handler = require('./handler')
-const fs = require('fs')
+const fs = require('node:fs')
 const { appPath } = require('../../../libs/paths')
 const EventEmitter = require('events').EventEmitter
 

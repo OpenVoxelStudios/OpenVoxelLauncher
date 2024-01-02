@@ -7,7 +7,7 @@ const { setAppMenu } = require('./launcher');
 const { OVOPTIONS_origin, appPath, OVOPTIONSPATH } = require('./paths');
 const path = require('path');
 const { defaultConfig } = require('../config');
-const { writeFileSync } = require('fs');
+const { writeFileSync } = require('node:fs');
 
 autoUpdater.setFeedURL({
     provider: 'github',

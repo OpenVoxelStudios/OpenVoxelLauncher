@@ -1,7 +1,7 @@
 const logger = require("./logger");
 const path = require('path');
 const { rootroot } = require("./paths");
-const { existsSync, readFileSync, rmSync, writeFileSync } = require("fs");
+const { existsSync, readFileSync, rmSync, writeFileSync } = require("node:fs");
 const { mcTokenToolbox } = require("../packages/msmc/");
 const { Auth } = require("../packages/msmc");
 const RPC = require("./rpc");

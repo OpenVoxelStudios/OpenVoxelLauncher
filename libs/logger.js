@@ -1,7 +1,6 @@
 const path = require('path');
-const { existsSync, createWriteStream } = require('node:fs');
+const { existsSync, createWriteStream, mkdirSync } = require('node:fs');
 const { rootroot, appPath } = require('./paths');
-const { mkdirSync } = require('fs');
 
 const STARTTIME = new Date(Date.now());
 

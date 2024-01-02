@@ -1,5 +1,5 @@
 const { app } = require('electron');
-const { writeFileSync, mkdirSync } = require('fs');
+const { writeFileSync, mkdirSync } = require('node:fs');
 const fetch = require('node-fetch');
 const path = require('path');
 const { rootroot } = require('./paths');

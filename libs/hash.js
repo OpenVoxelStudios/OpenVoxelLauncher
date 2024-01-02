@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const { createReadStream } = require('fs');
+const { createReadStream } = require('node:fs');
 const stream = require('stream/promises');
 
 async function computeHash(filepath, hashing='sha256') {
