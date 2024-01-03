@@ -101,7 +101,7 @@ document.getElementById('ArtkiliouPT').addEventListener('click', () => {
         document.getElementById('ArtkiliouPT').dataset.url = undefined;
 
         var video = document.createElement("video");
-        video.src = 'https://www.zygocraft.com/openvoxel/artkiliou.mp4';
+        video.src = 'https://openvoxel.studio/launcherassets/artkiliou.mp4';
         video.preload = "auto";
         video.controls = false;
         video.autoplay = true;
