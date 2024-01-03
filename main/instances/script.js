@@ -1,0 +1,3 @@
+function createInstance() {
+    alert('no')
+}

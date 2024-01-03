@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="../global/globals.css" />
+    <link rel="stylesheet" href="../global/styleguide.css" />
+    <link rel="stylesheet" href="../global/app.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Instances - OpenVoxel Launcher</title>
+    <script src="../localstorage.js"></script>
+</head>
+
+<body>
+    <div class="instances">
+        <div class="div">
+            <div class="instances-list">
+                <div class="instances-list-2" id="INSTANCELIST">
+                    <% instances.forEach((inst, i) => { %>
+                        <div class="element" style="top: <%= (i + 1) * 125 %>px;">
+                            <div class="overlap-group">
+                                <input class="input" placeholder="<%= inst.name %>" type="text" maxlength="32" />
+                                <p class="description"><%= inst.description %></p>
+                                <img class="icon" src="<%= inst.icon %>" />
+                            </div>
+                        </div>
+                    <% }) %>
+
+                    <div class="create pointer" onclick="createInstance()">
+                        <div class="overlap-group">
+                            <div class="text-wrapper">Create Instance</div>
+                            <div class="icons-create-full">
+                                <img style="width: 80px; height: 80px;" src="../global/img/icons/create-full.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="overlap-wrapper-2">
+                    <div class="overlap">
+                        <div class="text">MINECRAFT INSTANCES</div>
+                    </div>
+                </div>
+            </div>
+
+            <%- include('../components/header') %>
+
+            <%- include('../components/sidebar', { page: 'instances' }) %>
+        </div>
+    </div>
+
+    <script src="../allpages.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

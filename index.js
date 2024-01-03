@@ -15,6 +15,7 @@ const ejse = require('ejs-electron');
 const { execSync } = require('node:child_process');
 const os = require('node:os');
 const { downloadImage } = require('./libs/util.js');
+const { loadInstances } = require('./libs/instances.js');
 const { devMode } = existsSync(path.join(appPath, 'intern.json')) ? require(path.join(appPath, 'intern.json')) : false;
 
 if (devMode) logger.info('both', 'Launcher running in Dev Mode');
@@ -32,7 +33,7 @@ function editOptions(setting, newvalue) {
 
     ejse.data('options', ovopt);
     return ovopt;
-}
+};
 
 async function OpenVoxelLauncher(PROFILE) {
     app.focus({ steal: true });
@@ -78,8 +79,10 @@ async function OpenVoxelLauncher(PROFILE) {
     logger.log('both', 'Creating app menu...');
     setAppMenu(win, PROFILE !== false);
 
+    ejse.data('instances', loadInstances())
+
     if (PROFILE === false) win.loadFile('./main/login/index.ejs')
-    else win.loadFile('./main/home/index.ejs');
+    else win.loadFile('./main/instances/index.ejs');
 
     if (devMode) win.webContents.openDevTools({ mode: 'detach' });
 
@@ -99,7 +102,7 @@ async function OpenVoxelLauncher(PROFILE) {
 
         if (cntrl && input.key == 'h') { app.hide() }
         else if (cntrl && input.key == 'q') { app.emit('force-leave') }
-        else if (cntrl && ['c', 'v', 'x'].includes(input.key)) { }
+        else if (cntrl && ['c', 'v', 'x', 'Backspace'].includes(input.key)) { }
 
         // Disable everything starting with control/cmd like control+?
         else if (cntrl) return event.preventDefault();

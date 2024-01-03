@@ -251,33 +251,6 @@
   line-height: normal;
 }
 
-.infos .union {
-  position: absolute;
-  width: 21px;
-  height: 21px;
-  top: 14px;
-  left: 14px;
-}
-
-.infos .buttons-discord {
-  left: 1038px;
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  top: 0;
-}
-
-.infos .loggedin-player {
-  position: absolute;
-  width: 250px;
-  height: 50px;
-  top: 0;
-  left: 768px;
-  background-color: var(--variable-collection-highlight);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
 .infos .overlap-group-2 {
   position: absolute;
   width: 150px;
