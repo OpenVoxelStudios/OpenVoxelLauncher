@@ -27,3 +27,6 @@ HINT: `x.x.x` means the version of the launcher you are about to download. Try t
 4.  Is it free?
 
 > Yes! The app itself is free, but you still need a **Minecraft Account** to play. We _do not_ support cracks.
+
+
+Copyright 2023 OpenVoxel Studios
