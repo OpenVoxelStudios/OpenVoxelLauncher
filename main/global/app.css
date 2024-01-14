@@ -209,6 +209,30 @@
     left: 12px;
 }
 
+.sidebar-instances {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 130px;
+    left: 12px;
+}
+
+.sidebar-globe {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 195px;
+    left: 12px;
+}
+
+.sidebar-infos {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 455px;
+    left: 12px;
+}
+
 .sidebar-settings {
     position: absolute;
     width: 50px;
@@ -257,6 +281,15 @@
     overflow: hidden;
 }
 
+.sidebar-selected-instances {
+    position: absolute;
+    width: 6px;
+    height: 50px;
+    top: 130px;
+    left: 0;
+    overflow: hidden;
+}
+
 .sidebar-selected-infos {
     position: absolute;
     width: 6px;
@@ -275,21 +308,6 @@
     overflow: hidden;
 }
 
-.sidebar-globe {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: 130px;
-    left: 12px;
-}
-
-.sidebar-infos {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: 455px;
-    left: 12px;
-}
 
 .sidebar-VERSION {
     position: absolute;

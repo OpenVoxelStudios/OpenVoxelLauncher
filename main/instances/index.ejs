@@ -19,9 +19,9 @@
                     <% instances.forEach((inst, i) => { %>
                         <div class="element" style="top: <%= (i + 1) * 125 %>px;">
                             <div class="overlap-group">
-                                <input class="input" placeholder="<%= inst.name %>" type="text" maxlength="32" />
-                                <p class="description"><%= inst.description %></p>
-                                <img class="icon" src="<%= inst.icon %>" />
+                                <input class="input" placeholder="<%= inst.name %>" type="text" maxlength="32" onfocusout="if (this.value != '') window.openvoxel.renameInstance('<%= inst.id %>', this.value)" />
+                                <p class="description" id="<%= inst.id %>" data-description="<%= inst.description %>"><%= inst.description %></p>
+                                <img onclick="runInstance('<%= inst.id %>', this)" class="icon pointer" src="<%= inst.icon %>" onmouseover="this.src='../global/img/play.png'" onmouseout="this.src='<%= inst.icon %>'" />
                             </div>
                         </div>
                     <% }) %>
@@ -35,6 +35,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="overlap-wrapper-2">
                     <div class="overlap">
                         <div class="text">MINECRAFT INSTANCES</div>

@@ -22,9 +22,11 @@
 }
 
 .instances .instances-list-2 {
+  overflow-y: scroll;
+  overflow-x: hidden;
   position: absolute;
-  width: 1106px;
-  height: 475px;
+  width: 1100px;
+  height: 550px;
   top: 71px;
   left: 26px;
 }

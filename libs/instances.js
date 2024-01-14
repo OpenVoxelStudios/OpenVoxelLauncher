@@ -1,8 +1,21 @@
 const version = require('../package.json').version;
 const request = require('request');
 const { instancesPath } = require('./paths');
-const { readdirSync, existsSync, readFileSync } = require('fs');
+const { readdirSync, existsSync, readFileSync, mkdirSync, writeFileSync } = require('fs');
+const { BrowserWindow, ipcMain, dialog, app } = require('electron');
+const sharp = require('sharp');
 const path = require('path');
+const fetch = require('node-fetch');
+
+function decodeBase64Image(dataString) {
+    var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+
+    return {
+        type: matches[1],
+        data: Buffer.from(matches[2], 'base64')
+    };
+};
+
 
 const fetchModrinth = request.defaults({
     method: 'get',
@@ -20,6 +33,7 @@ function parseInstance(id) {
     let infos = JSON.parse(readFileSync(path.join(instancesPath, id, 'ovl.json'), { encoding: 'utf-8' }));
 
     return {
+        id: id,
         name: infos.name,
         modcount,
         version: infos.version,
@@ -30,7 +44,7 @@ function parseInstance(id) {
 };
 
 function makeDescription(instanceData) {
-    return `${instanceData.issnapshot ? "Snapshot": "Version"} ${instanceData.version} ${instanceData.platform}${instanceData.modcount ? ` - ${instanceData.modcount} Mods` : ""}`;
+    return `${instanceData.issnapshot ? "Snapshot" : "Version"} ${instanceData.version}${instanceData.platform ? ` ${instanceData.platform}${instanceData.modcount ? ` - ${instanceData.modcount} Mods` : ""}` : ''}`;
 };
 
 function loadInstances() {
@@ -40,11 +54,20 @@ function loadInstances() {
         .filter(f => f)
         .map(f => {
             return {
+                id: f.id,
                 name: f.name,
                 description: makeDescription(f),
                 icon: f.icon,
             }
         });
+};
+
+function renameInstance(id, name) {
+    let pth = path.join(instancesPath, id, 'ovl.json');
+
+    let json = JSON.parse(readFileSync(pth, { encoding: 'utf-8' }));
+    json.name = name;
+    writeFileSync(pth, JSON.stringify(json, undefined, 2), { encoding: 'utf-8' });
 };
 
 
@@ -100,4 +123,97 @@ function search(query, version, platform = 'modrinth', modloader = 'fabric', lim
     })
 };
 
-module.exports = { search, loadInstances, parseInstance, makeDescription };
+function createInstanceWindow(parentWin, ejse, devMode) {
+    return new Promise(async (resolve) => {
+        const win = new BrowserWindow({
+            width: 600,
+            height: 720,
+            fullscreenable: false,
+            frame: false,
+            maximizable: false,
+            resizable: false,
+            title: 'Create Instance',
+            movable: false,
+            titleBarOverlay: true,
+            webPreferences: {
+                preload: path.join(__dirname, '../preloadInstance.js'),
+                nodeIntegration: true,
+                contextIsolation: true,
+                devTools: devMode || false,
+            },
+            icon: '../assets/icon.png',
+            backgroundColor: '#252525',
+
+            parent: parentWin,
+            modal: true,
+            show: false
+        });
+
+        ipcMain.removeHandler('instanceSetIcon');
+        ipcMain.removeHandler('instanceCreate');
+        ipcMain.removeHandler('instanceClose');
+
+        win.loadFile('./main/createinstance/index.ejs');
+
+        win.once('ready-to-show', () => {
+            win.show();
+
+            if (devMode) win.webContents.openDevTools({ mode: 'detach' });
+        });
+
+        ipcMain.handleOnce('instanceClose', () => {
+            win.close();
+            resolve(true);
+        });
+
+        ipcMain.handle('instanceSetIcon', () => {
+            return new Promise((resolve) => {
+                const result = dialog.showOpenDialogSync({
+                    properties: ["openFile"],
+                    filters: [{ name: "Images", extensions: ["png", "jpg", "jpeg"] }],
+                    title: 'Select Instance Icon'
+                })[0];
+
+                if (!result) return resolve(undefined);
+                else {
+                    sharp(result)
+                        .resize(128, 128)
+                        .toFormat('png')
+                        .toBuffer()
+                        .then((buffer) => {
+                            resolve(`data:image/png;base64,${buffer.toString('base64')}`);
+                        })
+                }
+            })
+        });
+
+        ipcMain.handleOnce('instanceCreate', (_, data) => {
+            return new Promise(async (resolve) => {
+                let iPath = path.join(instancesPath, data.id);
+                mkdirSync(iPath, { recursive: true });
+                if (data.modloader) mkdirSync(path.join(iPath, 'mods'));
+
+                let ovl = {
+                    name: data.name,
+                    version: data.version,
+                    issnapshot: data.issnapshot,
+                    platform: data.modloader ? `${data.modloader} ${data.modloaderversion}` : undefined
+                };
+
+                writeFileSync(path.join(iPath, 'ovl.json'), JSON.stringify(ovl, undefined, 2), { encoding: 'utf-8' });
+                if (data.icon.startsWith('data:image')) writeFileSync(path.join(iPath, 'icon.png'), decodeBase64Image(data.icon).data, { encoding: 'utf-8' });
+
+                if (data.modloader == 'Fabric') {
+                    mkdirSync(path.join(iPath, 'versions', 'default'), { recursive: true });
+                    let got = JSON.stringify(await (await fetch(`https://meta.fabricmc.net/v2/versions/loader/1.20.4/0.15.3/profile/json`)).json(), undefined, 2);
+                    writeFileSync(path.join(iPath, 'versions', 'default', 'default.json'), got, { encoding: 'utf-8' });
+                }
+
+
+                resolve(true);
+            })
+        })
+    })
+}
+
+module.exports = { search, loadInstances, parseInstance, makeDescription, createInstanceWindow, renameInstance };

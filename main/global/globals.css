@@ -198,6 +198,10 @@ body :not(.full-header) {
   -webkit-app-region: drag;
 }
 
+.APPDRAG {
+  -webkit-app-region: drag;
+}
+
 html,
 body {
   margin: 0px;

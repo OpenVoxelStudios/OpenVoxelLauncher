@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="../global/globals.css" />
+  <link rel="stylesheet" href="../global/styleguide.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <title>Create Instance</title>
+</head>
+
+<body>
+  <div class="create-instance">
+    <div class="div">
+      <div class="overlap">
+        <div class="page-3" id="PAGE-NAME">
+          <img class="icon pointer" src="../global/img/default_instance.png" id="ICON" onclick="changeIcon()" /> <!-- Transform this shit into a image input -->
+          
+          <input class="input" placeholder="Enter the Instance name" type="text" id="NAME" oninput="checkNameInput(this)" />
+          <div class="cancel pointer" onclick="window.openvoxel.close()">
+            <div class="overlap-group-2">
+              <div class="text">Cancel</div>
+            </div>
+          </div>
+          <div class="next-2 disabled" id="afterNameClick" onclick="">
+            <div class="div-wrapper">
+              <div class="text">Next</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-2" id="PAGE-V">
+          <div class="overlap-group-wrapper pointer" onclick="hideShow(PAGES.v, PAGES.name)">
+            <div class="overlap-group">
+              <div class="text">Back</div>
+            </div>
+          </div>
+          <div class="next disabled" id="afterVersionClick" onclick="">
+            <div class="div-wrapper">
+              <div class="text">Next</div>
+            </div>
+          </div>
+
+          <select class="dropdown" size="5" id="V" onchange="checkVersionInput()">
+            <% versions.forEach(v => { %>
+              <option data-issnapshot="<%= v.issnapshot %>"<%= (v.issnapshot) ? ' hidden' : '' %>><%= v.id %></option>
+            <% }) %>
+          </select>
+
+          <div class="text-wrapper-2">Choose a Minecraft version</div>
+
+          <div class="name modloaderstuff pointer" id="addfabric" data-enabled="false" onclick="addFabric()">Add Fabric</div>
+          <div class="name-2 modloaderstuff pointer" id="showsnapshots" data-enabled="false" onclick="showSnapshots(this)">Show Snapshots</div>
+          <!-- Forge is not supported. Because they don't want us to automate the download, their buisness is to make you see advertisements -->
+        </div>
+
+        <div class="page" id="PAGE-LOADER">
+          <select class="dropdown" size="5" id="LOADER" onchange="checkLoaderInput()">
+          </select>
+
+          <div class="overlap-group-wrapper pointer" onclick="hideShow(PAGES.loader, PAGES.v)">
+            <div class="overlap-group">
+              <div class="text">Back</div>
+            </div>
+          </div>
+          <div class="next disabled" id="afterLoaderClick" onclick="">
+            <div class="div-wrapper">
+              <div class="text">Next</div>
+            </div>
+          </div>
+          <div class="text-wrapper-2" id="loadrtxt">Choose a Fabric version</div>
+        </div>
+
+        <div class="finish" id="PAGE-FINISH">
+          <div class="back pointer" onclick="finishBack()">
+            <div class="overlap-group">
+              <div class="text">Back</div>
+            </div>
+          </div>
+          <div class="overlap-wrapper pointer" onclick="finish()">
+            <div class="text-wrapper">
+              <div class="text">Finish</div>
+            </div>
+          </div>
+          <div class="text-wrapper-2">You are all set!</div>
+          <div class="recap" id="recap">Minecraft {version}<br />with {modloader}</div>
+        </div>
+      </div>
+
+      <div class="TITLE">
+        <div class="title-wrapper">
+          <div class="title">Create an Instance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
