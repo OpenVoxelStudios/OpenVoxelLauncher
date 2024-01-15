@@ -84,7 +84,7 @@ async function getLogin() {
                     resolve(false);
                 }
             } catch (err) {
-                logger.error('both', '[OVL] Error while getting login occured');
+                logger.error('both', 'Error while getting login occured');
                 logger.error('file', err?.stack || err);
 
                 rmSync(loginPath);

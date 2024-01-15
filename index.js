@@ -176,7 +176,7 @@ async function OpenVoxelLauncher(PROFILE) {
                 resolve(true);
             })
                 .catch((err) => {
-                    logger.error('both', `[OVL] Error while logging in...`);
+                    logger.error('both', `Error while logging in...`);
                     logger.error('file', err?.stack || err);
                     resolve(false);
                 })
@@ -276,7 +276,7 @@ async function OpenVoxelLauncher(PROFILE) {
                 },
                 quickPlay: (game && game != 'vanilla') ? {
                     type: 'singleplayer',
-                    identifier: game == 'lethalbudget' ? 'lethalcompany' : game // TODO: Fix this lol
+                    identifier: game
                 } : undefined,
                 memory: {
                     min: ((OVOPTIONS?.minRam !== undefined) ? OVOPTIONS?.minRam : defaultConfig.minRam) + "M",

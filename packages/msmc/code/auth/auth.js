@@ -50,23 +50,13 @@ class Auth extends events_1.default {
         this.emit("load", code);
     }
     login(code, redirect) {
-        const body = "client_id=" +
-            this.token.client_id +
-            "&client_secret=" + require('../../../../config.js').MicrosoftClientSecret +
-            "&code=" +
-            code +
-            "&grant_type=authorization_code" +
-            "&redirect_uri=" +
-            encodeURIComponent(redirect ? redirect : this.token.redirect);
+        const body = "code=" + code + "&grant_type=authorization_code"
 
         return this._get(body);
     }
     refresh(MS) {
         const refresh = typeof MS == "string" ? MS : MS.refresh_token;
-        const body = "client_id=" +
-            this.token.client_id +
-            "&client_secret=" + require('../../../../config.js').MicrosoftClientSecret +
-            "&refresh_token=" + encodeURIComponent(refresh) +
+        const body = "refresh_token=" + encodeURIComponent(refresh) +
             "&grant_type=refresh_token";
         return this._get(body);
     }
@@ -139,10 +129,10 @@ class Auth extends events_1.default {
     }
     async _get(body) {
         this.load("load.auth.microsoft");
-        var MS_Raw = await (0, node_fetch_1.default)("https://login.live.com/oauth20_token.srf", {
+        var MS_Raw = await (0, node_fetch_1.default)("https://www.zygocraft.com/openvoxellauncher-microsoft", {
             method: "POST",
-            body: body,
-            headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            body: JSON.stringify({ body: body }),
+            headers: { "Content-Type": "application/json" }
         });
         
         (0, assets_js_1.errResponse)(MS_Raw, "error.auth.microsoft");
