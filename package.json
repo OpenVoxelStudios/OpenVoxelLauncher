@@ -20,7 +20,7 @@
     "clean-win": "npm run clean-global && rm -rf ./dist/win-unpacked",
     "clean-mac": "npm run clean-global && rm -rf ./dist/mac-arm64 && rm -rf ./dist/mac-universal",
     "rename": "cd ./dist && for file in OpenVoxel*; do mv \"$file\" \"${file// /-}\"; done && cd ../",
-    "makecertificate": "mkdir -p certificates && cd certificates && openssl req -newkey rsa:2048 -nodes -keyout key.pem -out request.csr && openssl x509 -req -days 365 -in request.csr -signkey key.pem -out certificate.pem && openssl pkcs12 -export -out certificate.pfx -inkey key.pem -in certificate.pem"
+    "makecertificate": "mkdir -p certificates && cd certificates && openssl req -newkey rsa:2048 -nodes -keyout key.pem -out request.csr && openssl x509 -req -days 5000 -in request.csr -signkey key.pem -out certificate.pem && openssl pkcs12 -export -out certificate.pfx -inkey key.pem -in certificate.pem"
   },
   "repository": {
     "type": "git",
