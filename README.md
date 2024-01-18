@@ -1,6 +1,6 @@
 # OpenVoxel Launcher is out! 🔥
 
-## Check out latest release here: https://github.com/OpenVoxelStudios/OpenVoxelLauncher/releases/latest
+## Check out latest releases here: https://github.com/OpenVoxelStudios/OpenVoxelLauncher/releases/
 
 Download it now and play all of our games, with **Click & Play**!
 
@@ -28,5 +28,14 @@ HINT: `x.x.x` means the version of the launcher you are about to download. Try t
 
 > Yes! The app itself is free, but you still need a **Minecraft Account** to play. We _do not_ support cracks.
 
+
+## Version History
+┌──────────┬──────────────────────────────┐
+│  Version │         Release Date         │
+├──────────┼──────────────────────────────┤
+│  v1.0.0  │      1st  January  2024      │
+│  v1.0.1  │      15th January  2024      │
+│  v1.0.2  │      Coming Really Soon      │
+└──────────┴──────────────────────────────┘
 
 Copyright 2023 OpenVoxel Studios
