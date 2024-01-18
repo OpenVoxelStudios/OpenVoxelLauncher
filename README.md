@@ -30,6 +30,7 @@ HINT: `x.x.x` means the version of the launcher you are about to download. Try t
 
 
 ## Version History
+```
 ┌──────────┬──────────────────────────────┐
 │  Version │         Release Date         │
 ├──────────┼──────────────────────────────┤
@@ -37,5 +38,7 @@ HINT: `x.x.x` means the version of the launcher you are about to download. Try t
 │  v1.0.1  │      15th January  2024      │
 │  v1.0.2  │      Coming Really Soon      │
 └──────────┴──────────────────────────────┘
+```
+
 
 Copyright 2023 OpenVoxel Studios
