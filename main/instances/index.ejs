@@ -17,11 +17,18 @@
             <div class="instances-list">
                 <div class="instances-list-2" id="INSTANCELIST">
                     <% instances.forEach((inst, i) => { %>
-                        <div class="element" style="top: <%= (i + 1) * 125 %>px;">
+                        <div class="INSTANCEEL element" style="top: <%= (i + 1) * 125 + 80 %>px;">
                             <div class="overlap-group">
                                 <input class="input" placeholder="<%= inst.name %>" type="text" maxlength="32" onfocusout="if (this.value != '') window.openvoxel.renameInstance('<%= inst.id %>', this.value)" />
                                 <p class="description" id="<%= inst.id %>" data-description="<%= inst.description %>"><%= inst.description %></p>
-                                <img onclick="runInstance('<%= inst.id %>', this)" class="icon pointer" src="<%= inst.icon %>" onmouseover="this.src='../global/img/play.png'" onmouseout="this.src='<%= inst.icon %>'" />
+                                <img onclick="runInstance('<%= inst.id %>')" class="icon pointer" src="<%= inst.icon %>" onmouseover="this.src='../global/img/play.png'" onmouseout="this.src='<%= inst.icon %>'" alt="Click to play!" />
+
+                                <% if (inst.ismodded) { %>
+
+                                    <img onclick="installMoreMods('<%= inst.id %>')" class="icon-addmod pointer" src="../global/img/icons/addmod-fill.png" alt="Install more mods!" />
+                                <% } %>
+
+                                <img onclick="deleteInstance('<%= inst.id %>')" class="icon-trash pointer" src="../global/img/icons/trash-fill.png" alt="Delete this instance" />
                             </div>
                         </div>
                     <% }) %>
@@ -31,6 +38,16 @@
                             <div class="text-wrapper">Create Instance</div>
                             <div class="icons-create-full">
                                 <img style="width: 80px; height: 80px;" src="../global/img/icons/create-full.png" />
+                            </div>
+                        </div>
+                    </div>
+    
+    
+                    <div class="searchicn">
+                        <div class="overlap-group-2">
+                            <input class="input" placeholder="Search an instance" type="text" maxlength="64" style="top: 1px; height: 49px; width: 1054px; left: 52px;" oninput="searchInstance(this.value)">
+                            <div class="icons-search-full">
+                                <img style="width: 40px; height: 40px;" src="../global/img/icons/search-full.png" />
                             </div>
                         </div>
                     </div>

@@ -14,7 +14,7 @@ const ejse = require('ejs-electron');
 const { execSync } = require('node:child_process');
 const os = require('node:os');
 const { downloadImage } = require('./libs/util.js');
-const { loadInstances, createInstanceWindow, renameInstance } = require('./libs/instances.js');
+const { loadInstances, createInstanceWindow, renameInstance, deleteInstance, installModsInstanceWindow } = require('./libs/instances.js');
 const { devMode } = existsSync(path.join(appPath, 'intern.json')) ? require(path.join(appPath, 'intern.json')) : false;
 const fetch = require('node-fetch');
 const { getJavaPath, minecraftToJava, downloadJava } = require('./libs/java.js');
@@ -83,7 +83,7 @@ async function OpenVoxelLauncher(PROFILE) {
     ejse.data('instances', loadInstances())
 
     if (PROFILE === false) win.loadFile('./main/login/index.ejs')
-    else win.loadFile('./main/instances/index.ejs');
+    else win.loadFile('./main/home/index.ejs');
 
     if (devMode) win.webContents.openDevTools({ mode: 'detach' });
 
@@ -110,11 +110,17 @@ async function OpenVoxelLauncher(PROFILE) {
     });
 
     // Instances stuff
+    var MCVERSIONS = null;
     ipcMain.handle('createInstance', async () => {
-        let versions = (await (await fetch('https://piston-meta.mojang.com/mc/game/version_manifest.json')).json()).versions.map(v => { return { id: v.id, issnapshot: v.type != 'release' } });
-        ejse.data('versions', versions);
-        logger.log('both', 'Fetched Minecraft versions');
-        createInstanceWindow(win, ejse, devMode);
+        let versions = MCVERSIONS;
+        if (!versions) {
+            logger.log('both', 'Fetched Minecraft versions');
+            MCVERSIONS = (await (await fetch('https://piston-meta.mojang.com/mc/game/version_manifest.json')).json());
+            versions = MCVERSIONS;
+        }
+
+        ejse.data('versions', versions.versions.map(v => { return { id: v.id, issnapshot: v.type != 'release' } }));
+        createInstanceWindow(win, devMode);
     });
 
     ipcMain.handle('forceReloadInstances', () => {
@@ -126,6 +132,14 @@ async function OpenVoxelLauncher(PROFILE) {
         logger.info('both', `Renaming instance "${id}" to "${newName}"`);
         renameInstance(id, newName);
     })
+
+    ipcMain.handle('installMoreMods', (_, id) => {
+        return installModsInstanceWindow(win, id, devMode)
+    })
+
+    ipcMain.handle('deleteinstance', (_event, id) => {
+        return deleteInstance(win, id);
+    });
 
 
     let CMANIFMode = false;
@@ -255,7 +269,7 @@ async function OpenVoxelLauncher(PROFILE) {
             let javaPath = (OVOPTIONS?.java !== undefined) ? OVOPTIONS?.java : defaultConfig.java;
             if (['java', 'javaw'].includes(javaPath)) {
                 let javaV = await minecraftToJava((isinstance) ? gameInfo.version : '1.20.4');
-                javaPath = getJavaPath(javaV);
+                javaPath = getJavaPath(javaV.version, javaV.arch);
                 if (!existsSync(javaPath)) {
                     app.emit('send-to-window', (isinstance) ? game : 'gamelaunchdetails', 'Downloading Java...');
                     await downloadJava(javaV)
@@ -307,11 +321,18 @@ async function OpenVoxelLauncher(PROFILE) {
             });
 
 
-            launcher.on('debug', (e) => logger.log(devMode ? 'both' : 'file', e));
-            launcher.on('data', (e) => logger.log(devMode ? 'both' : 'file', e));
+            if (!isinstance) {
+                launcher.on('debug', (e) => {
+                    if (!e.startsWith('Launching with arguments')) logger.log(devMode ? 'both' : 'file', e)
+                    else logger.log(devMode ? 'both' : 'file', "Game Launched, arguments not printed")
+                });
+                launcher.on('data', (e) => {
+                    if (!e.startsWith('Launching with arguments')) logger.log(devMode ? 'both' : 'file', e)
+                    else logger.log(devMode ? 'both' : 'file', "Game Launched, arguments not printed")
+                });
+            }
 
             launcher.prepare({
-                //customLaunchArgs: (isinstance) ? [`--version ${gameInfo.version}`] : [],
                 clientPackage: null,
                 authorization: PROFILE.token,
                 root: (isinstance) ? path.join(instancesPath, game) : root,
@@ -326,7 +347,7 @@ async function OpenVoxelLauncher(PROFILE) {
                 },
                 quickPlay: (!isinstance && game && game != 'vanilla') ? {
                     type: 'singleplayer',
-                    identifier: game == 'lethalbudget' ? 'lethalcompany' : game // TODO: Fix this lol
+                    identifier: game
                 } : undefined,
                 memory: {
                     min: ((OVOPTIONS?.minRam !== undefined) ? OVOPTIONS?.minRam : defaultConfig.minRam) + "M",

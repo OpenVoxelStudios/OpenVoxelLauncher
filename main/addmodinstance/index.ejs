@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="../global/globals.css" />
+  <link rel="stylesheet" href="../global/styleguide.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <title>Install Mods</title>
+</head>
+
+<body>
+  <div class="addmod-instance">
+    <div class="div">
+
+      <div class="mod-list" id="INSTALLEDLIST">
+        <!--<div class="mod" style="top: <i * 115>px;">
+            <div class="overlap-group">
+              <p class="description">A modern rendering engine for Minecraft which greatly improves performance</p>
+              <div class="name">Sodium</div>
+              <img class="icon" src="img/icon.png" />
+              <img class="install pointer" src="../global/img/icons/download-full.png" onclick="toggleChecked(this)" />
+            </div>
+          </div>-->
+      </div>
+
+      <div class="mod-list" id="MODLIST">
+        <!--<div class="mod" style="top: <i * 115>px;">
+            <div class="overlap-group">
+              <p class="description">A modern rendering engine for Minecraft which greatly improves performance</p>
+              <div class="name">Sodium</div>
+              <img class="icon" src="img/icon.png" />
+              <img class="install pointer" src="../global/img/icons/download-full.png" onclick="toggleChecked(this)" />
+            </div>
+          </div>-->
+      </div>
+
+      <div class="next pointer" onclick="INSTALL()">
+        <div class="overlap">
+          <div class="text" id="installtxt">Install</div>
+        </div>
+      </div>
+
+      <div class="cancel pointer" onclick="window.close()">
+        <div class="text-wrapper">
+          <div class="text">Cancel</div>
+        </div>
+      </div>
+
+      <div class="TITLE">
+        <div class="title-wrapper">
+          <p class="title">Install Mods to this Instance</p>
+        </div>
+      </div>
+
+      <div class="search-bar">
+        <div class="overlap-2">
+          <input class="input" placeholder="Search mods..." type="text" onfocusout="search(this.value)" id="SEARCHMODS" />
+          <img class="icon-2" src="../global/img/icons/search-full.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+
+</html>

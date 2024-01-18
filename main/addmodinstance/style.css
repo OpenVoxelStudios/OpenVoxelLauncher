@@ -1,0 +1,256 @@
+.addmod-instance {
+  background-color: #252525;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.addmod-instance .div {
+  background-color: var(--variable-collection-base);
+  overflow: hidden;
+  width: 800px;
+  height: 720px;
+  position: relative;
+}
+
+.addmod-instance .mod-list {
+  position: absolute;
+  width: 780px;
+  height: 468px;
+  top: 143px;
+  left: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.addmod-instance .mod {
+  position: absolute;
+  width: 784px;
+  height: 100px;
+  top: 0;
+  left: 0;
+}
+
+.addmod-instance .overlap-group {
+  position: relative;
+  width: 780px;
+  height: 100px;
+  background-color: var(--variable-collection-foreground-light);
+  border-radius: 10px;
+}
+
+.addmod-instance .description {
+  position: absolute;
+  width: 600px;
+  height: 25px;
+  top: 53px;
+  left: 99px;
+  font-family: "Istok Web-Regular", Helvetica;
+  font-weight: 400;
+  color: var(--variable-collection-white);
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: inline;
+  white-space: nowrap;
+}
+
+.addmod-instance .name {
+  width: 581px;
+  height: 43px;
+  top: 10px;
+  left: 99px;
+  position: absolute;
+  font-family: "Istok Web-Bold", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: normal;
+  display: inline;
+  white-space: nowrap;
+}
+
+.addmod-instance .icon {
+  width: 80px;
+  height: 80px;
+  top: 10px;
+  position: absolute;
+  left: 9px;
+  object-fit: cover;
+}
+
+.addmod-instance .install {
+  height: 50px;
+  position: absolute;
+  width: 50px;
+  top: 25px;
+  left: 710px;
+  object-fit: cover;
+}
+
+.addmod-instance .overlap-wrapper {
+  position: absolute;
+  width: 784px;
+  height: 100px;
+  top: 115px;
+  left: 0;
+}
+
+.addmod-instance .overlap-group-wrapper {
+  position: absolute;
+  width: 784px;
+  height: 100px;
+  top: 230px;
+  left: 0;
+}
+
+.addmod-instance .div-wrapper {
+  position: absolute;
+  width: 784px;
+  height: 100px;
+  top: 345px;
+  left: 0;
+}
+
+.addmod-instance .mod-2 {
+  position: absolute;
+  width: 784px;
+  height: 100px;
+  top: 460px;
+  left: 0;
+}
+
+.addmod-instance .img {
+  width: 80px;
+  height: 22px;
+  top: 10px;
+  position: absolute;
+  left: 9px;
+  object-fit: cover;
+}
+
+.addmod-instance .next {
+  position: fixed;
+  width: 382px;
+  height: 50px;
+  top: 630px;
+  left: 410px;
+}
+
+.addmod-instance .overlap {
+  position: relative;
+  width: 380px;
+  height: 50px;
+  background-color: var(--variable-collection-highlight);
+  border-radius: 15px;
+}
+
+.addmod-instance .text {
+  position: absolute;
+  width: 380px;
+  height: 50px;
+  top: 5px;
+  left: 0;
+  font-family: "Istok Web-Bold", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 32px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.addmod-instance .cancel {
+  position: fixed;
+  width: 382px;
+  height: 50px;
+  top: 630px;
+  left: 10px;
+}
+
+.addmod-instance .text-wrapper {
+  position: relative;
+  width: 380px;
+  height: 50px;
+  background-color: var(--variable-collection-red);
+  border-radius: 15px;
+}
+
+.addmod-instance .TITLE {
+  position: fixed;
+  width: 802px;
+  left: 0;
+  height: 50px;
+  top: 0;
+}
+
+.addmod-instance .title-wrapper {
+  position: relative;
+  width: 800px;
+  height: 50px;
+  background-color: var(--variable-collection-foreground);
+}
+
+.addmod-instance .title {
+  position: absolute;
+  width: 600px;
+  left: 100px;
+  font-family: "Istok Web-Bold", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 32px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  height: 50px;
+  top: 7px;
+}
+
+.addmod-instance .search-bar {
+  position: fixed;
+  width: 782px;
+  height: 58px;
+  top: 60px;
+  left: 10px;
+}
+
+.addmod-instance .overlap-2 {
+  position: relative;
+  width: 780px;
+  height: 58px;
+  background-color: var(--variable-collection-foreground-light);
+  border-radius: 10px;
+}
+
+.addmod-instance .input {
+  width: 713px;
+  height: 40px;
+  top: 9px;
+  left: 58px;
+  position: absolute;
+  font-family: "Istok Web-Bold", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: normal;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.addmod-instance .icon-2 {
+  width: 40px;
+  height: 40px;
+  top: 9px;
+  position: absolute;
+  left: 9px;
+  object-fit: cover;
+}
