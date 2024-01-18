@@ -8,6 +8,8 @@ const path = require('path');
 const fetch = require('node-fetch');
 const logger = require('./logger');
 const { https } = require('follow-redirects');
+const ejse = require('ejs-electron');
+const StreamZip = require('node-stream-zip');
 
 function decodeBase64Image(dataString) {
     var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
@@ -31,7 +33,7 @@ const modrinth = 'https://api.modrinth.com/v2';
 function parseInstance(id) {
     if (!existsSync(path.join(instancesPath, id, 'ovl.json'))) return undefined;
 
-    let modcount = existsSync(path.join(instancesPath, id, 'mods')) ? readdirSync(path.join(instancesPath, id, 'mods')).length : undefined;
+    let modcount = existsSync(path.join(instancesPath, id, 'mods')) ? readdirSync(path.join(instancesPath, id, 'mods')).filter(m => m.endsWith('.jar')).length : undefined;
     let infos = JSON.parse(readFileSync(path.join(instancesPath, id, 'ovl.json'), { encoding: 'utf-8' }));
 
     return {
@@ -149,7 +151,7 @@ function downloadMod(modID, instanceID, version, platform = 'modrinth', modloade
                 if (error) {
                     resolve({ failed: true, error });
                 } else {
-                    let body = JSON.parse(bodyRaw).filter(m => m.game_versions.includes(version))[0];
+                    let body = JSON.parse(bodyRaw).filter(m => m.game_versions.includes(version) && m.loaders.includes(modloader))[0];
                     let writePath = path.join(instancesPath, instanceID, 'mods', body.files[0].filename);
 
                     if (existsSync(writePath)) rmSync(writePath);
@@ -301,17 +303,53 @@ function installModsInstanceWindow(parentWin, id, devMode) {
         });
 
         ipcMain.removeHandler('addmodClose');
+        ipcMain.removeHandler('addmodDelete');
         ipcMain.removeHandler('addmodSearch');
+
+        const INSTANCEINFOS = JSON.parse(readFileSync(path.join(instancesPath, id, 'ovl.json'), { encoding: 'utf-8' }));
+        let InstalledModsList = [];
+
+        if (INSTANCEINFOS.modloader) {
+            for (let mod of readdirSync(path.join(instancesPath, id, 'mods'), { withFileTypes: true }).filter(i => i.isFile() && i.name.endsWith('.jar')).map(f => path.join(f.path, f.name))) {
+                try {
+                    const zip = new StreamZip.async({ file: mod });
+                    let modinfo = JSON.parse((await zip.entryData('fabric.mod.json')).toString('utf-8'));
+
+                    let icon = '../global/img/icons/question-full.png';
+                    try {
+                        icon = 'data:image/png;base64,' + (await zip.entryData(modinfo.icon)).toString('base64');
+                    } catch(err) {
+                        logger.error('both', `Failed to parse mod icon "${path.basename(mod)}"`);
+                    };
+                    
+                    await zip.close();
+    
+                    InstalledModsList.push({
+                        name: modinfo.name,
+                        description: modinfo.description,
+                        icon: icon,
+                        id: path.basename(mod)
+                    });
+                } catch(err) {
+                    logger.error('both', `Failed to parse mod "${path.basename(mod)}"`)
+                }
+            }
+        }
+
+        ejse.data('modList', InstalledModsList);
 
         win.loadFile('./main/addmodinstance/index.ejs');
 
-        const INSTANCEINFOS = JSON.parse(readFileSync(path.join(instancesPath, id, 'ovl.json'), { encoding: 'utf-8' }));
 
         win.once('ready-to-show', () => {
             win.show();
 
             if (devMode) win.webContents.openDevTools({ mode: 'detach' });
         });
+
+        ipcMain.handle('addmodDelete', (_e, file) => {
+            return rmSync(path.join(instancesPath, id, 'mods', file), { force: true });
+        })
 
         ipcMain.handle('addmodSearch', (_e, query) => {
             return search(query, INSTANCEINFOS.version, 'modrinth', 'fabric')

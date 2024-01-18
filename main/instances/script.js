@@ -18,12 +18,17 @@ function runInstance(id) {
 
 const ALLINSTANCES = document.querySelectorAll('.INSTANCEEL');
 function searchInstance(query) {
+    let indx = 0;
     ALLINSTANCES.forEach(e => {
         let inpt = e.querySelector('div > input');
         let val = inpt.value || inpt.placeholder;
 
         if (!val.toLowerCase().includes(query.toLowerCase())) e.hidden = true;
-        else e.hidden = false;
+        else {
+            indx++;
+            e.style.top = `${indx * 125 + 80}px`;
+            e.hidden = false;
+        }
     })
 }
 

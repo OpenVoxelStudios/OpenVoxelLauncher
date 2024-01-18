@@ -35,10 +35,10 @@ function getJavaDownload(javaV, arch = os.arch()) {
 
         java8: {
             mac: {
-                sha: arch == 'x64' ? '0bd01a0c11c98761153fc6dceac7725cea5607e7ff3565edfcad6f427cb9b76c' : 'ab495525c4923400e984cf405ccfe0aec02f96d3dfa869bca259030e5a9627be',
-                link: `https://openvoxel.studio/launcher/java/java8/${arch == 'x64' ? 'jre-macosx-x64' : 'jdk-macosx-aarch64'}.tar.gz`,
-                filename: `${arch ? 'jre' : 'jdk'}-8-macosx-${arch == 'x64' ? 'x64' : 'aarch64'}.tar.gz`,
-                unzipname: arch == 'x64' ? 'jre1.8.0_381.jre' : 'jdk1.8.0_381.jdk',
+                sha: '0bd01a0c11c98761153fc6dceac7725cea5607e7ff3565edfcad6f427cb9b76c',
+                link: `https://openvoxel.studio/launcher/java/java8/jre-macosx-x64.tar.gz`,
+                filename: `jre-8-macosx-x64.tar.gz`,
+                unzipname: 'jre1.8.0_381.jre',
             },
             windows: {
                 sha: '09737832ce72298716d7d08425e4414517aea09302aba09a356506db1c78a2bc',

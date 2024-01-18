@@ -90,3 +90,8 @@ async function search(query) {
 function INSTALL() {
     openvoxeladdmod.close(TOINSTALL);
 }
+
+function deleteMod(el, mod) {
+    openvoxeladdmod.deleteMod(mod);
+    el.remove()
+}

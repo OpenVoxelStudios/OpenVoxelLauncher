@@ -15,25 +15,27 @@
     <div class="div">
 
       <div class="mod-list" id="INSTALLEDLIST">
-        <!--<div class="mod" style="top: <i * 115>px;">
+        <div class="mod" style="top: 0px;">
+          <div class="overlap-group">
+            <p class="description">Search for mods and manage the downloaded ones</p>
+            <div class="name">Downloaded Mods</div>
+            <img class="icon" src="../global/img/icons/download-full.png" />
+          </div>
+        </div>
+
+        <% modList.forEach((mod, i) => { %>
+          <div class="mod" style="top: <%= i * 115 + 115%>px;">
             <div class="overlap-group">
-              <p class="description">A modern rendering engine for Minecraft which greatly improves performance</p>
-              <div class="name">Sodium</div>
-              <img class="icon" src="img/icon.png" />
-              <img class="install pointer" src="../global/img/icons/download-full.png" onclick="toggleChecked(this)" />
+              <p class="description"><%= mod.description %></p>
+              <div class="name"><%= mod.name %></div>
+              <img class="icon" src="<%= mod.icon %>" />
+              <img class="install pointer" src="../global/img/icons/trash-fill.png" onclick="deleteMod(this.parentElement.parentElement, '<%= mod.id %>')" />
             </div>
-          </div>-->
+          </div>
+        <% }) %>
       </div>
 
-      <div class="mod-list" id="MODLIST">
-        <!--<div class="mod" style="top: <i * 115>px;">
-            <div class="overlap-group">
-              <p class="description">A modern rendering engine for Minecraft which greatly improves performance</p>
-              <div class="name">Sodium</div>
-              <img class="icon" src="img/icon.png" />
-              <img class="install pointer" src="../global/img/icons/download-full.png" onclick="toggleChecked(this)" />
-            </div>
-          </div>-->
+      <div class="mod-list" id="MODLIST" hidden>
       </div>
 
       <div class="next pointer" onclick="INSTALL()">
@@ -42,7 +44,7 @@
         </div>
       </div>
 
-      <div class="cancel pointer" onclick="window.close()">
+      <div class="cancel pointer" onclick="openvoxeladdmod.close([])">
         <div class="text-wrapper">
           <div class="text">Cancel</div>
         </div>
@@ -56,7 +58,7 @@
 
       <div class="search-bar">
         <div class="overlap-2">
-          <input class="input" placeholder="Search mods..." type="text" onfocusout="search(this.value)" id="SEARCHMODS" />
+          <input class="input" placeholder="Search mods..." type="text" onfocusout="search(this.value)" id="SEARCHMODS" oninput="document.getElementById('INSTALLEDLIST').hidden = (this.value != ''); document.getElementById('MODLIST').hidden = (this.value == '');" />
           <img class="icon-2" src="../global/img/icons/search-full.png" />
         </div>
       </div>
