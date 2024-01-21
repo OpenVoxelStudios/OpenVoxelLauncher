@@ -141,6 +141,11 @@ async function OpenVoxelLauncher(PROFILE) {
         return deleteInstance(win, id);
     });
 
+    app.on('addmode-refresh', () => {
+        ejse.data('instances', loadInstances());
+        win.webContents.reload();
+    });
+
 
     let CMANIFMode = false;
     app.on('toggle-CMANIF-mode', () => {

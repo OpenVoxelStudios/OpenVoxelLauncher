@@ -370,6 +370,7 @@ function installModsInstanceWindow(parentWin, id, devMode) {
             };
 
             app.emit('set-progress-bar', -1);
+            app.emit('addmode-refresh');
         });
     })
 }
