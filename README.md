@@ -14,13 +14,13 @@ Contains optimisation mods, settings tab, game tab & more!
 
 2. What version do I download?
 
-HINT: `x.x.x` means the version of the launcher you are about to download. Try to pick the newest one, but actually there is an auto-updater built-in so it's gonna update ;)
-
-> **If you are on Windows**, download the `OpenVoxel-Launcher Setup x.x.x.exe` file and open it to run the launcher installer. Enter the required parameters (like installation path) and then click install. It will create a shortcut on your Desktop.
+> **If you are on Windows**, download the `OpenVoxel-Launcher-Setup.exe` file and open it to run the launcher installer. Enter the required parameters (like installation path) and then click install. It will create a shortcut on your Desktop.
 > 
-> For a portable version, check out the `OpenVoxel-Launcher x.x.x.exe` file that contains everything.
+> For a portable version, check out the `OpenVoxel-Launcher.exe` file that contains everything.
 
-> **If you are on Mac**, download the `OpenVoxel-Launcher-x.x.x-arm64.dmg` (if you are on Silicon-Chip based Mac, else it's `OpenVoxel-Launcher-x.x.x-universal.dmg`) file and open it to begin the installation process. Drag and Drop the launcher in the Applications folder. Once this is done, open the app that is in the Applications folder and you're all set!
+> **If you are on Mac**, download the `OpenVoxel-Launcher-arm64.dmg` (if you are on Silicon-Chip based Mac, else it's `OpenVoxel-Launcher-universal.dmg`) file and open it to begin the installation process. Drag and Drop the launcher in the Applications folder. Once this is done, open the app that is in the Applications folder and you're all set!
+> 
+> For a portable mac version, same as the installer but use the `.zip` and extract it.
 
 > The `.blockmap`, `latest.yml` and `latest-mac.yml` are for the built-in updater, don't worry about it.
 
@@ -36,7 +36,8 @@ HINT: `x.x.x` means the version of the launcher you are about to download. Try t
 ├──────────┼──────────────────────────────┤
 │  v1.0.0  │      1st  January  2024      │
 │  v1.0.1  │      15th January  2024      │
-│  v1.0.2  │      Coming Really Soon      │
+│  v1.0.2  │      21th January  2024      │
+│  v1.1.0  │      Coming Really Soon      │
 └──────────┴──────────────────────────────┘
 ```
 
