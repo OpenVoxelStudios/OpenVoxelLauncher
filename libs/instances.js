@@ -232,7 +232,7 @@ function createInstanceWindow(parentWin, devMode) {
                     properties: ["openFile"],
                     filters: [{ name: "Images", extensions: ["png", "jpg", "jpeg"] }],
                     title: 'Select Instance Icon'
-                })[0];
+                })?.[0];
 
                 if (!result) return resolve(undefined);
                 else {
