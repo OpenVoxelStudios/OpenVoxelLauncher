@@ -31,22 +31,6 @@
   left: 24px;
 }
 
-.infos .zoomify {
-  position: absolute;
-  width: 1109px;
-  height: 60px;
-  top: 640px;
-  left: 0;
-}
-
-.infos .true_darkness {
-  position: absolute;
-  width: 1109px;
-  height: 60px;
-  top: 720px;
-  left: 0;
-}
-
 .infos .overlap-group {
   position: relative;
   width: 1107px;
@@ -66,46 +50,6 @@
   font-size: 30px;
   letter-spacing: 0;
   line-height: normal;
-}
-
-.infos .yet-another-config {
-  position: absolute;
-  width: 1109px;
-  height: 60px;
-  top: 560px;
-  left: 0;
-}
-
-.infos .sodium {
-  position: absolute;
-  width: 1109px;
-  height: 60px;
-  top: 480px;
-  left: 0;
-}
-
-.infos .skin-layers {
-  position: absolute;
-  width: 1109px;
-  height: 60px;
-  top: 400px;
-  left: 0;
-}
-
-.infos .lithium {
-  position: absolute;
-  width: 1109px;
-  height: 60px;
-  top: 320px;
-  left: 0;
-}
-
-.infos .iris-shaders {
-  position: absolute;
-  width: 1109px;
-  height: 60px;
-  top: 240px;
-  left: 0;
 }
 
 .infos .overlap-group-wrapper {
@@ -129,7 +73,7 @@
   width: 1109px;
   height: 60px;
   top: 0;
-  left: 1px;
+  left: 0;
 }
 
 .infos .div-3 {
@@ -338,4 +282,12 @@
   text-align: center;
   letter-spacing: 0;
   line-height: normal;
+}
+
+.infos .thatmod {
+  position: absolute;
+  width: 1109px;
+  height: 60px;
+  top: 0;
+  left: 0;
 }
