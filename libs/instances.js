@@ -265,7 +265,7 @@ function createInstanceWindow(parentWin, devMode) {
 
                 if (data.modloader == 'Fabric') {
                     mkdirSync(path.join(iPath, 'versions', 'default'), { recursive: true });
-                    let got = JSON.stringify(await (await fetch(`https://meta.fabricmc.net/v2/versions/loader/1.20.4/0.15.3/profile/json`)).json(), undefined, 2);
+                    let got = JSON.stringify(await (await fetch(`https://meta.fabricmc.net/v2/versions/loader/${data.version}/${data.modloaderversion}/profile/json`)).json(), undefined, 2);
                     writeFileSync(path.join(iPath, 'versions', 'default', 'default.json'), got, { encoding: 'utf-8' });
                 }
 
