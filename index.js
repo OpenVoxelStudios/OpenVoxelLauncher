@@ -1,5 +1,5 @@
 const { app, BrowserWindow, ipcMain, Notification } = require('electron');
-const { Client } = require("./packages/minecraft-launcher-core/index");
+const { Client, Authenticator } = require("./packages/minecraft-launcher-core/index");
 const launcher = new Client();
 const path = require('node:path');
 const { mkdirSync, readFileSync, writeFileSync, existsSync } = require('node:fs');
@@ -153,7 +153,7 @@ async function OpenVoxelLauncher(PROFILE) {
         ThePath = ThePath.replace(/ /g, '\\ ');
         try {
             execSync(`${os.platform() == 'win32' ? 'start' : 'open'} ${path.normalize(ThePath)}`);
-        } catch(err) {
+        } catch (err) {
             logger.error('both', `Could not open path "${ThePath}". Opening with file explorer/Finder instead`);
             execSync(`${os.platform() == 'win32' ? 'start' : 'open'} ${path.parse(path.normalize(ThePath)).dir}`);
         }
@@ -221,7 +221,7 @@ async function OpenVoxelLauncher(PROFILE) {
         let gameInfo = (game) ? JSON.parse(readFileSync(path.join(appPath, 'games', game + '.json'))) : {};
         return new Promise(async (gameExit) => {
             let started = Date.now();
-            if (!PROFILE.token) return gameExit('You are not logged in!');
+            if (!PROFILE.token && !PROFILE?.offline) return gameExit('You are not logged in!');
 
             gameLaunched = { is: true, game: game };
             app.emit('send-to-window', 'gamelaunchdetails', 'Checking installation...');
@@ -264,10 +264,10 @@ async function OpenVoxelLauncher(PROFILE) {
 
 
             let javaPath = (OVOPTIONS?.java !== undefined) ? OVOPTIONS?.java : defaultConfig.java;
-            
+
             launcher.prepare({
                 clientPackage: null,
-                authorization: PROFILE.token,
+                authorization: PROFILE.offline ? Authenticator.getAuth(PROFILE.username) : PROFILE.token,
                 root: root,
                 version: {
                     number: "1.20.4",
@@ -330,13 +330,18 @@ async function OpenVoxelLauncher(PROFILE) {
 
     app.removeAllListeners('open-url');
     app.removeAllListeners('second-instance');
-    
+
     app.on('open-url', (event, url) => { protocol(win, url, PROFILE) });
     app.on('second-instance', (event, commandLine, workingDirectory) => { protocol(win, commandLine.pop(), PROFILE) });
     logger.info('both', 'Restarted protocols handlers');
 };
 
-require('./libs/updater.js')().then((PROFILE) => OpenVoxelLauncher(PROFILE));
+if (OVOPTIONS['devModeOfflineUsername']) {
+    fetch(`https://api.mojang.com/users/profiles/minecraft/${OVOPTIONS['devModeOfflineUsername']}`).then(a => a.json()).then(b => {
+        OpenVoxelLauncher({ username: OVOPTIONS['devModeOfflineUsername'], uuid: b.id, offline: true })
+    })
+}
+else require('./libs/updater.js')().then((PROFILE) => OpenVoxelLauncher(PROFILE));
 
 process.on('uncaughtException', (err, origin) => {
     logger.error('both', err?.stack || err);

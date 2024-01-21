@@ -24,9 +24,6 @@ module.exports = () => {
     function handleProtocol(url) {
         app.removeAllListeners('protocol-apploaded');
         app.addListener('protocol-apploaded', (win, PROFILE) => {
-            logger.log('both', win)
-            logger.log('both', url)
-            logger.log('both', PROFILE)
             app.removeAllListeners('protocol-apploaded');
             protocol(win, url, PROFILE);
         });
