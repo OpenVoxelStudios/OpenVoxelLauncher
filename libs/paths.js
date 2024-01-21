@@ -9,9 +9,13 @@ const { defaultConfig } = require('../config');
 let mcroot = path.join(ospath.data(), (os.platform() == 'darwin') ? 'minecraft' : '.minecraft');
 let rootroot = path.join(ospath.data(), 'OpenVoxel');
 let root = path.join(rootroot, 'launcher');
+let instancesPath = path.join(rootroot, 'instances');
+let JVMPath = path.join(rootroot, 'java');
 const appPath = app.getAppPath().replace('app.asar', '');
 
 mkdirSync(root, { recursive: true });
+mkdirSync(instancesPath, { recursive: true });
+mkdirSync(JVMPath, { recursive: true });
 
 let OVOPTIONSPATH = path.join(rootroot, 'options.txt');
 if (!existsSync(OVOPTIONSPATH)) {
@@ -22,4 +26,4 @@ if (!existsSync(OVOPTIONSPATH)) {
 }
 let OVOPTIONS_origin = JSON.parse(readFileSync(OVOPTIONSPATH, { encoding: 'utf-8' }));
 
-module.exports = { mcroot, rootroot, root, appPath, OVOPTIONS_origin, OVOPTIONSPATH };
+module.exports = { mcroot, rootroot, root, appPath, OVOPTIONS_origin, OVOPTIONSPATH, instancesPath, JVMPath };

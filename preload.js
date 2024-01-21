@@ -8,6 +8,16 @@ contextBridge.exposeInMainWorld('openvoxel', {
     onCMANIFStuff: (callback) => ipcRenderer.on('set-CMANIF-mode', (_event, value) => callback(value)),
     getCMANIFStuff: () => ipcRenderer.invoke('get-CMANIF-mode'),
 
+    // Instances stuff
+    createInstance: () => ipcRenderer.invoke('createInstance'),
+    renameInstance: (id, newName) => ipcRenderer.invoke('renameInstance', id, newName),
+    runInstance: (id) => ipcRenderer.invoke('launchgame', id, true),
+    deleteInstance: (id) => ipcRenderer.invoke('deleteinstance', id),
+    oninstancedetails: (channel, callback) => ipcRenderer.addListener(channel, callback),
+    removeinstancedetails: (channel) => ipcRenderer.removeAllListeners(channel),
+    forceRefresh: async () => await ipcRenderer.invoke('forceReloadInstances'),
+    installMoreMods: async (id) => await ipcRenderer.invoke('installMoreMods', id),
+
     // Some caching stuff
     cacheNews: async (url, index, toOpen) => await ipcRenderer.invoke('cacheNews', url, index, toOpen),
     

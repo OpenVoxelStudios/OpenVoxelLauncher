@@ -1,0 +1,198 @@
+.instances {
+  background-color: #252525;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.instances .div {
+  background-color: var(--variable-collection-base);
+  width: 1280px;
+  height: 720px;
+  position: relative;
+}
+
+.instances .instances-list {
+  position: absolute;
+  width: 1158px;
+  height: 608px;
+  top: 87px;
+  left: 97px;
+}
+
+.instances .instances-list-2 {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: absolute;
+  width: 1109px;
+  height: 550px;
+  top: 71px;
+  left: 26px;
+}
+
+.instances .element {
+  position: absolute;
+  width: 1109px;
+  height: 100px;
+  left: 0;
+}
+
+.instances .overlap-group {
+  position: relative;
+  width: 1105px;
+  height: 100px;
+  background-color: var(--variable-collection-foreground-light);
+  border-radius: 10px;
+}
+
+.instances .overlap-group-2 {
+  position: relative;
+  width: 1105px;
+  height: 51px;
+  background-color: var(--variable-collection-foreground-light);
+  border-radius: 10px;
+}
+
+.instances .description {
+  position: absolute;
+  width: 700px;
+  height: 43px;
+  top: 53px;
+  left: 100px;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 400;
+  color: var(--variable-collection-white);
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.instances .icon {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: 10px;
+  left: 10px;
+  object-fit: cover;
+}
+
+.instances .icon-trash {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 30px;
+  right: 15px;
+  object-fit: cover;
+}
+
+.instances .icon-addmod {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 30px;
+  right: 70px;
+  object-fit: cover;
+}
+
+.instances .input {
+  width: 700px;
+  top: 10px;
+  left: 100px;
+  font-size: 30px;
+  position: absolute;
+  height: 43px;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  letter-spacing: 0;
+  line-height: normal;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.instances .input::placeholder {
+  color: var(--variable-collection-grayish);
+}
+
+.instances .create {
+  position: absolute;
+  width: 1107px;
+  height: 100px;
+  top: 0;
+  left: 0;
+}
+
+.instances .searchicn {
+  position: absolute;
+  width: 1107px;
+  height: 51px;
+  top: 125px;
+  left: 0;
+}
+
+.instances .text-wrapper {
+  width: 971px;
+  top: 28px;
+  left: 110px;
+  font-size: 35px;
+  position: absolute;
+  height: 43px;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.instances .icons-create-full {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: 10px;
+  left: 11px;
+}
+
+.instances .icons-search-full {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 6px;
+  left: 6px;
+}
+
+.instances .overlap-wrapper-2 {
+  position: absolute;
+  width: 1160px;
+  height: 46px;
+  top: -1px;
+  left: 0;
+}
+
+.instances .overlap {
+  position: relative;
+  width: 1158px;
+  height: 46px;
+  background-color: var(--variable-collection-base);
+}
+
+.instances .text {
+  position: absolute;
+  width: 1158px;
+  top: 5px;
+  left: 0;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 30px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}

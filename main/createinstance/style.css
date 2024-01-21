@@ -1,0 +1,310 @@
+.create-instance {
+  background-color: #252525;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.create-instance .div {
+  background-color: var(--variable-collection-base);
+  overflow: hidden;
+  width: 600px;
+  height: 720px;
+  position: relative;
+}
+
+.create-instance .overlap {
+  position: absolute;
+  width: 606px;
+  height: 611px;
+  top: 59px;
+  left: 0;
+}
+
+.create-instance .finish {
+  position: absolute;
+  width: 604px;
+  height: 611px;
+  top: 0;
+  left: 0;
+}
+
+.create-instance .back {
+  top: 561px;
+  position: absolute;
+  width: 502px;
+  height: 50px;
+  left: 50px;
+}
+
+.create-instance .overlap-group {
+  position: relative;
+  width: 500px;
+  height: 50px;
+  background-color: var(--variable-collection-foreground-light);
+  border-radius: 15px;
+}
+
+.create-instance .text {
+  position: absolute;
+  width: 500px;
+  height: 50px;
+  top: 0;
+  left: 0;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 32px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.create-instance .overlap-wrapper {
+  position: absolute;
+  width: 502px;
+  height: 50px;
+  top: 491px;
+  left: 50px;
+}
+
+.create-instance .text-wrapper {
+  position: relative;
+  width: 500px;
+  height: 50px;
+  background-color: var(--variable-collection-green);
+  border-radius: 15px;
+}
+
+.create-instance .text-wrapper-2 {
+  width: 600px;
+  height: 36px;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 25px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.create-instance .recap {
+  position: absolute;
+  width: 600px;
+  top: 311px;
+  left: 0;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 25px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.create-instance .page {
+  position: absolute;
+  width: 602px;
+  height: 601px;
+  top: 10px;
+  left: 0;
+}
+
+.create-instance .dropdown {
+  position: absolute;
+  width: 500px;
+  height: 325px;
+  top: 36px;
+  left: 50px;
+  background-color: var(--variable-collection-foreground-light);
+  border-radius: 15px;
+  outline: none;
+}
+
+.create-instance .dropdown option {
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: var(--variable-collection-white);
+  font-size: 25px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  outline: none;
+}
+
+.create-instance .dropdown option:checked {
+  outline: none;
+  background-color: var(--variable-collection-highlight);
+}
+
+.create-instance .overlap-group-wrapper {
+  top: 551px;
+  position: absolute;
+  width: 502px;
+  height: 50px;
+  left: 50px;
+}
+
+.create-instance .next {
+  top: 481px;
+  position: absolute;
+  width: 502px;
+  height: 50px;
+  left: 50px;
+}
+
+.create-instance .div-wrapper {
+  position: relative;
+  width: 500px;
+  height: 50px;
+  background-color: var(--variable-collection-highlight);
+  border-radius: 15px;
+}
+
+.create-instance .page-2 {
+  position: absolute;
+  width: 606px;
+  height: 601px;
+  top: 10px;
+  left: 0;
+}
+
+.modloaderstuff {
+  border-radius: 10px;
+  transition: all ease-in 0.15s;
+}
+
+.modloaderstuff[data-enabled="true"] {
+  background-color: var(--variable-collection-highlight);
+}
+
+.create-instance .name {
+  width: 300px;
+  top: 366px;
+  left: 0;
+  position: absolute;
+  height: 36px;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 25px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.create-instance .name-2 {
+  width: 300px;
+  top: 366px;
+  left: 300px;
+  position: absolute;
+  height: 36px;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 25px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.create-instance .page-3 {
+  position: absolute;
+  width: 602px;
+  height: 565px;
+  top: 46px;
+  left: 0;
+}
+
+.create-instance .icon {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  top: 0;
+  left: 175px;
+  object-fit: cover;
+}
+
+.create-instance .input {
+  width: 600px;
+  top: 305px;
+  left: 0;
+  position: absolute;
+  height: 36px;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 25px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.create-instance .cancel {
+  position: absolute;
+  width: 502px;
+  height: 50px;
+  top: 515px;
+  left: 50px;
+}
+
+.create-instance .overlap-group-2 {
+  position: relative;
+  width: 500px;
+  height: 50px;
+  background-color: var(--variable-collection-red);
+  border-radius: 15px;
+}
+
+.create-instance .next-2 {
+  top: 445px;
+  position: absolute;
+  width: 502px;
+  height: 50px;
+  left: 50px;
+}
+
+.create-instance .TITLE {
+  width: 602px;
+  height: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.create-instance .title-wrapper {
+  position: relative;
+  width: 600px;
+  height: 50px;
+  background-color: var(--variable-collection-foreground);
+}
+
+.create-instance .title {
+  width: 600px;
+  height: 50px;
+  font-family: "Istok Web", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 32px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.disabled {
+  cursor: not-allowed !important;
+}

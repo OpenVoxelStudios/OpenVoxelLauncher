@@ -1,6 +1,5 @@
-const { app, BrowserWindow, ipcMain, Notification } = require('electron');
+const { app, BrowserWindow, ipcMain, Notification, dialog } = require('electron');
 const { Client, Authenticator } = require("./packages/minecraft-launcher-core/index");
-const launcher = new Client();
 const path = require('node:path');
 const { mkdirSync, readFileSync, writeFileSync, existsSync } = require('node:fs');
 const RPC = require('./libs/rpc.js');
@@ -8,14 +7,17 @@ const { defaultConfig } = require('./config.js');
 const { parseNBT, writeNBT } = require('./libs/nbt.js');
 const { prepareFullGame, importSettings } = require('./libs/game.js');
 const logger = require('./libs/logger.js');
-const { root, appPath, OVOPTIONS_origin, rootroot } = require('./libs/paths.js');
+const { root, appPath, OVOPTIONS_origin, rootroot, instancesPath } = require('./libs/paths.js');
 const { fromXboxManagerToSaveLogin, authManager, deleteLogin } = require('./libs/login.js');
 const { setAppMenu, quit, openLicense, protocol } = require('./libs/launcher.js');
 const ejse = require('ejs-electron');
 const { execSync } = require('node:child_process');
 const os = require('node:os');
 const { downloadImage } = require('./libs/util.js');
+const { loadInstances, createInstanceWindow, renameInstance, deleteInstance, installModsInstanceWindow } = require('./libs/instances.js');
 const { devMode } = existsSync(path.join(appPath, 'intern.json')) ? require(path.join(appPath, 'intern.json')) : false;
+const fetch = require('node-fetch');
+const { getJavaPath, minecraftToJava, downloadJava } = require('./libs/java.js');
 
 if (devMode) logger.info('both', 'Launcher running in Dev Mode');
 
@@ -32,7 +34,7 @@ function editOptions(setting, newvalue) {
 
     ejse.data('options', ovopt);
     return ovopt;
-}
+};
 
 async function OpenVoxelLauncher(PROFILE) {
     app.focus({ steal: true });
@@ -78,6 +80,8 @@ async function OpenVoxelLauncher(PROFILE) {
     logger.log('both', 'Creating app menu...');
     setAppMenu(win, PROFILE !== false);
 
+    ejse.data('instances', loadInstances())
+
     if (PROFILE === false) win.loadFile('./main/login/index.ejs')
     else win.loadFile('./main/home/index.ejs');
 
@@ -99,11 +103,44 @@ async function OpenVoxelLauncher(PROFILE) {
 
         if (cntrl && input.key == 'h') { app.hide() }
         else if (cntrl && input.key == 'q') { app.emit('force-leave') }
-        else if (cntrl && ['c', 'v', 'x'].includes(input.key)) { }
+        else if (cntrl && ['c', 'v', 'x', 'Backspace'].includes(input.key)) { }
 
         // Disable everything starting with control/cmd like control+?
         else if (cntrl) return event.preventDefault();
     });
+
+    // Instances stuff
+    var MCVERSIONS = null;
+    ipcMain.handle('createInstance', async () => {
+        let versions = MCVERSIONS;
+        if (!versions) {
+            logger.log('both', 'Fetched Minecraft versions');
+            MCVERSIONS = (await (await fetch('https://piston-meta.mojang.com/mc/game/version_manifest.json')).json());
+            versions = MCVERSIONS;
+        }
+
+        ejse.data('versions', versions.versions.map(v => { return { id: v.id, issnapshot: v.type != 'release' } }));
+        createInstanceWindow(win, devMode);
+    });
+
+    ipcMain.handle('forceReloadInstances', () => {
+        ejse.data('instances', loadInstances());
+        win.webContents.reload();
+    });
+
+    ipcMain.handle('renameInstance', (_, id, newName) => {
+        logger.info('both', `Renaming instance "${id}" to "${newName}"`);
+        renameInstance(id, newName);
+    })
+
+    ipcMain.handle('installMoreMods', (_, id) => {
+        return installModsInstanceWindow(win, id, devMode)
+    })
+
+    ipcMain.handle('deleteinstance', (_event, id) => {
+        return deleteInstance(win, id);
+    });
+
 
     let CMANIFMode = false;
     app.on('toggle-CMANIF-mode', () => {
@@ -216,65 +253,99 @@ async function OpenVoxelLauncher(PROFILE) {
     ipcMain.handle('launcher.isgamelaunched', () => gameLaunched);
     ipcMain.handle('openlicense', (_event, license) => openLicense(license));
 
-    ipcMain.handle('launchgame', (_event, game) => {
-        logger.log('both', 'Received Launchgame signal. Starting Minecraft with game "' + (game || "no game selected") + '"');
-        let gameInfo = (game) ? JSON.parse(readFileSync(path.join(appPath, 'games', game + '.json'))) : {};
+    ipcMain.handle('launchgame', (_event, game, isinstance = false) => {
+        logger.log('both', `Received Launchgame signal. Starting Minecraft with ${isinstance ? 'instance' : 'game'} "${(game || "no game selected")}"`);
+
+        let gameInfo = (game && !isinstance) ? JSON.parse(readFileSync(path.join(appPath, 'games', game + '.json'))) : {};
+        if (isinstance) gameInfo = JSON.parse(readFileSync(path.join(instancesPath, game, 'ovl.json')));
+
         return new Promise(async (gameExit) => {
             let started = Date.now();
+            const launcher = new Client();
             if (!PROFILE.token && !PROFILE?.offline) return gameExit('You are not logged in!');
 
-            gameLaunched = { is: true, game: game };
-            app.emit('send-to-window', 'gamelaunchdetails', 'Checking installation...');
+            app.emit('send-to-window', (isinstance) ? game : 'gamelaunchdetails', 'Checking Java installation...');
 
-            importSettings(gameInfo);
+            let javaPath = (OVOPTIONS?.java !== undefined) ? OVOPTIONS?.java : defaultConfig.java;
+            if (['java', 'javaw'].includes(javaPath)) {
+                let javaV = await minecraftToJava((isinstance) ? gameInfo.version : '1.20.4');
+                javaPath = getJavaPath(javaV.version, javaV.arch);
+                if (!existsSync(javaPath)) {
+                    app.emit('send-to-window', (isinstance) ? game : 'gamelaunchdetails', 'Downloading Java...');
+                    await downloadJava(javaV)
+                }
+            }
 
-            // Adding our server at the top
-            let ourServer = { ip: { type: 'string', value: 'Thanks for using the launcher!' }, name: { type: 'string', value: '⭐ §6OpenVoxel Studios§r' }, acceptTextures: { type: 'byte', value: 1 }, icon: { type: 'string', value: readFileSync(path.join(appPath, 'assets/servericon.txt'), { encoding: 'utf-8' }) } };
-            let dat = await parseNBT(path.join(root, 'servers.dat'));
-            let values = dat.value.servers.value.value;
+            if (!isinstance) {
+                gameLaunched = { is: true, game: game };
+                app.emit('send-to-window', 'gamelaunchdetails', 'Checking installation...');
 
-            if (values[0] != ourServer) {
-                if (values[0].ip.value == ourServer.ip.value) values.shift();
-                values.unshift(ourServer);
-                dat.value.servers.value.value = values;
-                writeNBT(dat, path.join(root, 'servers.dat'));
-            };
+                importSettings(gameInfo);
 
-            if (game && game != 'vanilla') {
-                app.emit('send-to-window', 'gamelaunchdetails', 'Downloading the Game...');
-                await prepareFullGame(game)
-            };
+                // Adding our server at the top
+                let ourServer = { ip: { type: 'string', value: 'Thanks for using the launcher!' }, name: { type: 'string', value: '⭐ §6OpenVoxel Studios§r' }, acceptTextures: { type: 'byte', value: 1 }, icon: { type: 'string', value: readFileSync(path.join(appPath, 'assets/servericon.txt'), { encoding: 'utf-8' }) } };
+                let dat = await parseNBT(path.join(root, 'servers.dat'));
+                let values = dat.value.servers.value.value;
 
-            app.emit('send-to-window', 'gamelaunchdetails', 'Starting Minecraft...');
-            logger.log('both', "Everything ready, starting the game!");
+                if (values[0] != ourServer) {
+                    if (values[0].ip.value == ourServer.ip.value) values.shift();
+                    values.unshift(ourServer);
+                    dat.value.servers.value.value = values;
+                    writeNBT(dat, path.join(root, 'servers.dat'));
+                };
 
-            launcher.on('debug', (e) => logger.log('file', e));
-            launcher.on('data', (e) => logger.log('file', e));
+                if (game && game != 'vanilla') {
+                    app.emit('send-to-window', 'gamelaunchdetails', 'Downloading the Game...');
+                    await prepareFullGame(game)
+                };
+
+                app.emit('send-to-window', 'gamelaunchdetails', 'Starting Minecraft...');
+                logger.log('both', "Everything ready, starting the game!");
+            } else app.emit('send-to-window', game, 'Preparing Launch...');
+
             launcher.on('close', (code, err) => {
-                gameLaunched = { is: false };
-                app.emit('send-to-window', 'gamelaunchdetails', 'Click to play!');
+                if (!isinstance) {
+                    gameLaunched = { is: false };
+                    app.emit('send-to-window', 'gamelaunchdetails', 'Click to play!');
+                } else {
+                    app.emit('send-to-window', game, 'RESET');
+                }
 
                 if (err) {
                     gameExit(err);
-                    logger.log('both', `Error occured while launching Minecraft. ${err}`)
+                    logger.log('both', `Error occured while launching Minecraft. ${err}`);
+                    dialog.showErrorBox('An Error Occured', `Minecraft ran into an error...\n\nError: ${err}`);
                 } else gameExit(true);
                 logger.log('both', "Minecraft closed!");
                 app.emit('focus');
             });
 
 
-            let javaPath = (OVOPTIONS?.java !== undefined) ? OVOPTIONS?.java : defaultConfig.java;
+            if (!isinstance) {
+                launcher.on('debug', (e) => {
+                    if (!e.startsWith('Launching with arguments')) logger.log(devMode ? 'both' : 'file', e)
+                    else logger.log(devMode ? 'both' : 'file', "Game Launched, arguments not printed")
+                });
+                launcher.on('data', (e) => {
+                    if (!e.startsWith('Launching with arguments')) logger.log(devMode ? 'both' : 'file', e)
+                    else logger.log(devMode ? 'both' : 'file', "Game Launched, arguments not printed")
+                });
+            }
 
             launcher.prepare({
                 clientPackage: null,
                 authorization: PROFILE.offline ? Authenticator.getAuth(PROFILE.username) : PROFILE.token,
-                root: root,
-                version: {
+                root: (isinstance) ? path.join(instancesPath, game) : root,
+                version: (isinstance) ? {
+                    number: gameInfo.version,
+                    type: gameInfo.issnapshot ? 'snapshot' : 'release',
+                    custom: (gameInfo.modloader) ? 'default' : undefined,
+                } : {
                     number: "1.20.4",
                     type: "release",
                     custom: 'openvoxel'
                 },
-                quickPlay: (game && game != 'vanilla') ? {
+                quickPlay: (!isinstance && game && game != 'vanilla') ? {
                     type: 'singleplayer',
                     identifier: game
                 } : undefined,
@@ -290,15 +361,6 @@ async function OpenVoxelLauncher(PROFILE) {
                 javaPath: javaPath,
             });
 
-            if ((javaPath == 'java' || !javaPath) && os.platform() == 'win32') {
-                let testJavaw = await launcher.handler.checkJava('javaw')
-                if (testJavaw.run) {
-                    logger.info('both', 'Found javaw, using this instead of java');
-                    launcher.options.javaPath = 'javaw';
-                    editOptions('java', 'javaw');
-                };
-            };
-
             launcher.handler.client.on('progress', (data) => {
                 if (data?.type == 'assets') {
                     /* data = {
@@ -306,14 +368,20 @@ async function OpenVoxelLauncher(PROFILE) {
                         task: number,
                         total: max number
                     } */
-                    app.emit('send-to-window', 'gamelaunchdetails', `Downloading ${Math.floor(data.task / data.total * 1000) / 10}%`);
-                    app.emit('set-progress-bar', data.task / data.total);
+                    app.emit('send-to-window', (isinstance) ? game : 'gamelaunchdetails', `Downloading ${(Math.floor(data.task / data.total * 1000) / 10).toFixed(1)}%`);
+                    if (!isinstance) {
+                        app.emit('set-progress-bar', data.task / data.total);
+                    }
                 }
             });
 
             await launcher.launch()
-            app.emit('remove-progress-bar');
-            app.emit('send-to-window', 'gamelaunchdetails', 'Game Launched!');
+            if (!isinstance) {
+                app.emit('remove-progress-bar');
+                app.emit('send-to-window', 'gamelaunchdetails', 'Game Launched!');
+            } else {
+                app.emit('send-to-window', game, 'Game Launched!');
+            }
 
             app.emit('run-if-notfocused', () => {
                 if (Date.now() - started > 60 * 1000) new Notification({
@@ -322,7 +390,7 @@ async function OpenVoxelLauncher(PROFILE) {
                 }).show();
             });
 
-            if (OVOPTIONS['closeOnLaunch']) app.hide();
+            if (!isinstance && OVOPTIONS['closeOnLaunch']) app.hide();
         });
     });
 

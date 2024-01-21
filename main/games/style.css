@@ -212,33 +212,6 @@
   left: 12px;
 }
 
-.games .union {
-  position: absolute;
-  width: 21px;
-  height: 21px;
-  top: 14px;
-  left: 14px;
-}
-
-.games .buttons-discord {
-  left: 1038px;
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  top: 0;
-}
-
-.games .loggedin-player {
-  position: absolute;
-  width: 250px;
-  height: 50px;
-  top: 0;
-  left: 768px;
-  background-color: var(--variable-collection-highlight);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
 .games .text-wrapper-5 {
   position: absolute;
   width: 150px;

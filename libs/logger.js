@@ -25,8 +25,8 @@ const logger = {
     log: (mode, ...msgs) => {
         for (let msg of msgs) {
             let tolog = `[${NOW()}] [OVL-LOG]: ${JSON.stringify(msg)}`;
-            if (mode.includes('console') || mode.includes('both')) console.log(tolog)
-            if (mode.includes('file') || mode.includes('both')) LOGGER.write(`${tolog}\n`)
+            if (mode.includes('console') || mode.includes('both')) console.log(tolog.replace(/\\\n/g, "\n"))
+            if (mode.includes('file') || mode.includes('both')) LOGGER.write(`${tolog.replace(/\\\n/g, "\n")}\n`)
         }
     },
     /**
@@ -36,8 +36,8 @@ const logger = {
     info: (mode, ...msgs) => {
         for (let msg of msgs) {
             let tolog = `[${NOW()}] [OVL-INFO]: ${JSON.stringify(msg)}`;
-            if (mode.includes('console') || mode.includes('both')) console.log(tolog)
-            if (mode.includes('file') || mode.includes('both')) LOGGER.write(`${tolog}\n`)
+            if (mode.includes('console') || mode.includes('both')) console.log(tolog.replace(/\\\n/g, "\n"))
+            if (mode.includes('file') || mode.includes('both')) LOGGER.write(`${tolog.replace(/\\\n/g, "\n")}\n`)
         }
     },
     /**
@@ -47,8 +47,8 @@ const logger = {
     warn: (mode, ...msgs) => {
         for (let msg of msgs) {
             let tolog = `[${NOW()}] [OVL-WARN]: ${JSON.stringify(msg)}`;
-            if (mode.includes('console') || mode.includes('both')) console.log(tolog)
-            if (mode.includes('file') || mode.includes('both')) LOGGER.write(`${tolog}\n`)
+            if (mode.includes('console') || mode.includes('both')) console.log(tolog.replace(/\\\n/g, "\n"))
+            if (mode.includes('file') || mode.includes('both')) LOGGER.write(`${tolog.replace(/\\\n/g, "\n")}\n`)
         }
     },
     /**
@@ -58,8 +58,8 @@ const logger = {
     error: (mode, ...msgs) => {
         for (let msg of msgs) {
             let tolog = `[${NOW()}] [OVL-ERR]: ${JSON.stringify(msg)}`;
-            if (mode.includes('console') || mode.includes('both')) console.log(tolog)
-            if (mode.includes('file') || mode.includes('both')) LOGGER.write(`${tolog}\n`)
+            if (mode.includes('console') || mode.includes('both')) console.log(tolog.replace(/\\\n/g, "\n"))
+            if (mode.includes('file') || mode.includes('both')) LOGGER.write(`${tolog.replace(/\\\n/g, "\n")}\n`)
         }
     },
     both: {

@@ -1,8 +1,9 @@
 const { app } = require('electron');
-const { writeFileSync, mkdirSync } = require('node:fs');
+const { writeFileSync, mkdirSync, existsSync, readFileSync } = require('node:fs');
 const fetch = require('node-fetch');
 const path = require('path');
 const { rootroot } = require('./paths');
+const logger = require('./logger');
 
 function v1Bigger(v1, v2) {
     let v1parts = v1.split('.').map(Number),
@@ -30,16 +31,24 @@ function downloadImage(url, destination) {
     mkdirSync(path.join(rootroot, 'cache', 'heads'), { recursive: true });
 
     return new Promise(async (resolve) => {
-        let response = await fetch(url, {
-            headers: {
-                "User-Agent": `OpenVoxelLauncher/v${app.getVersion()} (+https://openvoxel.studio/; <contact@openvoxel.studio>)`
-            }
-        });
+        try {
 
-        let base64Data = `data:${response.headers.get('content-type')};base64,${(await response.buffer()).toString('base64')}`;
+            let response = await fetch(url, {
+                headers: {
+                    "User-Agent": `OpenVoxelLauncher/v${app.getVersion()} (+https://openvoxel.studio/; <contact@openvoxel.studio>)`
+                }
+            });
 
-        writeFileSync(destination, base64Data, { encoding: 'utf-8' });
-        resolve(base64Data);
+            let base64Data = `data:${response.headers.get('content-type')};base64,${(await response.buffer()).toString('base64')}`;
+
+            writeFileSync(destination, base64Data, { encoding: 'utf-8' });
+            resolve(base64Data);
+        } catch (err) {
+            logger.error('both', 'Failed to download from ' + url);
+
+            if (existsSync(destination)) resolve(readFileSync(destination, { encoding: 'utf-8' }))
+            else resolve(undefined)
+        }
     })
 };
 
