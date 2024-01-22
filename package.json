@@ -1,7 +1,7 @@
 {
   "name": "openvoxellauncher",
   "displayName": "OpenVoxel Launcher",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A Minecraft Launcher for OpenVoxel Studios!",
   "main": "index.js",
   "scripts": {
@@ -64,5 +64,6 @@
     "targz": "^1.0.1",
     "tslib": "^2.6.2",
     "uuid": "^9.0.1"
-  }
+  },
+  "icon": "./icons/icon-128px.png"
 }

@@ -37,7 +37,7 @@ Contains optimisation mods, settings tab, game tab & more!
 │  v1.0.0  │      1st  January  2024      │
 │  v1.0.1  │      15th January  2024      │
 │  v1.0.2  │      21th January  2024      │
-│  v1.1.0  │      Coming Really Soon      │
+│  v1.1.0  │      22th January  2024      │
 └──────────┴──────────────────────────────┘
 ```
 
