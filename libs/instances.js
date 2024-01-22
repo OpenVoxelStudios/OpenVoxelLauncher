@@ -3,7 +3,6 @@ const request = require('request');
 const { instancesPath } = require('./paths');
 const { readdirSync, existsSync, readFileSync, mkdirSync, writeFileSync, rmSync, createWriteStream } = require('fs');
 const { BrowserWindow, ipcMain, dialog, app } = require('electron');
-const sharp = require('sharp');
 const path = require('path');
 const fetch = require('node-fetch');
 const logger = require('./logger');
@@ -236,13 +235,7 @@ function createInstanceWindow(parentWin, devMode) {
 
                 if (!result) return resolve(undefined);
                 else {
-                    sharp(result)
-                        .resize(128, 128)
-                        .toFormat('png')
-                        .toBuffer()
-                        .then((buffer) => {
-                            resolve(`data:image/png;base64,${buffer.toString('base64')}`);
-                        })
+                    resolve(`data:image/png;base64,${readFileSync(result).toString('base64')}`);
                 }
             })
         });
@@ -318,19 +311,19 @@ function installModsInstanceWindow(parentWin, id, devMode) {
                     let icon = '../global/img/icons/question-full.png';
                     try {
                         icon = 'data:image/png;base64,' + (await zip.entryData(modinfo.icon)).toString('base64');
-                    } catch(err) {
+                    } catch (err) {
                         logger.error('both', `Failed to parse mod icon "${path.basename(mod)}"`);
                     };
-                    
+
                     await zip.close();
-    
+
                     InstalledModsList.push({
                         name: modinfo.name,
                         description: modinfo.description,
                         icon: icon,
                         id: path.basename(mod)
                     });
-                } catch(err) {
+                } catch (err) {
                     logger.error('both', `Failed to parse mod "${path.basename(mod)}"`)
                 }
             }
