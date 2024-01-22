@@ -97,7 +97,7 @@ module.exports = () => {
 
                 if (update && v1Bigger(update.updateInfo.version, app.getVersion())) {
                     win.webContents.send('progressUpdate', 0);
-                    win.webContents.send('statusUpdate', `Downloading update...`);
+                    win.webContents.send('statusUpdate', `Downloading update v${update?.updateInfo?.version}...`);
                     await autoUpdater.downloadUpdate();
                     win.webContents.send('statusUpdate', `Update downloaded!`);
                 }
