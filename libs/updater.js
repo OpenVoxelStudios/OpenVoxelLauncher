@@ -96,6 +96,28 @@ module.exports = () => {
                 if (update) logger.info('both', update)
 
                 if (update && v1Bigger(update.updateInfo.version, app.getVersion())) {
+                    if (process.platform == 'darwin' && !app.isInApplicationsFolder()) {
+                        let toMove = dialog.showMessageBoxSync(win, {
+                            message: 'The application cannot be updated!\nPlease move the Launcher to the applications folder or the update wont work.\n\nDo it manually by clicking "Cancel" or let the app do it by clicking on "Move".',
+                            title: 'Cannot Update The Launcher',
+                            buttons: [
+                                'Move',
+                                'Cancel'
+                            ],
+                            cancelId: 1,
+                            defaultId: 0,
+                            type: 'error'
+                        });
+
+                        if (toMove == 0) {
+                            try {
+                                app.moveToApplicationsFolder();
+                            } catch(err) {
+                                dialog.showErrorBox('Error While Moving The Launcher', `An unknown error occured. Please try again or move the Launcher manually.\n\nFULL ERROR: ${err}`);
+                                app.exit();
+                            }
+                        } else app.exit();
+                    }
                     win.webContents.send('progressUpdate', 0);
                     win.webContents.send('statusUpdate', `Downloading update v${update?.updateInfo?.version}...`);
                     await autoUpdater.downloadUpdate();

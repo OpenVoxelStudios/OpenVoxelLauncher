@@ -2,6 +2,7 @@
     "appId": "studio.openvoxel.ovlauncher",
     "productName": "OpenVoxel Launcher",
     "copyright": "Copyright © 2023 OpenVoxel Studios",
+    "forceCodeSigning": true,
     "mac": {
         "category": "public.app-category.games",
         "icon": "./icons/icon.icns",
@@ -26,7 +27,7 @@
     "win": {
         "icon": "./icons/icon.ico",
         "publisherName": "OpenVoxel Studios",
-        "sign": "./sign.js",
+        "sign": "./server/sign.js",
         "target": [
             {
                 "target": "nsis",
@@ -70,5 +71,9 @@
             "openvoxel",
             "openvoxellauncher"
         ]
-    }
+    },
+    "files": [
+        "!server/**/*",
+        "!.DS_Store"
+    ]
 }

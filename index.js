@@ -70,8 +70,10 @@ async function OpenVoxelLauncher(PROFILE) {
 
     if (PROFILE?.username) {
         ejse.data('playerName', PROFILE?.username);
-        let base64skin = await downloadImage(`https://visage.surgeplay.com/bust/320/${PROFILE?.uuid || PROFILE?.username}.png`, path.join(rootroot, 'cache', 'heads', `${PROFILE?.username}.base64`));
-        ejse.data('playerSkin', base64skin);
+        try {
+            let base64skin = await downloadImage(`https://visage.surgeplay.com/bust/320/${PROFILE?.uuid || PROFILE?.username}.png`, path.join(rootroot, 'cache', 'heads', `${PROFILE?.username}.base64`));
+            ejse.data('playerSkin', base64skin);
+        } catch(err) { logger.error('both', `Failed getting skin...`, err) }
     }
     ejse.data('version', 'v' + app.getVersion() || 'v0.0.0');
     ejse.data('options', OVOPTIONS);
@@ -410,7 +412,8 @@ async function OpenVoxelLauncher(PROFILE) {
 };
 
 if (OVOPTIONS['devModeOfflineUsername']) {
-    fetch(`https://api.mojang.com/users/profiles/minecraft/${OVOPTIONS['devModeOfflineUsername']}`).then(a => a.json()).then(b => {
+    if (OVOPTIONS['devModeOfflineUUID']) OpenVoxelLauncher({ username: OVOPTIONS['devModeOfflineUsername'], uuid: OVOPTIONS['devModeOfflineUUID'], offline: true })
+    else fetch(`https://api.mojang.com/users/profiles/minecraft/${OVOPTIONS['devModeOfflineUsername']}`).then(a => a.json()).then(b => {
         OpenVoxelLauncher({ username: OVOPTIONS['devModeOfflineUsername'], uuid: b.id, offline: true })
     })
 }

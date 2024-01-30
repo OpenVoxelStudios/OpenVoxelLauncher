@@ -12,15 +12,16 @@
     "electron": "clear && electron .",
     "build-mac": "npm run prepare-notdev && npx electron-builder --mac --publish never && npm run clean-mac && npm run rename",
     "build-win": "npm run prepare-notdev && npx electron-builder --win --publish never && npm run clean-win && npm run rename",
-    "build-all": "npm i && npm run build-mac && npm run build-win",
+    "build-all": "npm i && npm run updatemods && npm run build-mac && npm run build-win",
     "testbuild-mac": "npm run prepare-dev && npx electron-builder --mac --publish never",
     "testbuild-win": "npm run prepare-dev && npx electron-builder --win --publish never",
     "testbuild-all": "npm i && npm run testbuild-mac && npm run testbuild-win",
     "clean-global": "echo 'Cleaning up...' && rm -f ./dist/builder-debug.yml && rm -f ./dist/builder-effective-config.yaml",
     "clean-win": "npm run clean-global && rm -rf ./dist/win-unpacked",
     "clean-mac": "npm run clean-global && rm -rf ./dist/mac-arm64 && rm -rf ./dist/mac-universal",
-    "rename": "cd ./dist && for file in OpenVoxel*; do mv \"$file\" \"${file// /-}\"; done && cd ../ && node ./remove-version-from-name.js",
-    "makecertificate": "mkdir -p certificates && cd certificates && openssl req -newkey rsa:2048 -nodes -keyout key.pem -out request.csr && openssl x509 -req -days 5000 -in request.csr -signkey key.pem -out certificate.pem && openssl pkcs12 -export -out certificate.pfx -inkey key.pem -in certificate.pem"
+    "rename": "cd ./dist && for file in OpenVoxel*; do mv \"$file\" \"${file// /-}\"; done && cd ../ && node ./server/remove-version-from-name.js",
+    "makecertificate": "mkdir -p certificates && cd certificates && openssl req -newkey rsa:2048 -nodes -keyout key.pem -out request.csr && openssl x509 -req -days 5000 -in request.csr -signkey key.pem -out certificate.pem && openssl pkcs12 -export -out certificate.pfx -inkey key.pem -in certificate.pem",
+    "updatemods": "node ./server/update_mods.js"
   },
   "repository": {
     "type": "git",
@@ -64,5 +65,23 @@
     "tslib": "^2.6.2",
     "uuid": "^9.0.1"
   },
-  "icon": "./icons/icon-128px.png"
+  "icon": "./icons/icon-128px.png",
+  "launcher": {
+    "mods": {
+      "default": {
+        "3DSkinLayers": "Ja7zPEaN",
+        "CustomWindowTitle": "RGH5gtzF",
+        "DisableCustomWorldAdvice": "HdwRs3kc",
+        "FabricAPI": "P7dR8mSH",
+        "FabricLanguageKotlin": "Ha28R6CL",
+        "Indium": "Orvt0mRa",
+        "Iris": "YL57xq9U",
+        "Lithium": "gvQqBUqZ",
+        "Sodium": "AANobbMI",
+        "WorldHost": "2AIZDfYo",
+        "YetAnotherConfigLib": "1eAoo2KR",
+        "Zoomify": "w7ThoJFB"
+      }
+    }
+  }
 }
