@@ -1,7 +1,7 @@
 {
   "name": "openvoxellauncher",
   "displayName": "OpenVoxel Launcher",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A Minecraft Launcher for OpenVoxel Studios!",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "electron": "clear && electron .",
     "build-mac": "npm run prepare-notdev && npx electron-builder --mac --publish never && npm run clean-mac && npm run rename",
     "build-win": "npm run prepare-notdev && npx electron-builder --win --publish never && npm run clean-win && npm run rename",
-    "build-all": "npm i && npm run updatemods && npm run build-mac && npm run build-win",
+    "build-all": "npm i && npm run build-mac && npm run build-win",
     "testbuild-mac": "npm run prepare-dev && npx electron-builder --mac --publish never",
     "testbuild-win": "npm run prepare-dev && npx electron-builder --win --publish never",
     "testbuild-all": "npm i && npm run testbuild-mac && npm run testbuild-win",
