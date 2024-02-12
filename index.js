@@ -277,10 +277,9 @@ async function OpenVoxelLauncher(PROFILE) {
             if (['java', 'javaw'].includes(javaPath)) {
                 let javaV = await minecraftToJava((isinstance) ? gameInfo.version : '1.20.4');
                 javaPath = getJavaPath(javaV.version, javaV.arch);
-                if (!existsSync(javaPath)) {
-                    app.emit('send-to-window', (isinstance) ? game : 'gamelaunchdetails', 'Downloading Java...');
-                    await downloadJava(javaV)
-                }
+                
+                app.emit('send-to-window', (isinstance) ? game : 'gamelaunchdetails', 'Downloading Java...');
+                await downloadJava(javaV)
             }
 
             if (!isinstance) {
