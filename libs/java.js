@@ -110,7 +110,10 @@ function downloadJava(javaFull) {
                     logger.error('file', err);
                     return reject(err);
                 };
-                renameSync(path.join(jpath, links.unzipname, 'Contents'), path.join(jpath, 'Contents'));
+
+                if (os.platform() == 'darwin') renameSync(path.join(jpath, links.unzipname, 'Contents'), path.join(jpath, 'Contents'));
+                else renameSync(path.join(jpath, links.unzipname), path.join(jpath));
+                
                 rmdirSync(path.join(jpath, links.unzipname));
 
                 rmSync(file.path, { force: true });

@@ -135,11 +135,6 @@ function importSettings(gameInfo) {
     };
 
 
-    if (!existsSync(path.join(root, 'config', 'sodium-options.json')) && existsSync(path.join(mcroot, 'config', 'sodium-options.json'))) {
-        logger.log('both', 'sodium-options.json doesnt exist yet: copying the Minecraft config');
-        cpSync(path.join(mcroot, 'sodium-options.json'), path.join(root, 'sodium-options.json'));
-    }
-
     let read = {
         "quality": {
             "weather_quality": "DEFAULT",
@@ -165,7 +160,19 @@ function importSettings(gameInfo) {
         }
     };
 
-    if (existsSync(path.join(root, 'config', 'sodium-options.json'))) read = JSON.parse(readFileSync(path.join(root, 'config', 'sodium-options.json'), { encoding: 'utf-8' }));
+    try {
+        if (existsSync(path.join(mcroot, 'config', 'sodium-options.json'))) {
+            read = JSON.parse(readFileSync(path.join(root, 'config', 'sodium-options.json'), { encoding: 'utf-8' }));
+            if (!existsSync(path.join(root, 'config', 'sodium-options.json'))) {
+                logger.log('both', 'sodium-options.json doesnt exist yet: copying the Minecraft config');
+                cpSync(path.join(mcroot, 'sodium-options.json'), path.join(root, 'sodium-options.json'));
+            }
+        }
+    } catch (err) {
+        logger.error('both', 'Could not copy the sodium options.');
+        logger.error("file", err);
+    };
+
     read.notifications = {};
     read.notifications.hide_donation_button = true;
 
