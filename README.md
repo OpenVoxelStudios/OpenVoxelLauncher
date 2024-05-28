@@ -10,15 +10,17 @@ Contains optimisation mods, settings tab, game tab & more!
 ## Q&A
 1. Is my computer compatible?
 
-> We tried targeting as many computers as possible but for now, the application is only available for **All Macs (Silicon-Chip and Intel-Chip based)** and **Windows x64** (your computer is probably x64, Windows arm isn't popular at the time I write this).
+> We tried targeting as many computers as possible but for now, the application is only available for **All Macs (Silicon-Chip and Intel-Chip based)** and **Windows x64** (your computer is probably x64, Windows arm isn't popular at the time I write this). It is also PARTIALLY supported on Linux (you may find bugs).
 
 2. What version do I download?
+
+I recommend you downloading the launcher from here: https://openvoxel.studio/launcher/
 
 > **If you are on Windows**, download the `OpenVoxel-Launcher-Setup.exe` file and open it to run the launcher installer. Enter the required parameters (like installation path) and then click install. It will create a shortcut on your Desktop.
 > 
 > For a portable version, check out the `OpenVoxel-Launcher.exe` file that contains everything.
 
-> **If you are on Mac**, download the `OpenVoxel-Launcher-arm64.dmg` (if you are on Silicon-Chip based Mac, else it's `OpenVoxel-Launcher-universal.dmg`) file and open it to begin the installation process. Drag and Drop the launcher in the Applications folder. Once this is done, open the app that is in the Applications folder and you're all set!
+> **If you are on Mac**, download the `OpenVoxel-Launcher-arm64.dmg` (if you are on Silicon-Chip based Mac, else it's `OpenVoxel-Launcher-x64.dmg`) file and open it to begin the installation process. Drag and Drop the launcher in the Applications folder. Once this is done, open the app that is in the Applications folder and you're all set!
 > 
 > For a portable mac version, same as the installer but use the `.zip` and extract it.
 
@@ -44,4 +46,4 @@ Contains optimisation mods, settings tab, game tab & more!
 ```
 
 
-Copyright 2024 OpenVoxel Studios
+Copyright © 2024 OpenVoxel Studios
