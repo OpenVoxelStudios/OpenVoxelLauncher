@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=OpenVoxel Launcher
+Comment=A Minecraft Launcher to Play OpenVoxel Games!
+Exec=openvoxellauncher
+Icon=./assets/icon.png
+Keywords=open;voxel;studio;launcher;minecraft;
+Type=Application
+Categories=Game;
+Terminal=false
+StartupNotify=true

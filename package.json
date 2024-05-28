@@ -2,7 +2,7 @@
   "name": "openvoxellauncher",
   "displayName": "OpenVoxel Launcher",
   "version": "1.1.2",
-  "description": "A Minecraft Launcher for OpenVoxel Studios!",
+  "description": "A Minecraft Launcher to Play OpenVoxel Games!",
   "main": "index.js",
   "scripts": {
     "prepare-notdev": "node -e \"var old = require('./intern.json'); old.devMode = false; require('node:fs').writeFileSync('./intern.json', JSON.stringify(old, undefined, 2), { encoding: 'utf-8' });\"",
@@ -10,15 +10,22 @@
     "dev": "npm run prepare-dev && npm run electron",
     "start": "npm run prepare-notdev && npm run electron",
     "electron": "clear && electron .",
+
     "build-mac": "npm run prepare-notdev && npx electron-builder --mac --publish never && npm run clean-mac && npm run rename",
     "build-win": "npm run prepare-notdev && npx electron-builder --win --publish never && npm run clean-win && npm run rename",
-    "build-all": "npm i && npm run build-mac && npm run build-win",
+    "build-linux": "npm run prepare-notdev && npx electron-builder --linux --publish never && npm run clean-linux && npm run rename",
+    "build-all": "npm i && npm run build-mac && npm run build-win && npm run build-linux",
+
     "testbuild-mac": "npm run prepare-dev && npx electron-builder --mac --publish never",
     "testbuild-win": "npm run prepare-dev && npx electron-builder --win --publish never",
-    "testbuild-all": "npm i && npm run testbuild-mac && npm run testbuild-win",
+    "testbuild-linux": "npm run prepare-dev && npx electron-builder --linux --publish never",
+    "testbuild-all": "npm i && npm run testbuild-mac && npm run testbuild-win && npm run testbuild-linux",
+
     "clean-global": "echo 'Cleaning up...' && rm -f ./dist/builder-debug.yml && rm -f ./dist/builder-effective-config.yaml",
     "clean-win": "npm run clean-global && rm -rf ./dist/win-unpacked",
     "clean-mac": "npm run clean-global && rm -rf ./dist/mac-arm64 && rm -rf ./dist/mac-universal",
+    "clean-linux": "npm run clean-global && rm -rf ./dist/linux-unpacked && rm -rf ./dist/linux-arm64-unpacked",
+
     "rename": "cd ./dist && for file in OpenVoxel*; do mv \"$file\" \"${file// /-}\"; done && cd ../ && node ./server/remove-version-from-name.js",
     "makecertificate": "mkdir -p certificates && cd certificates && openssl req -newkey rsa:2048 -nodes -keyout key.pem -out request.csr && openssl x509 -req -days 5000 -in request.csr -signkey key.pem -out certificate.pem && openssl pkcs12 -export -out certificate.pfx -inkey key.pem -in certificate.pem",
     "updatemods": "node ./server/update_mods.js"
@@ -29,7 +36,8 @@
   },
   "author": {
     "name": "OpenVoxel Studios",
-    "url": "https://github.com/OpenVoxelStudios"
+    "url": "https://github.com/OpenVoxelStudios",
+    "email": "contact@openvoxel.studio"
   },
   "contributors": [
     {

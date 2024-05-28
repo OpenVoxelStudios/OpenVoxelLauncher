@@ -1,8 +1,11 @@
 {
+    "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
     "appId": "studio.openvoxel.ovlauncher",
     "productName": "OpenVoxel Launcher",
-    "copyright": "Copyright © 2023 OpenVoxel Studios",
+    "executableName": "OpenVoxelLauncher",
+    "copyright": "Copyright © 2024 OpenVoxel Studios",
     "forceCodeSigning": true,
+    "asar": true,
     "mac": {
         "category": "public.app-category.games",
         "icon": "./icons/icon.icns",
@@ -11,14 +14,14 @@
                 "target": "dmg",
                 "arch": [
                     "arm64",
-                    "universal"
+                    "x64"
                 ]
             },
             {
                 "target": "zip",
                 "arch": [
                     "arm64",
-                    "universal"
+                    "x64"
                 ]
             }
         ],
@@ -43,12 +46,42 @@
             }
         ]
     },
+    "linux": {
+        "category": "Game",
+        "artifactName": "OpenVoxel Launcher",
+        "desktop": "openvoxellauncher.desktop",
+        "synopsis": "A Minecraft Launcher to Play OpenVoxel Games!",
+        "description": "A Minecraft Launcher to Play OpenVoxel Games!",
+        "icon": "./assets/icon.png",
+        "executableName": "openvoxellauncher",
+        "target": [
+            {
+                "target": "AppImage",
+                "arch": [
+                    "x64",
+                    "arm64"
+                ]
+            }
+        ]
+    },
+    "appImage": {
+        "artifactName": "OpenVoxel-Launcher-${arch}.AppImage",
+        "category": "Game",
+        "desktop": "./OpenVoxelLauncher.desktop",
+        "license": "./eula.txt"
+    },
+    "deb": {
+        "artifactName": "OpenVoxel-Launcher_${version}-1_${arch}.deb",
+        "category": "Game",
+        "desktop": "./OpenVoxelLauncher.desktop"
+    },
     "dmg": {
         "background": "./icons/background.png",
         "icon": "./icons/cmdblock.icns",
         "title": "OpenVoxel Launcher Installer"
     },
     "nsis": {
+        "license": "./eula.txt",
         "oneClick": false,
         "perMachine": false,
         "allowToChangeInstallationDirectory": true,

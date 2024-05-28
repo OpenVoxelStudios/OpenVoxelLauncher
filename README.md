@@ -44,4 +44,4 @@ Contains optimisation mods, settings tab, game tab & more!
 ```
 
 
-Copyright 2023 OpenVoxel Studios
+Copyright 2024 OpenVoxel Studios

@@ -7,3 +7,7 @@ node_modules/
 package-lock.json
 electron-builder.yml
 bun.lockb
+
+# Temporary
+linux-apt/
+front/
