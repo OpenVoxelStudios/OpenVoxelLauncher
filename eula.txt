@@ -11,19 +11,20 @@ The OpenVoxel Launcher does not collect any personal information from users. The
 
 
 2. User-Generated Content
-Maps included in the Launcher are made by OpenVoxel Studios, further credits if applicable will be found on our maps website: https://openvoxel.studio/games/. User-created content within the Launcher is subject to adherence to the Minecraft Terms of Service and will be found in the folder %APPDATA%\OpenVoxel\launcher\saves on Windows and in the folder Library/Application Support/OpenVoxel/launcher/saves on Mac.
+Maps included in the Launcher are made by OpenVoxel Studios, further credits if applicable will be found on our maps website: https://openvoxel.studio/games/. User-created content within the Launcher is subject to adherence to the Minecraft Terms of Service and will be found in the folder %APPDATA%\OpenVoxel\launcher\saves on Windows and in the folder Library/Application Support/OpenVoxel/launcher/saves on Mac. When creating "instances", the saves will be located in Library/Application Support/OpenVoxel/instances folder for Mac, and %APPDATA%\OpenVoxel\instances for Windows.
 
 
 3. Security Measures
-All sensitive data (like the Microsoft log-in details) and information stored on the user's computer, if applicable, are encrypted. Users are solely responsible for the security and integrity of their data.
+All sensitive data (like the Microsoft log-in details) and information stored on the user's computer, if applicable, are encrypted. Users are solely responsible for the security and integrity of their data. All sensitive data and login credentials sent to our servers are encrypted using HTTPS and not stored on the server. The fact that you logged-in may be logged on our servers: this will only include your Minecraft username for anonymous public statistics usage, and private statistics usage.
 
 
 4. Updates to Terms
-Users will be notified within the Launcher of any updates or changes to these Terms of Service and it will be sent in the channel 📔〙changed-log in our Discord (https://discord.gg/Xhvb2wujVh) with the @Launcher mention.
+Users should be notified within the Launcher of any updates or changes to these Terms of Service and it will be sent in the channel 📔〙changed-log in our Discord server (https://discord.gg/Xhvb2wujVh) with the @Launcher mention. You can get the @Launcher role in the Channels and Roles tab.
+OpenVoxel Studios reserves the right to modify or replace these Terms at any time. It is the user's responsibility to review these Terms periodically for changes, although they should be notified.
 
 
 5. Usage Restrictions
-The use of the OpenVoxel Launcher follows age limits as well as geographical restrictions specified in the Minecraft Terms of Service.
+The use of the OpenVoxel Launcher follows age limits as well as geographical restrictions specified in the Minecraft End User License Agreement (EULA) that you can find here: https://www.minecraft.net/en-us/eula
 
 
 6. Limitation of Liability
@@ -31,14 +32,10 @@ OpenVoxel Studios shall not be liable for any direct, indirect, incidental, cons
 
 
 7. Indemnification
-Users agree to indemnify and hold harmless OpenVoxel Studios from any claims, damages, liabilities, and expenses arising out of the use of the Launcher. If you have any copyright requests, please contact us at this address: contact@openvoxel.studio or on the Discord (https://discord.gg/Xhvb2wujVh) by asking a Developper.
+Users agree to indemnify and hold harmless OpenVoxel Studios from any claims, damages, liabilities, and expenses arising out of the use of the Launcher. If you have any copyright requests, please contact us at this address: contact@openvoxel.studio or on the Discord (https://discord.gg/Xhvb2wujVh) by asking a Developper (preferably Kubik).
 
 
-8. Changes to Terms
-OpenVoxel Studios reserves the right to modify or replace these Terms at any time. It is the user's responsibility to review these Terms periodically for changes, although they should be notified (as stated in 4. Updates to Terms).
-
-
-9. Contact Information
+8. Contact Information
 For questions or concerns regarding these Terms, please contact OpenVoxel Studios at contact@openvoxel.studio or again, on our Discord by asking a Developper.
 
 By using the OpenVoxel Launcher, you acknowledge that you have read, understood, and agreed to these Terms of Service. If you do not agree with these terms, please do not use the Launcher.

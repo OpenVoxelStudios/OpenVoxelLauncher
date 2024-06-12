@@ -4,6 +4,7 @@ const { Menu, app, shell, BrowserWindow } = require('electron');
 const { appPath, OVOPTIONS } = require("./paths");
 const RPC = require("./rpc");
 const { existsSync } = require("fs");
+const os = require('node:os');
 
 /**
  * @param {BrowserWindow} win 
@@ -166,6 +167,8 @@ function openLicense(license) {
 
     LicenseWindow.on('close', () => LicenseWindow = undefined);
     LicenseWindow.on('closed', () => LicenseWindow = undefined);
-}
+};
 
-module.exports = { protocol, setAppMenu, quit, openLicense };
+const computer = os.platform() == 'darwin' ? 'mac' : (os.platform() == 'win32' ? 'win' : 'linux');
+
+module.exports = { protocol, setAppMenu, quit, openLicense, computer };

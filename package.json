@@ -23,7 +23,7 @@
 
     "clean-global": "echo 'Cleaning up...' && rm -f ./dist/builder-debug.yml && rm -f ./dist/builder-effective-config.yaml",
     "clean-win": "npm run clean-global && rm -rf ./dist/win-unpacked",
-    "clean-mac": "npm run clean-global && rm -rf ./dist/mac-arm64 && rm -rf ./dist/mac-universal",
+    "clean-mac": "npm run clean-global && rm -rf ./dist/mac-arm64 && rm -rf ./dist/mac-universal && rm -rf ./dist/mac",
     "clean-linux": "npm run clean-global && rm -rf ./dist/linux-unpacked && rm -rf ./dist/linux-arm64-unpacked",
 
     "rename": "cd ./dist && for file in OpenVoxel*; do mv \"$file\" \"${file// /-}\"; done && cd ../ && node ./server/remove-version-from-name.js",

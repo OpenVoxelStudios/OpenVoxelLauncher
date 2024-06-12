@@ -58,8 +58,7 @@
             {
                 "target": "AppImage",
                 "arch": [
-                    "x64",
-                    "arm64"
+                    "x64"
                 ]
             }
         ]
@@ -76,6 +75,7 @@
         "desktop": "./OpenVoxelLauncher.desktop"
     },
     "dmg": {
+        "artifactName": "OpenVoxel-Launcher-${arch}.dmg",
         "background": "./icons/background.png",
         "icon": "./icons/cmdblock.icns",
         "title": "OpenVoxel Launcher Installer"

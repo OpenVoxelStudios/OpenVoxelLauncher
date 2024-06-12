@@ -7,42 +7,20 @@ const { existsSync, mkdirSync, createWriteStream, rmSync, renameSync, rmdirSync,
 const { https } = require('follow-redirects');
 const { computeHash } = require('./hash');
 const targz = require('targz');
+const { computer } = require('./launcher');
 
 
 /**
- * @param {"java21" | "java16" | "java8"} javaV 
- * @returns {{ sha: String, link: String, filename: String, unzipname: String }}
+ * @param {"java17" | "java8"} javaV 
+ * @param {"arm" | "x64"} arch 
+ * @returns {{ hash: String, link: String }}
  */
-function getJavaDownload(javaV, arch = os.arch()) {
-    let computer = os.platform() == 'darwin' ? 'mac' : 'windows';
-
+function getJavaDownload(javaV, arch = (os.arch().includes('arm') ? 'arm' : 'x64')) {
     return {
-        java17: {
-            mac: {
-                link: `https://openvoxel.studio/launcher/java/java17/jdk-17_macos-${arch == 'x64' ? 'x64' : 'aarch64'}_bin.tar.gz`,
-                filename: `jdk-17_macos-${arch == 'x64' ? 'x64' : 'aarch64'}_bin.tar.gz`,
-                unzipname: 'jdk-17.0.10.jdk',
-            },
-            windows: {
-                link: 'https://openvoxel.studio/launcher/java/java17/jdk-17_windows-x64_bin.tar.gz',
-                filename: 'jdk-17_windows-x64_bin.tar.gz',
-                unzipname: 'jdk-17.0.10',
-            },
-        },
-
-        java8: {
-            mac: {
-                link: `https://openvoxel.studio/launcher/java/java8/jre-macosx-x64.tar.gz`,
-                filename: `jre-8-macosx-x64.tar.gz`,
-                unzipname: 'jre1.8.0_381.jre',
-            },
-            windows: {
-                link: 'https://openvoxel.studio/launcher/java/java8/jre-windows-x64.tar.gz',
-                filename: 'jre-8-windows-x64_bin.zip',
-                unzipname: 'jre1.8.0_381',
-            },
-        }
-    }[javaV][computer];
+        filename: `${javaV}-${computer}-${arch}.tar.gz`,
+        link: `https://openvoxel.studio/launcher/static/java/${javaV}-${computer}-${arch}.tar.gz`,
+        hash: `https://openvoxel.studio/launcher/static/java/${javaV}-${computer}-${arch}.sha256`,
+    };
 };
 
 var MCVERSIONS = null;
@@ -61,7 +39,7 @@ async function minecraftToJava(mcversion) {
 
     if (version.indexOf('1.16.5') <= mcindex) return { version: 'java8', arch: 'x64' }
     else if (version.indexOf('1.20') < mcindex) return { version: 'java17', arch: 'x64' }
-    else return { version: 'java17', arch: os.arch().startsWith('arm') ? 'arm64' : 'x64' }
+    else return { version: 'java17', arch: os.arch().includes('arm') ? 'arm' : 'x64' }
 };
 
 function downloadJava(javaFull) {
@@ -69,11 +47,11 @@ function downloadJava(javaFull) {
 
     return new Promise(async (resolve, reject) => {
         logger.info('both', `Downloading ${javaV}`)
-        let jpath = path.join(JVMPath, `${javaV}_${javaFull.arch}`);
+        let jpath = path.join(JVMPath, `${javaV}-${javaFull.arch}`);
 
         let links = getJavaDownload(javaV, javaFull.arch);
 
-        let shouldBeHash = (await (await fetch(links.link + '.sha256')).text());
+        let shouldBeHash = (await (await fetch(links.hash)).text());
 
         if (existsSync(path.join(jpath))) {
             let hasSHA256 = readFileSync(path.join(jpath, 'version.sha256'), { encoding: 'utf-8' });
@@ -84,7 +62,6 @@ function downloadJava(javaFull) {
         if (!existsSync(jpath)) mkdirSync(jpath, { recursive: true });
 
         let zippedPath = path.join(jpath, '../', links.filename);
-
         if (existsSync(zippedPath)) rmSync(zippedPath, { force: true });
 
         const file = createWriteStream(zippedPath);
@@ -111,11 +88,6 @@ function downloadJava(javaFull) {
                     return reject(err);
                 };
 
-                if (os.platform() == 'darwin') renameSync(path.join(jpath, links.unzipname, 'Contents'), path.join(jpath, 'Contents'));
-                else renameSync(path.join(jpath, links.unzipname), path.join(jpath));
-                
-                rmdirSync(path.join(jpath, links.unzipname));
-
                 rmSync(file.path, { force: true });
 
                 writeFileSync(path.join(jpath, 'version.sha256'), isHash, { encoding: 'utf-8' });
@@ -127,7 +99,11 @@ function downloadJava(javaFull) {
 };
 
 function getJavaPath(javaV, arch) {
-    return path.join(JVMPath, `${javaV}_${arch}`, os.platform() == 'win32' ? `bin/javaw.exe` : `Contents/Home/bin/java`)
+    let pathy = path.join('bin', 'java');
+    if (computer == 'mac') pathy = path.join('Contents', 'Home', 'bin', 'java')
+    else if (computer == 'win') pathy = path.join('bin', 'javaw.exe')
+
+    return path.join(JVMPath, `${javaV}-${arch}`, pathy)
 };
 
 module.exports = { minecraftToJava, getJavaDownload, downloadJava, getJavaPath };
