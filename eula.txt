@@ -11,7 +11,7 @@ The OpenVoxel Launcher does not collect any personal information from users. The
 
 
 2. User-Generated Content
-Maps included in the Launcher are made by OpenVoxel Studios, further credits if applicable will be found on our maps website: https://openvoxel.studio/games/. User-created content within the Launcher is subject to adherence to the Minecraft Terms of Service and will be found in the folder %APPDATA%\OpenVoxel\launcher\saves on Windows and in the folder Library/Application Support/OpenVoxel/launcher/saves on Mac. When creating "instances", the saves will be located in Library/Application Support/OpenVoxel/instances folder for Mac, and %APPDATA%\OpenVoxel\instances for Windows.
+Maps included in the Launcher are made by OpenVoxel Studios, further credits if applicable will be found on our maps website: https://openvoxel.studio/games/. User-created content within the Launcher is subject to adherence to the Minecraft Terms of Service and will be found in the folder "%APPDATA%\OpenVoxel\launcher\saves" on Windows and in the folder "Library/Application Support/OpenVoxel/launcher/saves" on Mac. When creating "instances", the saves will be located in "Library/Application Support/OpenVoxel/instances" folder for Mac, and "%APPDATA%\OpenVoxel\instances" for Windows.
 
 
 3. Security Measures
@@ -19,7 +19,7 @@ All sensitive data (like the Microsoft log-in details) and information stored on
 
 
 4. Updates to Terms
-Users should be notified within the Launcher of any updates or changes to these Terms of Service and it will be sent in the channel 📔〙changed-log in our Discord server (https://discord.gg/Xhvb2wujVh) with the @Launcher mention. You can get the @Launcher role in the Channels and Roles tab.
+Users should be notified within the Launcher of any updates or changes to these Terms of Service and it will be sent in the channel "📔〙changed-log" in our Discord server (https://discord.gg/Xhvb2wujVh) with the "@Launcher" role mention. You can get the "@Launcher" role in the "Channels and Roles" tab.
 OpenVoxel Studios reserves the right to modify or replace these Terms at any time. It is the user's responsibility to review these Terms periodically for changes, although they should be notified.
 
 
