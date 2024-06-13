@@ -42,6 +42,7 @@ I recommend you downloading the launcher from here: https://openvoxel.studio/lau
 │  v1.1.0  │      22th January  2024      │
 │  v1.1.1  │      31th January  2024      │
 │  v1.1.2  │      9th  February 2024      │
+│  v1.1.3  │      xxx  June     2024      │
 └──────────┴──────────────────────────────┘
 ```
 
