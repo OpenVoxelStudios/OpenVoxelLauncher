@@ -1,0 +1,8 @@
+{
+    "name": "Lethal Budget",
+    "id": "lethal-budget",
+    "url": "https://github.com/OpenVoxelStudios/Maps/releases/download/OpenVoxel/lethal-budget.zip",
+    "appendMods": [
+        "lethal-budget"
+    ]
+}

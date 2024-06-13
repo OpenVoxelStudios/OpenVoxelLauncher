@@ -52,19 +52,19 @@
     border-radius: 5px;
 }
 
-.gameicons-oakhousemurder {
+.gameicons-oak-house-murder {
     left: 0;
-    background-image: url(./img/games/oakhousemurder-icon.png);
+    background-image: url(./img/games/oak-house-murder-icon.png);
 }
 
-/*.gameicons-blockhunt {
+/*.gameicons-block-hunt {
     left: 75px;
-    background-image: url(./img/games/blockhunt-icon.png);
+    background-image: url(./img/games/block-hunt-icon.png);
 }*/
 
-.gameicons-lethalbudget {
+.gameicons-lethal-budget {
     left: 75px;
-    background-image: url(./img/games/lethalbudget-icon.png);
+    background-image: url(./img/games/lethal-budget-icon.png);
 }
 
 .gameicons-yahiamice {

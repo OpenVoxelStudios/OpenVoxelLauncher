@@ -14,15 +14,16 @@ octokit.request('GET /repos/{owner}/{repo}/tags', {
             let answ = await octokit.request('GET /repos/{owner}/{repo}/releases/tags/{tag}', {
                 owner: 'OpenVoxelStudios', repo: 'OpenVoxelLauncher', tag: tag,
                 headers: { 'X-GitHub-Api-Version': '2022-11-28' }
-            });
+            })
+                .catch((err) => console.error(err));
 
             resolve({
                 tag: tag,
-                data: answ.data.assets.map(asst =>
+                data: (answ?.data?.assets?.map(asst =>
                     (["latest-mac.yml", "latest.yml"].includes(asst.name) || asst.name.endsWith('.blockmap'))
                         ? undefined
                         : { name: asst.name, download_count: asst.download_count }
-                )
+                ) || [])
                     .filter(e => e)
                     .sort((a, b) => a.download_count - b.download_count)
                     .reverse()

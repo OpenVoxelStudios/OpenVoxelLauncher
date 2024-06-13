@@ -96,15 +96,15 @@ function setAppMenu(win, full = true) {
                 },
                 {
                     label: 'Oak House Murder',
-                    click() { win.show(); win.loadFile('main/home/index.ejs', { query: { game: 'oakhousemurder' }})}
+                    click() { win.show(); win.loadFile('main/home/index.ejs', { query: { game: 'oak-house-murder' }})}
                 },
                 /*{
                     label: 'Block Hunt',
-                    click() { win.show(); win.loadFile('main/home/index.ejs', { query: { game: 'blockhunt' }}) }
+                    click() { win.show(); win.loadFile('main/home/index.ejs', { query: { game: 'block-hunt' }}) }
                 },*/
                 {
                     label: 'Lethal Budget',
-                    click() { win.show(); win.loadFile('main/home/index.ejs', { query: { game: 'lethalbudget' }}) }
+                    click() { win.show(); win.loadFile('main/home/index.ejs', { query: { game: 'lethal-budget' }}) }
                 },
                 {
                     label: 'Yahiamice',
