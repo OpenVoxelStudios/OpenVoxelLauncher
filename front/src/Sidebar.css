@@ -1,0 +1,50 @@
+.sidebar {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    width: 72px;
+    height: calc(100% - 100px);
+    overflow: hidden;
+    overflow-y: scroll;
+    background-color: rgba(37, 37, 37, 0.2);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    z-index: 200;
+    gap: 20px;
+}
+
+.sidebar>.spacer {
+    flex: 1;
+    min-height: 50px;
+}
+
+.sidebar>.tab {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.sidebar>.tab>.selector {
+    height: 50px;
+    width: 8px;
+    border-radius: 0 8px 8px 0;
+    transition: all 0.2s ease-in;
+
+    position: absolute;
+    left: -9px;
+
+    background-color: #373737;
+}
+
+.sidebar>.tab>.tabicon,
+.sidebar>.tabicon {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+}

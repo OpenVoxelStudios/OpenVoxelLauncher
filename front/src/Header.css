@@ -1,0 +1,139 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(37, 37, 37, 0.2);
+
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+
+    padding-left: 15px;
+    padding-right: 15px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    z-index: 200;
+    gap: 20px;
+}
+
+.header>img {
+    width: 75px;
+    height: 75px;
+}
+
+.header>a {
+    background-color: #3D3D3D;
+    height: 60px;
+    width: 60px;
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.header>a>img {
+    height: 50%;
+    width: 50%;
+}
+
+#closeApp {
+    transition: all 0.2s ease;
+}
+
+#closeApp:hover {
+    background-color: #f42324;
+}
+
+.header>.games {
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    height: 60px;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 35px;
+    background-color: #3D3D3D;
+}
+
+.header>.flexer {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 30px;
+}
+
+@media screen and (max-width: 1000px) {
+    .header>.flexer {
+        font-size: 22px;
+    }
+}
+
+.header>.games>div>img {
+    width: 20px;
+    height: 20px;
+    margin: 15px;
+}
+
+.header>.games>div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 15px;
+    border-right: 2px solid #373737;
+}
+
+.header>.games>img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+.header>.logged {
+    border-radius: 8px;
+    height: 60px;
+    width: 250px;
+    background-color: #D6A964;
+    display: flex;
+    flex-direction: row;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+.header>.logged>div {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+.header>.logged>img {
+    width: 60px;
+    height: 60px;
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+.header>.logged>div * {
+    color: black;
+}

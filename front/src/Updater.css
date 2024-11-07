@@ -1,0 +1,31 @@
+.updater {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.updater>img {
+    max-height: 70%;
+    max-width: 70%;
+}
+
+.updater>div {
+    height: 65px;
+    border-radius: 15px;
+    width: 60%;
+    max-width: 500px;
+    background-color: #3D3D3D;
+    overflow: hidden;
+}
+
+.updater>div>div {
+    background-color: rgba(214, 169, 100, 1);
+    width: 30%;
+    height: 100%;
+    border-radius: 0 15px 15px 0;
+}

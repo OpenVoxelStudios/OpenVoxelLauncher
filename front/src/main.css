@@ -1,0 +1,125 @@
+:root {
+    --variable-collection-foreground: rgba(61, 61, 61, 1);
+    --variable-collection-white: rgba(255, 255, 255, 1);
+    --variable-collection-highlight: rgba(214, 169, 100, 1);
+    --variable-collection-foreground-light: rgba(55, 55, 55, 1);
+    --variable-collection-green: rgba(56, 148, 54, 1);
+    --variable-collection-green-light: rgb(67, 172, 66);
+    --variable-collection-base: rgba(37, 37, 37, 1);
+    --variable-collection-grayish: rgba(202, 202, 202, 1);
+    --variable-collection-red: rgba(244, 36, 36, 1);
+}
+
+html,
+body,
+#root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(37, 37, 37);
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+#root {
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+@font-face {
+    font-family: 'Rubik';
+    src: url(/font/Rubik-Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rubik';
+    src: url(/font/Rubik-Bold.ttf) format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+* {
+    font-family: "Rubik", sans-serif;
+    color: white;
+}
+
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.notextselection {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.yestextselection {
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+.content {
+    width: 100%;
+    height: fit-content;
+    padding-top: 125px;
+}
+
+.coolclick {
+    transition: transform 0.15s ease;
+    cursor: pointer;
+}
+
+.coolclick-small {
+    transition: transform 0.15s ease;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .coolclick:active {
+        transform: translateY(3px);
+    }
+
+    .coolclick-small:active {
+        transform: translateY(1px);
+    }
+
+    .content {
+        padding-top: 100px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .coolclick:hover {
+        transform: scale(1.06);
+    }
+
+    .coolclick:active {
+        transform: scale(1.06) translateY(3px);
+    }
+
+    .coolclick-small:hover {
+        transform: scale(1.02);
+    }
+
+    .coolclick-small:active {
+        transform: scale(1.02) translateY(1px);
+    }
+}
